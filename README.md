@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 # S26_SE4920_TeamC
-=======
 Contents
    # Setting Up a Serverless Angular Project
    # Branch Management Guidelines
