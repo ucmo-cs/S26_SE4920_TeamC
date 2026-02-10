@@ -4,7 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NgModel } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { DailyStatusComponent } from './components/daily-status/daily-status.component';
-import { AppManageRolesComponent } from './components/manage-roles/app-manage-roles.component';
+import { ManageRolesComponent } from './components/manage-roles/app-manage-roles.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
