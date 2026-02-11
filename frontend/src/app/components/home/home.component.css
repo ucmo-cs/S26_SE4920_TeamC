@@ -63,7 +63,7 @@ h5 {
   text-align: center;
 }
 
-button {
+/* button {
   margin-top: 1rem;
   color: white;
   background-color: black;
@@ -71,7 +71,7 @@ button {
 
 button:hover {
   transform: scale(1.05);
-}
+} */
 
 .button-link {
   margin-top: 10px;
@@ -116,9 +116,9 @@ button:hover {
   display: flex;
   align-items: center;
   margin: 1rem;
-  border: 5px solid #33658A;
+  border: 5px solid #33658a;
   border-radius: 0.5rem;
-  color: #33658A;
+  color: #33658a;
 }
 
 .danger {
@@ -136,8 +136,9 @@ button:hover {
   padding-right: 35px;
 }
 
-
-.message, .warning, .danger {
+.message,
+.warning,
+.danger {
   flex-direction: row;
   justify-content: left;
   padding: 15px;
@@ -183,7 +184,10 @@ button:hover {
   }
 }
 
-a, a:hover, a:focus, a:active {
+a,
+a:hover,
+a:focus,
+a:active {
   text-decoration: none;
   color: inherit;
 }

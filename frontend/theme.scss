@@ -1,4 +1,8 @@
-@use "bulma/sass/base";
+@use "bulma/sass" with (
+    $body-background-color: green,
+    $body-color: blue,
+    $text: red
+);
 
 @use "bulma/sass/elements";
 
