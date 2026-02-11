@@ -3,14 +3,62 @@
   padding: 0;
 }
 
+:root {
+  --bg-gradient-start: #ffcc00;
+  --bg-gradient-end: #f39c12;
+  --surface: #ffffff;
+  --text: #1b1b1b;
+  --muted: #4f4f4f;
+  --accent: #1f5fbf;
+  --accent-contrast: #ffffff;
+  --control-text: #1b1b1b;
+  --control-muted: #5a5a5a;
+  --menu-bg: #ffffff;
+  --menu-text: #1b1b1b;
+  --nav-bg: #0f0f0f;
+  --nav-text: #f4f4f4;
+  --card-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+.theme-forest {
+  --bg-gradient-start: #0b3d2e;
+  --bg-gradient-end: #c9a227;
+  --accent: #2f7d32;
+  --accent-contrast: #ffffff;
+  --nav-bg: #0a2a21;
+  --nav-text: #f3efe6;
+  --card-border: #365b40;
+  --card-bg: #f7f4ea;
+  --button-bg: #2f7d32;
+  --button-text: #ffffff;
+  --menu-bg: #f7f4ea;
+  --menu-text: #1b1b1b;
+}
+
+.theme-fema {
+  --bg-gradient-start: #0b1f3a;
+  --bg-gradient-end: #b3202a;
+  --accent: #0b4ea2;
+  --accent-contrast: #ffffff;
+  --nav-bg: #0a1526;
+  --nav-text: #f5f7fb;
+  --card-border: #2b4d7a;
+  --card-bg: #f4f6fb;
+  --button-bg: #0b4ea2;
+  --button-text: #ffffff;
+  --menu-bg: #f4f6fb;
+  --menu-text: #1b1b1b;
+}
+
 html,
 body {
   all: unset;
-    background-image: linear-gradient(
-      to right bottom,
-      hsla(48, 100%, 49%, 0.8),
-      hsla(34, 100%, 46%, 0.8)
-    );
+  background-image: linear-gradient(
+    to right bottom,
+    var(--bg-gradient-start),
+    var(--bg-gradient-end)
+  );
+  color: var(--text);
 }
 
 p {
@@ -26,7 +74,8 @@ p {
 * ======================= */
 
 .form-section {
-  background-color: white;
+  background-color: var(--surface);
+  color: var(--text);
   border-radius: 10px;
   padding: 25px 35px 20px 35px;
   align-content: center;
@@ -75,6 +124,92 @@ p {
 * {
   font-family: "Montserrat", sans-serif;
   --mdc-list-list-item-label-text-font: "Montserrat", sans-serif;
+}
+
+app-header .header-container {
+  background-color: var(--nav-bg);
+  color: var(--nav-text);
+}
+
+app-sidenav .sidenav-container {
+  background-color: var(--nav-bg);
+  color: var(--nav-text);
+}
+
+.mat-mdc-card {
+  background-color: var(--surface);
+  color: var(--text);
+  box-shadow: var(--card-shadow);
+}
+
+.mat-mdc-raised-button.mat-primary,
+.mat-mdc-unelevated-button.mat-primary {
+  background-color: var(--accent) !important;
+  color: var(--accent-contrast) !important;
+}
+
+.mat-mdc-outlined-button.mat-primary,
+.mat-mdc-stroked-button.mat-primary {
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+}
+
+.mat-mdc-button,
+.mat-mdc-outlined-button,
+.mat-mdc-stroked-button,
+.mat-mdc-unelevated-button,
+.mat-mdc-raised-button {
+  color: var(--control-text) !important;
+}
+
+.mat-mdc-button.mat-primary,
+.mat-mdc-outlined-button.mat-primary,
+.mat-mdc-stroked-button.mat-primary,
+.mat-mdc-unelevated-button.mat-primary,
+.mat-mdc-raised-button.mat-primary {
+  color: var(--accent-contrast) !important;
+}
+
+.mat-mdc-form-field,
+.mat-mdc-select-panel {
+  color: var(--control-text);
+}
+
+.mat-mdc-form-field-label,
+.mat-mdc-select-value-text,
+.mat-mdc-input-element {
+  color: var(--control-text) !important;
+}
+
+.mat-mdc-form-field-hint,
+.mat-mdc-form-field-subscript-wrapper {
+  color: var(--control-muted) !important;
+}
+
+.mat-mdc-menu-panel {
+  background-color: var(--menu-bg, var(--surface));
+  color: var(--menu-text, var(--text));
+}
+
+.mat-mdc-menu-item {
+  color: var(--menu-text, var(--text)) !important;
+}
+
+.mat-mdc-menu-item:hover {
+  background-color: color-mix(in srgb, var(--accent) 18%, transparent) !important;
+}
+
+.mat-mdc-select-panel {
+  background-color: var(--menu-bg, var(--surface));
+  color: var(--menu-text, var(--text));
+}
+
+.mat-mdc-option .mdc-list-item__primary-text {
+  color: var(--menu-text, var(--text)) !important;
+}
+
+.mat-mdc-option.mdc-list-item--selected .mdc-list-item__primary-text {
+  color: var(--accent-contrast) !important;
 }
 
 .mat-mdc-card-content.mat-mdc-card-content {

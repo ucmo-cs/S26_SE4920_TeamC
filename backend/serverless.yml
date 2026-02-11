@@ -84,6 +84,46 @@ functions:
           method: post
           cors: true
 
+  users:
+    handler: src/handlers/users.handler
+    environment:
+      USERS_TABLE: users
+    events:
+      - http:
+          path: users
+          method: get
+          cors: true
+
+  userById:
+    handler: src/handlers/user.handler
+    environment:
+      USERS_TABLE: users
+    events:
+      - http:
+          path: users/{uuid}
+          method: get
+          cors: true
+
+  updateUserRoles:
+    handler: src/handlers/update-user-roles.handler
+    environment:
+      USERS_TABLE: users
+    events:
+      - http:
+          path: users/{uuid}/roles
+          method: put
+          cors: true
+
+  projects:
+    handler: src/handlers/projects.handler
+    environment:
+      PROJECTS_TABLE: projects
+    events:
+      - http:
+          path: projects
+          method: get
+          cors: true
+
   importData:
     handler: src/handlers/import-data.handler
     environment:
