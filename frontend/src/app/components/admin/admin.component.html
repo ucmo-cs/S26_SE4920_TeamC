@@ -1,0 +1,79 @@
+<div class="admin-page">
+  <div class="admin-content">
+    <div class="admin-header">
+      <div>
+        <h2>Admin</h2>
+        <p class="muted">Manage user roles and access.</p>
+      </div>
+      <button mat-stroked-button color="primary" (click)="loadUsers()">Reload</button>
+    </div>
+
+    <mat-card class="admin-card admin-theme-card">
+      <mat-card-content>
+        <div class="theme-grid">
+          <div>
+            <h3>Site Theme</h3>
+            <p class="muted">Pick a palette for the whole site.</p>
+          </div>
+          <div class="theme-controls">
+            <mat-form-field appearance="outline" class="theme-field">
+              <mat-label>Palette</mat-label>
+              <mat-select [(ngModel)]="selectedTheme" (selectionChange)="applyTheme()">
+                <mat-option *ngFor="let theme of themeOptions" [value]="theme.value">
+                  {{ theme.label }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="admin-card">
+    <mat-card-content>
+      <ng-container *ngIf="users.length; else emptyState">
+        <table mat-table [dataSource]="users" class="admin-table" [trackBy]="trackByUuid">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let user">{{ user.name }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="roles">
+            <th mat-header-cell *matHeaderCellDef>Roles</th>
+            <td mat-cell *matCellDef="let user">
+              <mat-form-field appearance="outline" class="role-field">
+                <mat-select [(ngModel)]="user.roles" multiple>
+                  <mat-option *ngFor="let role of availableRoles" [value]="role">
+                    {{ role }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let user">
+              <button mat-raised-button color="primary" (click)="saveUser(user)">Save</button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </ng-container>
+
+      <ng-template #emptyState>
+        <div class="empty-state">
+          <p>No users found. Check your backend or reload.</p>
+        </div>
+      </ng-template>
+    </mat-card-content>
+    </mat-card>
+  </div>
+</div>

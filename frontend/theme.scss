@@ -1,3 +1,19 @@
+@use "bulma/sass";
+
+@use "bulma/sass/elements";
+
+@use "bulma/sass/layout";
+
+@use "bulma/sass/grid";
+
+@use "bulma/sass/form";
+
+@use "bulma/sass/components";
+
+@use "bulma/sass/helpers";
+
+@use "bulma/sass/themes";
+
 // Base (default) theme
 $base-theme: (
   bg-gradient-start: #ffcc00,
@@ -69,18 +85,4 @@ $theme-fema: (
   @include apply-theme($theme-fema);
 }
 
-@use "bulma/sass";
 
-@use "bulma/sass/elements";
-
-@use "bulma/sass/layout";
-
-@use "bulma/sass/grid";
-
-@use "bulma/sass/form";
-
-@use "bulma/sass/components";
-
-@use "bulma/sass/helpers";
-
-@use "bulma/sass/themes";
