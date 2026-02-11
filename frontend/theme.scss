@@ -1,8 +1,75 @@
-@use "bulma/sass" with (
-    $body-background-color: green,
-    $body-color: blue,
-    $text: red
+// Base (default) theme
+$base-theme: (
+  bg-gradient-start: #ffcc00,
+  bg-gradient-end: #f39c12,
+  surface: #ffffff,
+  text: #1b1b1b,
+  muted: #4f4f4f,
+  accent: #1f5fbf,
+  accent-contrast: #ffffff,
+  control-text: #1b1b1b,
+  control-muted: #5a5a5a,
+  menu-bg: #ffffff,
+  menu-text: #1b1b1b,
+  nav-bg: #0f0f0f,
+  nav-text: #f4f4f4,
+  card-shadow: 0 6px 18px rgba(0, 0, 0, 0.18)
 );
+
+// Forest theme
+$theme-forest: (
+  bg-gradient-start: #0b3d2e,
+  bg-gradient-end: #c9a227,
+  accent: #2f7d32,
+  accent-contrast: #ffffff,
+  nav-bg: #0a2a21,
+  nav-text: #f3efe6,
+  card-border: #365b40,
+  card-bg: #f7f4ea,
+  button-bg: #2f7d32,
+  button-text: #ffffff,
+  menu-bg: #f7f4ea,
+  menu-text: #1b1b1b
+);
+
+// FEMA theme
+$theme-fema: (
+  bg-gradient-start: #0b1f3a,
+  bg-gradient-end: #b3202a,
+  accent: #0b4ea2,
+  accent-contrast: #ffffff,
+  nav-bg: #0a1526,
+  nav-text: #f5f7fb,
+  card-border: #2b4d7a,
+  card-bg: #f4f6fb,
+  button-bg: #0b4ea2,
+  button-text: #ffffff,
+  menu-bg: #f4f6fb,
+  menu-text: #1b1b1b
+);
+
+// Mixin to output CSS variables
+@mixin apply-theme($theme-map) {
+  @each $key, $value in $theme-map {
+    --#{$key}: #{$value};
+  }
+}
+
+// Root default theme
+:root {
+  @include apply-theme($base-theme);
+}
+
+// Theme classes
+.theme-forest {
+  @include apply-theme($theme-forest);
+}
+
+.theme-fema {
+  @include apply-theme($theme-fema);
+}
+
+@use "bulma/sass";
 
 @use "bulma/sass/elements";
 
