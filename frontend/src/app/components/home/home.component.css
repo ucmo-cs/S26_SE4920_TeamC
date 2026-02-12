@@ -17,7 +17,7 @@
   padding: 1rem;
   border-radius: 0.5rem;
   color: var(--text);
-  background-color: var(--surface);
+  background-color: var(--card-bg, var(--surface));
   border: 2px solid var(--card-border, #d7d7d7);
 }
 
@@ -66,7 +66,7 @@ h5 {
   text-align: center;
 }
 
-/* button {
+button {
   margin-top: 1rem;
   color: var(--accent-contrast);
   background-color: var(--accent);
@@ -74,7 +74,7 @@ h5 {
 
 button:hover {
   transform: scale(1.05);
-} */
+}
 
 .button-link {
   margin-top: 10px;
@@ -85,6 +85,7 @@ button:hover {
 }
 
 .home-icon {
+  color: var(--icon-color);
   padding-right: 4rem;
   font-size: 4rem;
   height: 5rem;
@@ -100,6 +101,14 @@ button:hover {
 
 .inline-block {
   display: inline-block;
+}
+
+.header-text {
+  color: var(--body-text);
+}
+
+.text {
+  color: var(--body-text);
 }
 
 .home-card:last-child:nth-child(odd) {

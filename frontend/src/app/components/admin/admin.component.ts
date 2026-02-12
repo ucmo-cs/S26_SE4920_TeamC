@@ -22,11 +22,12 @@ export class AdminComponent implements OnInit {
     { value: 'default', label: 'Default' },
     { value: 'forest', label: 'Forest Service' },
     { value: 'fema', label: 'FEMA' },
-    { value: 'dark', label: 'Dark Mode' },
-    { value: 'light', label: 'Light Mode' },
-    { value: 'sunset', label: 'Sunset' }
+    { value: 'sunset', label: 'Sunset' },
+    { value: 'cyberpunk', label: 'Cyberpunk' },
+    { value: 'ocean', label: 'Ocean' },
+    { value: 'volcano', label: 'Volcano' },
   ];
-  
+
   selectedTheme = 'default';
 
   constructor(private userApi: UserApiService) {}

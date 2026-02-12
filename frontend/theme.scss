@@ -1,20 +1,5 @@
-$text: #1f2937;
 
 @use "bulma/sass";
-
-@use "bulma/sass/elements";
-
-@use "bulma/sass/layout";
-
-@use "bulma/sass/grid";
-
-@use "bulma/sass/form";
-
-@use "bulma/sass/components";
-
-@use "bulma/sass/helpers";
-
-@use "bulma/sass/themes";
 
 // Base (default) theme
 $base-theme: (
@@ -31,6 +16,8 @@ $base-theme: (
   menu-text: #1b1b1b,
   nav-bg: #0f0f0f,
   nav-text: #f4f4f4,
+  body-text: #f4f4f4,
+  icon-color: #f4f4f4,
   card-shadow: 0 6px 18px rgba(0, 0, 0, 0.18)
 );
 
@@ -42,6 +29,8 @@ $theme-forest: (
   accent-contrast: #ffffff,
   nav-bg: #0a2a21,
   nav-text: #f3efe6,
+  body-text: #f3efe6,
+  icon-color: #f3efe6,
   card-border: #365b40,
   card-bg: #f7f4ea,
   button-bg: #2f7d32,
@@ -58,42 +47,14 @@ $theme-fema: (
   accent-contrast: #ffffff,
   nav-bg: #0a1526,
   nav-text: #f5f7fb,
+  body-text: #f5f7fb,
+  icon-color: #f5f7fb,
   card-border: #2b4d7a,
   card-bg: #f4f6fb,
   button-bg: #0b4ea2,
   button-text: #ffffff,
   menu-bg: #f4f6fb,
   menu-text: #1b1b1b
-);
-
-$theme-dark: (
-  bg-gradient-start: #1f1f2e,
-  bg-gradient-end: #0f172a,
-  accent: #6366f1,
-  accent-contrast: #ffffff,
-  nav-bg: #111827,
-  nav-text: #e5e7eb,
-  card-border: #374151,
-  card-bg: #1f2933,
-  button-bg: #6366f1,
-  button-text: #ffffff,
-  menu-bg: #111827,
-  menu-text: #e5e7eb
-);
-
-$theme-light: (
-  bg-gradient-start: #f8fafc,
-  bg-gradient-end: #e2e8f0,
-  accent: #2563eb,
-  accent-contrast: #ffffff,
-  nav-bg: #ffffff,
-  nav-text: #1f2937,
-  card-border: #d1d5db,
-  card-bg: #ffffff,
-  button-bg: #2563eb,
-  button-text: #ffffff,
-  menu-bg: #f9fafb,
-  menu-text: #1f2937
 );
 
 $theme-sunset: (
@@ -103,6 +64,8 @@ $theme-sunset: (
   accent-contrast: #ffffff,
   nav-bg: #7c2d12,
   nav-text: #ffedd5,
+  body-text: #ffedd5,
+  icon-color: #ffedd5,
   card-border: #ea580c,
   card-bg: #fed7aa,
   button-bg: #ef4444,
@@ -111,7 +74,59 @@ $theme-sunset: (
   menu-text: #ffedd5
 );
 
+$theme-cyberpunk: (
+  content-heading-color: #00ff99,
+  bg-gradient-start: #0f0c29,
+  bg-gradient-end: #302b63,
+  accent: #ff00ff,
+  accent-contrast: #ffffff,
+  nav-bg: #1a1a2e,
+  nav-text: #e0e0ff,
+  body-text: #e0e0ff,
+  icon-color: #e0e0ff,
+  card-border: #ff00ff,
+  card-bg: #1a1a2e,
+  button-bg: #ff00ff,
+  button-text: #000000,
+  menu-bg: #1a1a2e,
+  menu-text: #e0e0ff
+);
 
+$theme-ocean: (
+   content-heading-color: #00ff99,
+  bg-gradient-start: #001f3f,
+  bg-gradient-end: #003366,
+  accent: #00bcd4,
+  accent-contrast: #ffffff,
+  nav-bg: #001a33,
+  nav-text: #cce7ff,
+  body-text: #cce7ff,
+  icon-color: #cce7ff,
+  card-border: #005580,
+  card-bg: #002b4d,
+  button-bg: #00bcd4,
+  button-text: #001f3f,
+  menu-bg: #002b4d,
+  menu-text: #cce7ff
+);
+
+$theme-volcano: (
+  heading-color: #00ff99,
+  bg-gradient-start: #2c0b0b,
+  bg-gradient-end: #5a0d0d,
+  accent: #ff4500,
+  accent-contrast: #ffffff,
+  nav-bg: #3a0c0c,
+  nav-text: #ffd6c1,
+  body-text: #ffd6c1,
+  icon-color: #ffd6c1,
+  card-border: #7a1a1a,
+  card-bg: #4c0d0d,
+  button-bg: #ff4500,
+  button-text: #ffffff,
+  menu-bg: #4c0d0d,
+  menu-text: #ffd6c1
+);
 
 
 // Mixin to output CSS variables
@@ -135,15 +150,18 @@ $theme-sunset: (
   @include apply-theme($theme-fema);
 }
 
-// Theme classes
-.theme-dark {
-  @include apply-theme($theme-dark);
-}
-
-.theme-light {
-  @include apply-theme($theme-light);
-}
-
 .theme-sunset {
   @include apply-theme($theme-sunset);
+}
+
+.theme-cyberpunk {
+  @include apply-theme($theme-cyberpunk);
+}
+
+.theme-ocean {
+  @include apply-theme($theme-ocean);
+}
+
+.theme-volcano {
+  @include apply-theme($theme-volcano);
 }
