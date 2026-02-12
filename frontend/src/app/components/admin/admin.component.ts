@@ -21,8 +21,12 @@ export class AdminComponent implements OnInit {
   themeOptions = [
     { value: 'default', label: 'Default' },
     { value: 'forest', label: 'Forest Service' },
-    { value: 'fema', label: 'FEMA' }
+    { value: 'fema', label: 'FEMA' },
+    { value: 'dark', label: 'Dark Mode' },
+    { value: 'light', label: 'Light Mode' },
+    { value: 'sunset', label: 'Sunset' }
   ];
+  
   selectedTheme = 'default';
 
   constructor(private userApi: UserApiService) {}
@@ -34,7 +38,12 @@ export class AdminComponent implements OnInit {
 
   applyTheme(): void {
     const root = document.documentElement;
-    root.classList.remove('theme-default', 'theme-forest', 'theme-fema');
+    root.classList.forEach(cls => {
+      if (cls.startsWith('theme-')) {
+        root.classList.remove(cls);
+      }
+    });
+
     root.classList.add(`theme-${this.selectedTheme}`);
     localStorage.setItem('app-theme', this.selectedTheme);
   }

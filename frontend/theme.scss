@@ -1,3 +1,5 @@
+$text: #1f2937;
+
 @use "bulma/sass";
 
 @use "bulma/sass/elements";
@@ -64,6 +66,54 @@ $theme-fema: (
   menu-text: #1b1b1b
 );
 
+$theme-dark: (
+  bg-gradient-start: #1f1f2e,
+  bg-gradient-end: #0f172a,
+  accent: #6366f1,
+  accent-contrast: #ffffff,
+  nav-bg: #111827,
+  nav-text: #e5e7eb,
+  card-border: #374151,
+  card-bg: #1f2933,
+  button-bg: #6366f1,
+  button-text: #ffffff,
+  menu-bg: #111827,
+  menu-text: #e5e7eb
+);
+
+$theme-light: (
+  bg-gradient-start: #f8fafc,
+  bg-gradient-end: #e2e8f0,
+  accent: #2563eb,
+  accent-contrast: #ffffff,
+  nav-bg: #ffffff,
+  nav-text: #1f2937,
+  card-border: #d1d5db,
+  card-bg: #ffffff,
+  button-bg: #2563eb,
+  button-text: #ffffff,
+  menu-bg: #f9fafb,
+  menu-text: #1f2937
+);
+
+$theme-sunset: (
+  bg-gradient-start: #ff7e5f,
+  bg-gradient-end: #feb47b,
+  accent: #ef4444,
+  accent-contrast: #ffffff,
+  nav-bg: #7c2d12,
+  nav-text: #ffedd5,
+  card-border: #ea580c,
+  card-bg: #fed7aa,
+  button-bg: #ef4444,
+  button-text: #ffffff,
+  menu-bg: #7c2d12,
+  menu-text: #ffedd5
+);
+
+
+
+
 // Mixin to output CSS variables
 @mixin apply-theme($theme-map) {
   @each $key, $value in $theme-map {
@@ -85,4 +135,15 @@ $theme-fema: (
   @include apply-theme($theme-fema);
 }
 
+// Theme classes
+.theme-dark {
+  @include apply-theme($theme-dark);
+}
 
+.theme-light {
+  @include apply-theme($theme-light);
+}
+
+.theme-sunset {
+  @include apply-theme($theme-sunset);
+}
