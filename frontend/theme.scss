@@ -5,7 +5,7 @@
 $base-theme: (
   bg-gradient-start: #ffcc00,
   bg-gradient-end: #f39c12,
-  surface: #ffffff,
+  surface: blue,
   text: #1b1b1b,
   muted: #4f4f4f,
   accent: #1f5fbf,
@@ -16,8 +16,8 @@ $base-theme: (
   menu-text: #1b1b1b,
   nav-bg: #0f0f0f,
   nav-text: #f4f4f4,
-  body-text: #f4f4f4,
-  icon-color: #f4f4f4,
+  body-text: #0f0f0f,
+  icon-color: #0f0f0f,
   card-shadow: 0 6px 18px rgba(0, 0, 0, 0.18)
 );
 
