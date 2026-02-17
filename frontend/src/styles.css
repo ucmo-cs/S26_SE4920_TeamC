@@ -21563,7 +21563,7 @@ has-background-danger.is-hoverable:active {
 :root {
   --bg-gradient-start: #ffcc00;
   --bg-gradient-end: #f39c12;
-  --surface: blue;
+  --surface: #fffafa;
   --text: #1b1b1b;
   --muted: #4f4f4f;
   --accent: #1f5fbf;
@@ -21576,6 +21576,7 @@ has-background-danger.is-hoverable:active {
   --nav-text: #f4f4f4;
   --body-text: #0f0f0f;
   --icon-color: #0f0f0f;
+  --risen-one-icon-background: #0f0f0f;
   --card-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
 }
 
@@ -21587,7 +21588,8 @@ has-background-danger.is-hoverable:active {
   --nav-bg: #0a2a21;
   --nav-text: #f3efe6;
   --body-text: #f3efe6;
-  --icon-color: #f3efe6;
+  --icon-color: rgba(243, 239, 230, 0.0823529412);
+  --risen-one-icon-background: #0f0f0f;
   --card-border: #365b40;
   --card-bg: #f7f4ea;
   --button-bg: #2f7d32;
@@ -21605,6 +21607,7 @@ has-background-danger.is-hoverable:active {
   --nav-text: #f5f7fb;
   --body-text: #f5f7fb;
   --icon-color: #f5f7fb;
+  --risen-one-icon-background: #0f0f0f;
   --card-border: #2b4d7a;
   --card-bg: #f4f6fb;
   --button-bg: #0b4ea2;
@@ -21622,6 +21625,7 @@ has-background-danger.is-hoverable:active {
   --nav-text: #ffedd5;
   --body-text: #ffedd5;
   --icon-color: #ffedd5;
+  --risen-one-icon-background: transparent;
   --card-border: #ea580c;
   --card-bg: #fed7aa;
   --button-bg: #ef4444;
@@ -21640,6 +21644,7 @@ has-background-danger.is-hoverable:active {
   --nav-text: #e0e0ff;
   --body-text: #e0e0ff;
   --icon-color: #e0e0ff;
+  --risen-one-icon-background: transparent;
   --card-border: #ff00ff;
   --card-bg: #1a1a2e;
   --button-bg: #ff00ff;
@@ -21658,6 +21663,7 @@ has-background-danger.is-hoverable:active {
   --nav-text: #cce7ff;
   --body-text: #cce7ff;
   --icon-color: #cce7ff;
+  --risen-one-icon-background: transparent;
   --card-border: #005580;
   --card-bg: #002b4d;
   --button-bg: #00bcd4;
@@ -21676,6 +21682,7 @@ has-background-danger.is-hoverable:active {
   --nav-text: #ffd6c1;
   --body-text: #ffd6c1;
   --icon-color: #ffd6c1;
+  --risen-one-icon-background: transparent;
   --card-border: #7a1a1a;
   --card-bg: #4c0d0d;
   --button-bg: #ff4500;
