@@ -7,14 +7,19 @@
   scrollbar-width: none;
 }
 
+h1, h3{
+   color: var(--body-text);
+}
+
 h3{
   margin:10px;
 }
 
 /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
 mat-card {
-  background-color: white;
-  border-radius: 30px;
+  background-color: var(--card-bg, var(--surface));
+  border-radius: 10px;
+  border: 2px solid var(--card-border, #d7d7d7);
   font-family: 'Roboto';
   height: 100%;
   margin-left: 5%;
