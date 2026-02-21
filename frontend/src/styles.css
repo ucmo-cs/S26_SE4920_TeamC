@@ -21590,6 +21590,7 @@ has-background-danger.is-hoverable:active {
   --icon-color: #62bd65;
   --risen-one-icon-background: #62bd65;
   --card-border: #365b40;
+  --border-color: #365b40;
   --card-bg: #f7f4ea;
   --button-bg: #2f7d32;
   --button-text: #ffffff;
@@ -21609,6 +21610,7 @@ has-background-danger.is-hoverable:active {
   --icon-color: #0b4ea2;
   --risen-one-icon-background: #0b4ea2;
   --card-border: #2b4d7a;
+  --border-color: #2b4d7a;
   --card-bg: #f4f6fb;
   --button-bg: #0b4ea2;
   --button-text: #ffffff;
@@ -21629,6 +21631,7 @@ has-background-danger.is-hoverable:active {
   --risen-one-icon-background: transparent;
   --risen-one-icon-border: #ea580c;
   --card-border: #ea580c;
+  --border-color: #ea580c;
   --card-bg: #140d05;
   --button-bg: #ee6c6c;
   --button-text: #ffffff;
@@ -21649,6 +21652,7 @@ has-background-danger.is-hoverable:active {
   --icon-color: #e0e0ff;
   --risen-one-icon-background: transparent;
   --card-border: #ff00ff;
+  --border-color: #ff00ff;
   --card-bg: #1a1a2e;
   --button-bg: #ff00ff;
   --button-text: #000000;
@@ -21669,6 +21673,7 @@ has-background-danger.is-hoverable:active {
   --icon-color: #cce7ff;
   --risen-one-icon-background: transparent;
   --card-border: #005580;
+  --border-color: #005580;
   --card-bg: #002b4d;
   --button-bg: #00bcd4;
   --button-text: #001f3f;
@@ -21689,6 +21694,7 @@ has-background-danger.is-hoverable:active {
   --icon-color: #ffd6c1;
   --risen-one-icon-background: transparent;
   --card-border: #7a1a1a;
+  --border-color: #7a1a1a;
   --card-bg: #4c0d0d;
   --button-bg: #ff4500;
   --button-text: #ffffff;
