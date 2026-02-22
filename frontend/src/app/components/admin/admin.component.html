@@ -21,8 +21,6 @@
             <mat-form-field appearance="outline" class="theme-field">
               <mat-label class="muted">Palette</mat-label>
               <mat-select
-                panelClass="theme-option"
-                class="theme-select"
                 [(ngModel)]="selectedTheme"
                 (selectionChange)="applyTheme()"
               >

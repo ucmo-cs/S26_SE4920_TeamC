@@ -108,11 +108,11 @@ button:hover {
 }
 
 .header-text {
-  color: var(--body-text);
+  color: var(--primary-color);
 }
 
 .text {
-  color: var(--body-text);
+  color: var(--primary-color);
 }
 
 .home-card:last-child:nth-child(odd) {

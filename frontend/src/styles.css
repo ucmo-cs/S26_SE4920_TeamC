@@ -21561,6 +21561,19 @@ has-background-danger.is-hoverable:active {
 }
 
 :root {
+  --mdc-outlined-text-field-outline-width: 1px;
+  --mdc-outlined-text-field-focus-outline-color: var(--accent);
+  --mdc-outlined-text-field-outline-color: var(--border-color);
+  --mdc-outlined-text-field-hover-outline-color: var(--primary-color);
+  --mat-select-enabled-trigger-text-color: var(--primary-color);
+  --mat-select-disabled-trigger-text-color: var(--muted);
+  --mat-select-placeholder-text-color: var(--primary-color);
+  --mat-select-enabled-arrow-color: var(--primary-color);
+  --mat-select-disabled-arrow-color: var(--muted);
+  --mat-select-focused-arrow-color: var(--accent);
+}
+
+:root {
   --bg-gradient-start: #ffcc00;
   --bg-gradient-end: #f39c12;
   --surface: #fffafa;
@@ -21571,7 +21584,7 @@ has-background-danger.is-hoverable:active {
   --menu-text: #1b1b1b;
   --nav-bg: #0f0f0f;
   --nav-text: #f4f4f4;
-  --body-text: #0f0f0f;
+  --primary-color: #0f0f0f;
   --icon-color: #0f0f0f;
   --card-bg: #fdfaf9;
   --risen-one-icon-background: #0f0f0f;
@@ -21586,7 +21599,7 @@ has-background-danger.is-hoverable:active {
   --nav-bg: #0a2a21;
   --muted: #6c916d;
   --nav-text: #f3efe6;
-  --body-text: #62bd65;
+  --primary-color: #62bd65;
   --icon-color: #62bd65;
   --risen-one-icon-background: #62bd65;
   --card-border: #365b40;
@@ -21606,7 +21619,7 @@ has-background-danger.is-hoverable:active {
   --nav-bg: #0a1526;
   --muted: #406188;
   --nav-text: #f5f7fb;
-  --body-text: #0b4ea2;
+  --primary-color: #0b4ea2;
   --icon-color: #0b4ea2;
   --risen-one-icon-background: #0b4ea2;
   --card-border: #2b4d7a;
@@ -21626,7 +21639,7 @@ has-background-danger.is-hoverable:active {
   --nav-bg: #7c2d12;
   --muted: #dbb683;
   --nav-text: #ffedd5;
-  --body-text: #fab34f;
+  --primary-color: #fab34f;
   --icon-color: #fab34f;
   --risen-one-icon-background: transparent;
   --risen-one-icon-border: #ea580c;
@@ -21648,7 +21661,7 @@ has-background-danger.is-hoverable:active {
   --nav-bg: #1a1a2e;
   --muted: rgba(224, 224, 255, 0.5764705882);
   --nav-text: #e0e0ff;
-  --body-text: #e0e0ff;
+  --primary-color: #e0e0ff;
   --icon-color: #e0e0ff;
   --risen-one-icon-background: transparent;
   --card-border: #ff00ff;
@@ -21669,7 +21682,7 @@ has-background-danger.is-hoverable:active {
   --nav-bg: #001a33;
   --muted: rgba(204, 231, 255, 0.5333333333);
   --nav-text: #cce7ff;
-  --body-text: #cce7ff;
+  --primary-color: #cce7ff;
   --icon-color: #cce7ff;
   --risen-one-icon-background: transparent;
   --card-border: #005580;
@@ -21690,7 +21703,7 @@ has-background-danger.is-hoverable:active {
   --nav-bg: #3a0c0c;
   --muted: rgba(255, 214, 193, 0.5254901961);
   --nav-text: #ffd6c1;
-  --body-text: #ffd6c1;
+  --primary-color: #ffd6c1;
   --icon-color: #ffd6c1;
   --risen-one-icon-background: transparent;
   --card-border: #7a1a1a;

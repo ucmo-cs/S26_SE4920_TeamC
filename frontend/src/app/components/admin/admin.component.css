@@ -1,9 +1,10 @@
 h2,
 h3 {
-  color: var(--body-text);
+  color: var(--primary-color);
 }
+
 .admin-page {
-  color: var(--body-text);
+  color: var(--primary-color);
   box-sizing: border-box;
   max-width: 100%;
   padding: 24px;
@@ -61,21 +62,15 @@ h3 {
   width: 100%;
 }
 
-.theme-select {
+/* .theme-select {
   color: var(--body-text);
-  border-color: var(--border-color);
-}
-
-.theme-select {
-  color: var(--body-text);
-  border-color: var(--border-color);
 }
 
 .theme-option {
   color: var(--body-text);
   background: var(--card-bg);
   border-style: dashed;
-}
+} */
 
 .admin-card .mat-mdc-select-trigger {
   color: var(--body-text) !important;

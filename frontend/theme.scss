@@ -1,6 +1,29 @@
+@use '@angular/material' as mat;
 @use "bulma/sass";
 
-// Sunset
+:root {
+  @include mat.form-field-overrides((
+    outline-color: var(--border-color),
+    focus-outline-color: var(--accent),
+    hover-outline-color: var(--primary-color),
+    outline-width: 1px,
+  ));
+  // This handles the floating panel and the options
+  @include mat.select-overrides((
+    // panel-background-color: var(--card-bg),
+    placeholder-text-color: var(--primary-color),
+    enabled-trigger-text-color: var(--primary-color),
+    disabled-trigger-text-color: var(--muted),
+    enabled-arrow-color: var(--primary-color),
+    disabled-arrow-color: var(--muted),
+    focused-arrow-color: var(--accent),
+  ));
+
+  // @include mat.option-overrides((
+  //   label-text-color: var(green),
+  //   selected-state-layer-color: var(pink),
+  // ));
+}
 
 // Base (default) theme
 $base-theme: (
@@ -14,7 +37,7 @@ $base-theme: (
   menu-text: #1b1b1b,
   nav-bg: #0f0f0f,
   nav-text: #f4f4f4,
-  body-text: #0f0f0f,
+  primary-color: #0f0f0f,
   icon-color: #0f0f0f,
   card-bg: #fdfaf9,
   risen-one-icon-background: #0f0f0f,
@@ -30,7 +53,7 @@ $theme-forest: (
   nav-bg: #0a2a21,
   muted: #6c916d,
   nav-text: #f3efe6,
-  body-text: #62bd65,
+  primary-color: #62bd65,
   icon-color: #62bd65,
   risen-one-icon-background:  #62bd65,
   card-border: #365b40,
@@ -51,7 +74,7 @@ $theme-fema: (
   nav-bg: #0a1526,
   muted: #406188,
   nav-text: #f5f7fb,
-  body-text: #0b4ea2,
+  primary-color: #0b4ea2,
   icon-color: #0b4ea2,
   risen-one-icon-background: #0b4ea2,
   card-border: #2b4d7a,
@@ -71,7 +94,7 @@ $theme-sunset: (
   nav-bg: #7c2d12,
   muted: #dbb683,
   nav-text: #ffedd5,
-  body-text: #fab34f,
+  primary-color: #fab34f,
   icon-color: #fab34f,
   risen-one-icon-background: transparent, 
   risen-one-icon-border: #ea580c,
@@ -93,7 +116,7 @@ $theme-cyberpunk: (
   nav-bg: #1a1a2e,
   muted: #e0e0ff93,
   nav-text: #e0e0ff,
-  body-text: #e0e0ff,
+  primary-color: #e0e0ff,
   icon-color: #e0e0ff,
   risen-one-icon-background: transparent,
   card-border: #ff00ff,
@@ -114,7 +137,7 @@ $theme-ocean: (
   nav-bg: #001a33,
   muted: #cce7ff88,
   nav-text: #cce7ff,
-  body-text: #cce7ff,
+  primary-color: #cce7ff,
   icon-color: #cce7ff,
   risen-one-icon-background: transparent,
   card-border: #005580,
@@ -135,7 +158,7 @@ $theme-volcano: (
   nav-bg: #3a0c0c,
   muted: #ffd6c186,
   nav-text: #ffd6c1,
-  body-text: #ffd6c1,
+  primary-color: #ffd6c1,
   icon-color: #ffd6c1,
   risen-one-icon-background: transparent,
   card-border: #7a1a1a,
@@ -146,7 +169,6 @@ $theme-volcano: (
   menu-bg: #4c0d0d,
   menu-text: #ffd6c1
 );
-
 
 // Mixin to output CSS variables
 @mixin apply-theme($theme-map) {
