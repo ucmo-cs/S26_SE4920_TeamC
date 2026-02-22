@@ -8,9 +8,8 @@
     hover-outline-color: var(--primary-color),
     outline-width: 1px,
   ));
-  // This handles the floating panel and the options
+
   @include mat.select-overrides((
-    // panel-background-color: var(--card-bg),
     placeholder-text-color: var(--primary-color),
     enabled-trigger-text-color: var(--primary-color),
     disabled-trigger-text-color: var(--muted),
@@ -19,10 +18,12 @@
     focused-arrow-color: var(--accent),
   ));
 
-  // @include mat.option-overrides((
-  //   label-text-color: var(green),
-  //   selected-state-layer-color: var(pink),
-  // ));
+  @include mat.paginator-overrides((
+    container-background-color: color-mix(in srgb, var(--card-bg), var(--primary-color) 10%),
+    disabled-icon-color: var(--muted),
+    enabled-icon-color: var(--primary-color),
+    container-text-color: var(--primary-color),
+  ));
 }
 
 // Base (default) theme
@@ -40,6 +41,7 @@ $base-theme: (
   primary-color: #0f0f0f,
   icon-color: #0f0f0f,
   card-bg: #fdfaf9,
+  primary-button-bg: #393cfa,
   risen-one-icon-background: #0f0f0f,
   card-shadow: 0 6px 18px rgba(0, 0, 0, 0.18)
 );
@@ -60,6 +62,7 @@ $theme-forest: (
   border-color: #365b40,
   card-bg: #f7f4ea,
   button-bg: #2f7d32,
+  primary-button-bg: #249b28,
   button-text: #ffffff,
   menu-bg: #f7f4ea,
   menu-text: #1b1b1b
@@ -81,6 +84,7 @@ $theme-fema: (
   border-color: #2b4d7a,
   card-bg: #f4f6fb,
   button-bg: #0b4ea2,
+  primary-button-bg: #032e62,
   button-text: #ffffff,
   menu-bg: #f4f6fb,
   menu-text: #1b1b1b
@@ -102,6 +106,7 @@ $theme-sunset: (
   border-color: #ea580c,
   card-bg: #140d05,
   button-bg: #ee6c6c,
+  primary-button-bg: #f83939,
   button-text: #ffffff,
   menu-bg: #7c2d12,
   menu-text: #ffedd5
@@ -123,13 +128,14 @@ $theme-cyberpunk: (
   border-color: #ff00ff,
   card-bg: #1a1a2e,
   button-bg: #ff00ff,
+  primary-button-bg: #c300ff,
   button-text: #000000,
   menu-bg: #1a1a2e,
   menu-text: #e0e0ff
 );
 
 $theme-ocean: (
-   content-heading-color: #00ff99,
+  content-heading-color: #00ff99,
   bg-gradient-start: #001f3f,
   bg-gradient-end: #003366,
   accent: #00bcd4,
@@ -144,6 +150,7 @@ $theme-ocean: (
   border-color: #005580,
   card-bg: #002b4d,
   button-bg: #00bcd4,
+  primary-button-bg: #00a8fc,
   button-text: #001f3f,
   menu-bg: #002b4d,
   menu-text: #cce7ff
@@ -153,7 +160,7 @@ $theme-volcano: (
   heading-color: #00ff99,
   bg-gradient-start: #2c0b0b,
   bg-gradient-end: #5a0d0d,
-  accent: #ff4500,
+  accent: #9f2a00,
   accent-contrast: #ffffff,
   nav-bg: #3a0c0c,
   muted: #ffd6c186,
@@ -164,7 +171,8 @@ $theme-volcano: (
   card-border: #7a1a1a,
   border-color: #7a1a1a,
   card-bg: #4c0d0d,
-  button-bg: #ff4500,
+  button-bg: #9f2a00,
+  primary-button-bg: #ff4500,
   button-text: #ffffff,
   menu-bg: #4c0d0d,
   menu-text: #ffd6c1

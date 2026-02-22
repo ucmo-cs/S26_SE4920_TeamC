@@ -75,6 +75,13 @@ th.mat-mdc-header-cell, td.mat-mdc-cell, td.mat-mdc-footer-cell {
 }
 
 button {
+  background-color: var(--button-bg) !important;
+  color: var(--button-text) !important;
+  margin: 10px;
+}
+
+.primaryButton{
+  background-color: var(--primary-button-bg) !important;
   margin: 10px;
 }
 

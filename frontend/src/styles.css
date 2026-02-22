@@ -21571,6 +21571,10 @@ has-background-danger.is-hoverable:active {
   --mat-select-enabled-arrow-color: var(--primary-color);
   --mat-select-disabled-arrow-color: var(--muted);
   --mat-select-focused-arrow-color: var(--accent);
+  --mat-paginator-container-text-color: var(--primary-color);
+  --mat-paginator-container-background-color: color-mix(in srgb, var(--card-bg), var(--primary-color) 10%);
+  --mat-paginator-enabled-icon-color: var(--primary-color);
+  --mat-paginator-disabled-icon-color: var(--muted);
 }
 
 :root {
@@ -21587,6 +21591,7 @@ has-background-danger.is-hoverable:active {
   --primary-color: #0f0f0f;
   --icon-color: #0f0f0f;
   --card-bg: #fdfaf9;
+  --primary-button-bg: #393cfa;
   --risen-one-icon-background: #0f0f0f;
   --card-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
 }
@@ -21606,6 +21611,7 @@ has-background-danger.is-hoverable:active {
   --border-color: #365b40;
   --card-bg: #f7f4ea;
   --button-bg: #2f7d32;
+  --primary-button-bg: #249b28;
   --button-text: #ffffff;
   --menu-bg: #f7f4ea;
   --menu-text: #1b1b1b;
@@ -21626,6 +21632,7 @@ has-background-danger.is-hoverable:active {
   --border-color: #2b4d7a;
   --card-bg: #f4f6fb;
   --button-bg: #0b4ea2;
+  --primary-button-bg: #032e62;
   --button-text: #ffffff;
   --menu-bg: #f4f6fb;
   --menu-text: #1b1b1b;
@@ -21647,6 +21654,7 @@ has-background-danger.is-hoverable:active {
   --border-color: #ea580c;
   --card-bg: #140d05;
   --button-bg: #ee6c6c;
+  --primary-button-bg: #f83939;
   --button-text: #ffffff;
   --menu-bg: #7c2d12;
   --menu-text: #ffedd5;
@@ -21668,6 +21676,7 @@ has-background-danger.is-hoverable:active {
   --border-color: #ff00ff;
   --card-bg: #1a1a2e;
   --button-bg: #ff00ff;
+  --primary-button-bg: #c300ff;
   --button-text: #000000;
   --menu-bg: #1a1a2e;
   --menu-text: #e0e0ff;
@@ -21689,6 +21698,7 @@ has-background-danger.is-hoverable:active {
   --border-color: #005580;
   --card-bg: #002b4d;
   --button-bg: #00bcd4;
+  --primary-button-bg: #00a8fc;
   --button-text: #001f3f;
   --menu-bg: #002b4d;
   --menu-text: #cce7ff;
@@ -21698,7 +21708,7 @@ has-background-danger.is-hoverable:active {
   --heading-color: #00ff99;
   --bg-gradient-start: #2c0b0b;
   --bg-gradient-end: #5a0d0d;
-  --accent: #ff4500;
+  --accent: #9f2a00;
   --accent-contrast: #ffffff;
   --nav-bg: #3a0c0c;
   --muted: rgba(255, 214, 193, 0.5254901961);
@@ -21709,7 +21719,8 @@ has-background-danger.is-hoverable:active {
   --card-border: #7a1a1a;
   --border-color: #7a1a1a;
   --card-bg: #4c0d0d;
-  --button-bg: #ff4500;
+  --button-bg: #9f2a00;
+  --primary-button-bg: #ff4500;
   --button-text: #ffffff;
   --menu-bg: #4c0d0d;
   --menu-text: #ffd6c1;

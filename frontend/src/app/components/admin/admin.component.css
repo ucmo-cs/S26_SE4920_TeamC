@@ -1,4 +1,7 @@
-h2,
+h2 {
+  color: color-mix(in srgb, var(--primary-color), white 50%);
+}
+
 h3 {
   color: var(--primary-color);
 }
@@ -61,16 +64,6 @@ h3 {
 .theme-field {
   width: 100%;
 }
-
-/* .theme-select {
-  color: var(--body-text);
-}
-
-.theme-option {
-  color: var(--body-text);
-  background: var(--card-bg);
-  border-style: dashed;
-} */
 
 .admin-card .mat-mdc-select-trigger {
   color: var(--body-text) !important;
