@@ -3,6 +3,7 @@
 
 :root {
   @include mat.form-field-overrides((
+    disabled-input-text-placeholder-color: var(--muted),
     outline-color: var(--border-color),
     focus-outline-color: var(--accent),
     hover-outline-color: var(--primary-color),

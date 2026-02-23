@@ -21565,6 +21565,7 @@ has-background-danger.is-hoverable:active {
   --mdc-outlined-text-field-focus-outline-color: var(--accent);
   --mdc-outlined-text-field-outline-color: var(--border-color);
   --mdc-outlined-text-field-hover-outline-color: var(--primary-color);
+  --mat-form-field-disabled-input-text-placeholder-color: var(--muted);
   --mat-select-enabled-trigger-text-color: var(--primary-color);
   --mat-select-disabled-trigger-text-color: var(--muted);
   --mat-select-placeholder-text-color: var(--primary-color);

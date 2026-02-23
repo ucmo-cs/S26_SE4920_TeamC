@@ -48,9 +48,10 @@
         class="users-right-buffer users-form-size small-input"
         appearance="outline"
       >
-        <mat-label>Date Range Start</mat-label>
+        <mat-label class="date-label">Date Range Start</mat-label>
         <div class="date-container">
           <input
+            class="date-input"
             matInput
             [matDatepicker]="picker"
             [(ngModel)]="startRange"
@@ -58,6 +59,7 @@
             data-testid="start_range"
           />
           <mat-datepicker-toggle
+            class="date-input"
             matIconSuffix
             [for]="picker"
           ></mat-datepicker-toggle>
@@ -70,9 +72,10 @@
         class="users-right-buffer users-form-size small-input"
         appearance="outline"
       >
-        <mat-label>Date Range End</mat-label>
+        <mat-label class="date-label">Date Range End</mat-label>
         <div class="date-container">
           <input
+            class="date-input"
             matInput
             [matDatepicker]="picker1"
             [(ngModel)]="endRange"
@@ -80,6 +83,7 @@
             data-testid="end_range"
           />
           <mat-datepicker-toggle
+            class="date-input"
             matIconSuffix
             [for]="picker1"
           ></mat-datepicker-toggle>
