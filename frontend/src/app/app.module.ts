@@ -70,6 +70,7 @@ import { TeamSummaryComponent } from './components/team-summary/team-summary.com
 import { TeamAdminComponent } from './components/team-admin/team-admin.component';
 import { RoleFormComponent } from './components/admin/roles/role-form/role-form.component';
 import { RolesListComponent } from './components/admin/roles/role-list/roles-list.component';
+import { TimeOffComponent } from './components/time-off/time-off.component';
 @NgModule({
     declarations: [
       AppHeaderComponent,
@@ -91,6 +92,7 @@ import { RolesListComponent } from './components/admin/roles/role-list/roles-lis
       TeamAdminComponent,
       RoleFormComponent,
       RolesListComponent
+      TimeOffComponent,
     ],
     exports: [],
     bootstrap: [AppComponent],

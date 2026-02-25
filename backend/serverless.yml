@@ -135,6 +135,21 @@ functions:
           path: import-data
           method: post
           cors: true
-
-  
-
+  postTimeOff:
+    handler: src/handlers/post-time-off.handler
+    environment:
+      USERS_TABLE: users
+    events:
+      - http:
+          path: time-off
+          method: post
+          cors: true
+  getTimeOff:
+    handler: src/handlers/get-time-off.handler
+    environment:
+      USERS_TABLE: users
+    events:
+      - http:
+          path: time-off/{userId}
+          method: get
+          cors: true
