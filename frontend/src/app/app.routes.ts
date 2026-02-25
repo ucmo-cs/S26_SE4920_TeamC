@@ -1,26 +1,15 @@
-import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
-import { NgModel } from '@angular/forms';
-import { NgModule } from '@angular/core';
-import { DailyStatusComponent } from './components/daily-status/daily-status.component';
+import { Routes } from '@angular/router';
+
+import { RolesListComponent } from './admin/roles/roles-list/roles-list.component';
+import { RoleFormComponent } from './admin/roles/role-form/role-form.component';
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent }, 
-  {
-    path: 'daily-status',
-    component: DailyStatusComponent
-  },
-  ];
+  { path: '', redirectTo: 'admin/roles', pathMatch: 'full' },
 
-  @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule],
-    providers: []
-  })
+  { path: 'admin', redirectTo: 'admin/roles', pathMatch: 'full' },
+  { path: 'admin/roles', component: RolesListComponent },
+  { path: 'admin/roles/new', component: RoleFormComponent },
+  { path: 'admin/roles/:id', component: RoleFormComponent },
 
-  export class AppRoutingModule{
-   
-  }
+  { path: '**', redirectTo: 'admin/roles' }
+];
