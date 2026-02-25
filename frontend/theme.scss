@@ -1,134 +1,217 @@
 @use '@angular/material' as mat;
+@use "bulma/sass";
 
-@include mat.core();
+:root {
+  @include mat.form-field-overrides((
+    disabled-input-text-placeholder-color: var(--muted),
+    outline-color: var(--border-color),
+    focus-outline-color: var(--accent),
+    hover-outline-color: var(--primary-color),
+    outline-width: 1px,
+  ));
 
-$custom-primary-palette: (
-    50: #f9f0e0,
-    100: #f1d9b2,
-    200: #e8c181,
-    300: #e0a951,
-    400: #db9831,
-    500: #d68814,
-    600: #d37e11,
-    700: #cd700c,
-    800: #c66107,
-    900: #bd4a00,
-    contrast: (
-        50: #0000,
-        100: #0000,
-        200: #0000,
-        300: #ffff,
-        400: #ffff,
-        500: #ffff,
-        600: #ffff,
-        700: #ffff,
-        800: #ffff,
-        900: #ffff,
-    )
+  @include mat.select-overrides((
+    placeholder-text-color: var(--primary-color),
+    enabled-trigger-text-color: var(--primary-color),
+    disabled-trigger-text-color: var(--muted),
+    enabled-arrow-color: var(--primary-color),
+    disabled-arrow-color: var(--muted),
+    focused-arrow-color: var(--accent),
+  ));
+
+  @include mat.paginator-overrides((
+    container-background-color: color-mix(in srgb, var(--card-bg), var(--primary-color) 10%),
+    disabled-icon-color: var(--muted),
+    enabled-icon-color: var(--primary-color),
+    container-text-color: var(--primary-color),
+  ));
+}
+
+// Base (default) theme
+$base-theme: (
+  bg-gradient-start: #ffcc00,
+  bg-gradient-end: #f39c12,
+  surface: #fffafa,
+  muted: #4f4f4f,
+  accent: #1f5fbf,
+  accent-contrast: #ffffff,
+  menu-bg: #ffffff,
+  menu-text: #1b1b1b,
+  nav-bg: #0f0f0f,
+  nav-text: #f4f4f4,
+  primary-color: #0f0f0f,
+  icon-color: #0f0f0f,
+  card-bg: #fdfaf9,
+  primary-button-bg: #393cfa,
+  risen-one-icon-background: #0f0f0f,
+  card-shadow: 0 6px 18px rgba(0, 0, 0, 0.18)
 );
 
-$custom-accent-palette: (
-    50: #e5f2fd,
-    100: #c1defb,
-    200: #9ccaf8,
-    300: #7ab5f4,
-    400: #64a5f2,
-    500: #5696ee,
-    600: #5188e0,
-    700: #4a76cc,
-    800: #4565ba,
-    900: #3a4799,
-    contrast: (
-        50: #0000,
-        100: #0000,
-        200: #0000,
-        300: #ffff,
-        400: #ffff,
-        500: #ffff,
-        600: #ffff,
-        700: #ffff,
-        800: #ffff,
-        900: #ffff,
-    )
+// Forest theme
+$theme-forest: (
+  bg-gradient-start: #0b3d2e,
+  bg-gradient-end: #c9a227,
+  accent: #2f7d32,
+  accent-contrast: #ffffff,
+  nav-bg: #0a2a21,
+  muted: #6c916d,
+  nav-text: #f3efe6,
+  primary-color: #62bd65,
+  icon-color: #62bd65,
+  risen-one-icon-background:  #62bd65,
+  card-border: #365b40,
+  border-color: #365b40,
+  card-bg: #f7f4ea,
+  button-bg: #2f7d32,
+  primary-button-bg: #249b28,
+  button-text: #ffffff,
+  menu-bg: #f7f4ea,
+  menu-text: #1b1b1b
 );
 
-$custom-warn-palette: (
-    50: #fdeced,
-    100: #f9cfd1,
-    200: #e69f9a,
-    300: #d87b73,
-    400: #e06251,
-    500: #e35739,
-    600: #d44e38,
-    700: #c34532,
-    800: #b63f2c,
-    900: #a73621,
-    contrast: (
-        50: #0000,
-        100: #0000,
-        200: #0000,
-        300: #ffff,
-        400: #ffff,
-        500: #ffff,
-        600: #ffff,
-        700: #ffff,
-        800: #ffff,
-        900: #ffff,
-    )
+// FEMA theme
+$theme-fema: (
+  bg-gradient-start: #0b1f3a,
+  bg-gradient-end: #b3202a,
+  accent: #0b4ea2,
+  accent-contrast: #ffffff,
+  nav-bg: #0a1526,
+  muted: #406188,
+  nav-text: #f5f7fb,
+  primary-color: #0b4ea2,
+  icon-color: #0b4ea2,
+  risen-one-icon-background: #0b4ea2,
+  card-border: #2b4d7a,
+  border-color: #2b4d7a,
+  card-bg: #f4f6fb,
+  button-bg: #0b4ea2,
+  primary-button-bg: #032e62,
+  button-text: #ffffff,
+  menu-bg: #f4f6fb,
+  menu-text: #1b1b1b
 );
 
-
-$custom-secondary-palette: (
-    50: #0000,
-    100: #0000,
-    200: #0000,
-    300: #0000,
-    400: #0000,
-    500: #0000,
-    600: #0000,
-    700: #0000,
-    800: #0000,
-    900: #0000,
-    contrast: (
-        50: #0000,
-        100: #0000,
-        200: #0000,
-        300: #ffff,
-        400: #ffff,
-        500: #ffff,
-        600: #ffff,
-        700: #ffff,
-        800: #ffff,
-        900: #ffff,
-    )
-);
-$custom-primary: mat.m2-define-palette($custom-primary-palette);
-$custom-accent: mat.m2-define-palette($custom-accent-palette);
-// $custom-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-$custom-warn: mat.m2-define-palette($custom-warn-palette);
-//$custom-warn: mat.define-palette(mat.$red-palette);
-$custom-secondary: mat.m2-define-palette($custom-secondary-palette);
-
-
-$custom-typography: mat.m2-define-typography-config(
-    $font-family: 'Montserrat',
+$theme-sunset: (
+  bg-gradient-start: #ff7e5f,
+  bg-gradient-end: #feb47b,
+  accent: #ef4444,
+  accent-contrast: #ffffff,
+  nav-bg: #7c2d12,
+  muted: #dbb683,
+  nav-text: #ffedd5,
+  primary-color: #fab34f,
+  icon-color: #fab34f,
+  risen-one-icon-background: transparent, 
+  risen-one-icon-border: #ea580c,
+  card-border: #ea580c,
+  border-color: #ea580c,
+  card-bg: #140d05,
+  button-bg: #ee6c6c,
+  primary-button-bg: #f83939,
+  button-text: #ffffff,
+  menu-bg: #7c2d12,
+  menu-text: #ffedd5
 );
 
-$custom-theme: mat.m2-define-light-theme((
-    color: (
-        primary: $custom-primary,
-        accent: $custom-accent,
-        warn: $custom-warn,
-        secondary: $custom-secondary,
-    ),
-    typography: $custom-typography,
-));
+$theme-cyberpunk: (
+  content-heading-color: #00ff99,
+  bg-gradient-start: #0f0c29,
+  bg-gradient-end: #302b63,
+  accent: #ff00ff,
+  accent-contrast: #ffffff,
+  nav-bg: #1a1a2e,
+  muted: #e0e0ff93,
+  nav-text: #e0e0ff,
+  primary-color: #e0e0ff,
+  icon-color: #e0e0ff,
+  risen-one-icon-background: transparent,
+  card-border: #ff00ff,
+  border-color: #ff00ff,
+  card-bg: #1a1a2e,
+  button-bg: #ff00ff,
+  primary-button-bg: #c300ff,
+  button-text: #000000,
+  menu-bg: #1a1a2e,
+  menu-text: #e0e0ff
+);
 
-$custom-background-color: #628cc9;
+$theme-ocean: (
+  content-heading-color: #00ff99,
+  bg-gradient-start: #001f3f,
+  bg-gradient-end: #003366,
+  accent: #00bcd4,
+  accent-contrast: #ffffff,
+  nav-bg: #001a33,
+  muted: #cce7ff88,
+  nav-text: #cce7ff,
+  primary-color: #cce7ff,
+  icon-color: #cce7ff,
+  risen-one-icon-background: transparent,
+  card-border: #005580,
+  border-color: #005580,
+  card-bg: #002b4d,
+  button-bg: #00bcd4,
+  primary-button-bg: #00a8fc,
+  button-text: #001f3f,
+  menu-bg: #002b4d,
+  menu-text: #cce7ff
+);
 
-$background: map-get($custom-theme, background);
-$background: map_merge($background, (background: $custom-background-color));
-$custom-theme: map_merge($custom-theme, (background: $background));
+$theme-volcano: (
+  heading-color: #00ff99,
+  bg-gradient-start: #2c0b0b,
+  bg-gradient-end: #5a0d0d,
+  accent: #9f2a00,
+  accent-contrast: #ffffff,
+  nav-bg: #3a0c0c,
+  muted: #ffd6c186,
+  nav-text: #ffd6c1,
+  primary-color: #ffd6c1,
+  icon-color: #ffd6c1,
+  risen-one-icon-background: transparent,
+  card-border: #7a1a1a,
+  border-color: #7a1a1a,
+  card-bg: #4c0d0d,
+  button-bg: #9f2a00,
+  primary-button-bg: #ff4500,
+  button-text: #ffffff,
+  menu-bg: #4c0d0d,
+  menu-text: #ffd6c1
+);
 
+// Mixin to output CSS variables
+@mixin apply-theme($theme-map) {
+  @each $key, $value in $theme-map {
+    --#{$key}: #{$value};
+  }
+}
 
-@include mat.all-component-themes($custom-theme);
+// Root default theme
+:root {
+  @include apply-theme($base-theme);
+}
+
+// Theme classes
+.theme-forest {
+  @include apply-theme($theme-forest);
+}
+
+.theme-fema {
+  @include apply-theme($theme-fema);
+}
+
+.theme-sunset {
+  @include apply-theme($theme-sunset);
+}
+
+.theme-cyberpunk {
+  @include apply-theme($theme-cyberpunk);
+}
+
+.theme-ocean {
+  @include apply-theme($theme-ocean);
+}
+
+.theme-volcano {
+  @include apply-theme($theme-volcano);
+}

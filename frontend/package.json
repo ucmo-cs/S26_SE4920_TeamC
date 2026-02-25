@@ -4,10 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:local": "ng serve --configuration local",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build-bulma": "sass --load-path=node_modules my-bulma-project.scss my-bulma-project.css",
+    "build-bulma": "sass --load-path=node_modules theme.scss src/styles.css",
     "start-bulma": "npm run build-bulma -- --watch"
   },
   "private": true,

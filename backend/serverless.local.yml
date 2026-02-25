@@ -1,0 +1,30 @@
+service: senior-project-template-local
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: us-east-1
+
+functions:
+  importData:
+    handler: src/handlers/import-data.handler
+    environment:
+      USERS_TABLE: users
+      PROJECTS_TABLE: projects
+      DAILY_STATUS_TABLE: dailyStatus
+
+  users:
+    handler: src/handlers/users.handler
+    environment:
+      USERS_TABLE: users
+
+  userById:
+    handler: src/handlers/user.handler
+    environment:
+      USERS_TABLE: users
+
+  projects:
+    handler: src/handlers/projects.handler
+    environment:
+      PROJECTS_TABLE: projects
