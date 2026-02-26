@@ -62,6 +62,10 @@ import { UpdateDateRangeComponent } from './components/daily-status/update-date-
 import { ReportReviewComponent } from './components/daily-status/report-review/report-review.component';
 import { ReportDialogComponent } from './components/daily-status/report-dialog/report-dialog.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { ProjectsComponent } from './components/projects/projects.component';
+import { ProjectsOverviewComponent } from './components/projects-overview/projects-overview.component';
+import { TeamSummaryComponent } from './components/team-summary/team-summary.component';
+import { TeamAdminComponent } from './components/team-admin/team-admin.component';
 
 @NgModule({
     declarations: [
@@ -77,7 +81,11 @@ import { AdminComponent } from './components/admin/admin.component';
       UpdateDateRangeComponent,
       ReportReviewComponent,
       ReportDialogComponent,
-      AdminComponent
+      AdminComponent,
+      ProjectsComponent,
+      ProjectsOverviewComponent,
+      TeamSummaryComponent,
+      TeamAdminComponent
     ],
     exports: [],
     bootstrap: [AppComponent],
