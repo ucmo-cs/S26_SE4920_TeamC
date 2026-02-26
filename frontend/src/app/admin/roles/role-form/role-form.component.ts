@@ -7,9 +7,8 @@ import { Permission } from '../models';
 
 @Component({
   selector: 'app-role-form',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
-  templateUrl: './role-form.component.html'
+  templateUrl: './role-form.component.html',
+  styleUrls: ['./role-form.component.css'],
 })
 export class RoleFormComponent implements OnInit {
   id: string | null = null;

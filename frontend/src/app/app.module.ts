@@ -68,7 +68,8 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { ProjectsOverviewComponent } from './components/projects-overview/projects-overview.component';
 import { TeamSummaryComponent } from './components/team-summary/team-summary.component';
 import { TeamAdminComponent } from './components/team-admin/team-admin.component';
-
+import { RoleFormComponent } from '../app/admin/roles/role-form/role-form.component';
+import { RolesListComponent } from '../app/admin/roles/role-list/roles-list.component';
 @NgModule({
     declarations: [
       AppHeaderComponent,
@@ -87,7 +88,9 @@ import { TeamAdminComponent } from './components/team-admin/team-admin.component
       ProjectsComponent,
       ProjectsOverviewComponent,
       TeamSummaryComponent,
-      TeamAdminComponent
+      TeamAdminComponent,
+      RoleFormComponent,
+      RolesListComponent
     ],
     exports: [],
     bootstrap: [AppComponent],
@@ -136,6 +139,8 @@ import { TeamAdminComponent } from './components/team-admin/team-admin.component
         FormsModule,
         ReactiveFormsModule,
         AppRoutingModule,
+        RouterModule,
+        HttpClientModule
     ],
     providers: [
         MatSnackBar,

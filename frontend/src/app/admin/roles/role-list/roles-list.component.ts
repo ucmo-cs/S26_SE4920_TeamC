@@ -6,9 +6,8 @@ import { Role } from '../models';
 
 @Component({
   selector: 'app-roles-list',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
   templateUrl: './roles-list.component.html',
+  styleUrls: ['./roles-list.component.css'],
 })
 export class RolesListComponent implements OnInit {
   roles: Role[] = [];
