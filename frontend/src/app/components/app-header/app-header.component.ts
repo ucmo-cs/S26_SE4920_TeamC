@@ -1,26 +1,33 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-header',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatIconModule,
-    MatMenuModule,
-    MatButtonModule
-  ],
   templateUrl: './app-header.component.html',
-  styleUrls: ['./app-header.component.css']
+  styleUrls: ['./app-header.component.css'],
 })
-export class AppHeaderComponent {
+export class AppHeaderComponent implements OnInit {
+  loginStatus!: boolean;
+  user: any;
+  defaultUserPhoto = '../../../assets/generic_pfp.png';
+  userphoto = this.defaultUserPhoto;
+  admin: boolean = false;
+  lead: boolean = false;
+  tester: boolean = false;
+  pm: boolean = false;
+
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {
+
+  }
+
+  ngOnInit() {
+  }
+
   signOut() {
-    console.log('Logged out');
+    this.authService.logout();
   }
 }
