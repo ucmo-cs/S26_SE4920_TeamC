@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { RocConstants } from '../shared/constants/roc-constants';
 import { Project } from '../models/project';
-import { Employee } from '../models/employee';
 import { of } from 'rxjs';
 
 @Injectable({
@@ -11,7 +10,7 @@ import { of } from 'rxjs';
 })
 export class ProjectApiService {
   private baseUrl = environment.rocApiUrl;
-  private projectUrl = this.baseUrl + '/portal/' + RocConstants.APIS.PROJECTS;
+  private projectUrl = `${this.baseUrl}/${RocConstants.APIS.PROJECTS}`;
 
   constructor(private http: HttpClient) {}
 
@@ -20,7 +19,7 @@ export class ProjectApiService {
   }
 
   addProject(requestParams: any) {
-    return of({ uuid: 'new-uuid', ...requestParams });
+    return of({ ...requestParams });
   }
 
   editProject(projectInfo: Project) {
@@ -32,6 +31,6 @@ export class ProjectApiService {
   } 
 
   getProjects() {
-    return of([{ uuid: '1', projectName: 'Project 1', status: 'Active' }, { uuid: '2', projectName: 'Project 2', status: 'Inactive' }]);
+    return this.http.get<Project[]>(this.projectUrl);
   }
 }

@@ -4,8 +4,10 @@
 }
 
 .content {
-    width: 90vw;
+    box-sizing: border-box;
+    flex: 1 1 auto;
     min-height: 80vh;
+    min-width: 0;
 }
 
 app-sidenav {
