@@ -2,7 +2,7 @@
 @use "bulma/sass";
 
 :root {
-  .mat-mdc-form-field {
+  .mat-mdc-form-field .mat-mdc-input-element {
     color: var(--primary-color) !important;
   }
   .mdc-floating-label { 

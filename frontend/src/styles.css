@@ -21560,7 +21560,7 @@ has-background-danger.is-hoverable:active {
   pointer-events: all !important;
 }
 
-:root .mat-mdc-form-field {
+:root .mat-mdc-form-field .mat-mdc-input-element {
   color: var(--primary-color) !important;
 }
 :root .mdc-floating-label {
