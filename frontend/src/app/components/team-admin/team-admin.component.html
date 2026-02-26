@@ -18,42 +18,53 @@
               <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef>Name</th>
                 <td mat-cell *matCellDef="let user">
-                  {{ user.name || 'Unknown' }}
+                  {{ user.name || "Unknown" }}
                 </td>
               </ng-container>
 
               <ng-container matColumnDef="email">
                 <th mat-header-cell *matHeaderCellDef>Email</th>
                 <td mat-cell *matCellDef="let user">
-                  {{ user.email || '—' }}
+                  {{ user.email || "—" }}
                 </td>
               </ng-container>
 
               <ng-container matColumnDef="team">
                 <th mat-header-cell *matHeaderCellDef>Team</th>
                 <td mat-cell *matCellDef="let user">
-                  {{ user.teamName || '—' }}
+                  {{ user.teamName || "—" }}
                 </td>
               </ng-container>
 
               <ng-container matColumnDef="roles">
                 <th mat-header-cell *matHeaderCellDef>Roles</th>
                 <td mat-cell *matCellDef="let user">
-                  {{ user.roles.length ? user.roles.join(', ') : '—' }}
+                  {{ user.roles.length ? user.roles.join(", ") : "—" }}
                 </td>
               </ng-container>
 
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let user">
-                  <button mat-stroked-button color="primary" (click)="selectUser(user)">
+                  <button
+                    mat-stroked-button
+                    color="primary"
+                    (click)="selectUser(user)"
+                  >
                     Edit
                   </button>
                 </td>
               </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns; trackBy: trackByUuid"></tr>
+              <tr
+                mat-row
+                *matRowDef="
+                  let row;
+                  columns: displayedColumns;
+                  trackBy: trackByUuid
+                "
+              ></tr>
             </table>
           </ng-container>
 
@@ -71,8 +82,10 @@
           <form [formGroup]="teamForm" class="team-form">
             <div class="form-header">
               <div>
-                <h3>{{ selectedUser ? 'Edit Team' : 'Select a User' }}</h3>
-                <p class="muted">Team assignments are stored locally for now.</p>
+                <h3>{{ selectedUser ? "Edit Team" : "Select a User" }}</h3>
+                <p class="muted">
+                  Team assignments are stored locally for now.
+                </p>
               </div>
             </div>
 
@@ -99,15 +112,29 @@
 
               <mat-form-field appearance="outline" class="form-span">
                 <mat-label>Team Name</mat-label>
-                <input matInput formControlName="teamName" placeholder="Ex: Team Atlas" />
+                <input
+                  matInput
+                  formControlName="teamName"
+                  placeholder="Ex: Team Atlas"
+                />
               </mat-form-field>
             </div>
 
             <div class="form-actions">
-              <button mat-stroked-button type="button" (click)="teamForm.reset()">
+              <button
+                mat-stroked-button
+                type="button"
+                (click)="teamForm.reset()"
+              >
                 Clear
               </button>
-              <button mat-raised-button color="primary" type="button" (click)="saveTeam()" [disabled]="!selectedUser">
+              <button
+                mat-raised-button
+                color="primary"
+                type="button"
+                (click)="saveTeam()"
+                [disabled]="!selectedUser"
+              >
                 Save Team
               </button>
             </div>
