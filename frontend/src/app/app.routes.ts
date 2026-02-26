@@ -1,4 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
+import { RolesListComponent } from './admin/roles/roles-list/roles-list.component';
+import { RoleFormComponent } from './admin/roles/role-form/role-form.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NgModel } from '@angular/forms';
@@ -22,6 +24,7 @@ export const routes: Routes = [
     path: 'admin',
     component: AdminComponent
   },
+  { path: '', redirectTo: 'admin/roles', pathMatch: 'full' },
   {
     path: 'admin/projects',
     component: ProjectsComponent
@@ -40,12 +43,10 @@ export const routes: Routes = [
   },
   ];
 
-  @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule],
-    providers: []
-  })
+  { path: 'admin', redirectTo: 'admin/roles', pathMatch: 'full' },
+  { path: 'admin/roles', component: RolesListComponent },
+  { path: 'admin/roles/new', component: RoleFormComponent },
+  { path: 'admin/roles/:id', component: RoleFormComponent },
 
-  export class AppRoutingModule{
-   
-  }
+  { path: '**', redirectTo: 'admin/roles' }
+];

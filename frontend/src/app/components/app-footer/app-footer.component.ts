@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-footer',
-  templateUrl: './app-footer.component.html',
-  styleUrls: ['./app-footer.component.css'],
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <footer style="padding: 10px; text-align: center;">
+      © 2026 Portal
+    </footer>
+  `
 })
-export class AppFooterComponent implements OnInit {
-  
-  constructor(private router: Router) {}
-
-  ngOnInit() {}
-}
+export class AppFooterComponent {}
