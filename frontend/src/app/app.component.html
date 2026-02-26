@@ -1,8 +1,11 @@
-<app-header *ngIf="!router.url.startsWith('/login')"></app-header>
-<div class="content-div">
-    <app-sidenav *ngIf="!router.url.startsWith('/login')"></app-sidenav>
-    <div class="content">
-        <router-outlet></router-outlet>
-    </div>
-</div>
-<app-footer *ngIf="!router.url.startsWith('/login')"></app-footer>
+<h1>Admin Panel</h1>
+
+<hr>
+
+<h2>Roles Management</h2>
+<app-roles-list></app-roles-list>
+
+<hr>
+
+<h2>Employee Management</h2>
+<p>Employee management section will go here.</p>
