@@ -1,0 +1,15 @@
+export const environment = {
+  state: 'local',
+  production: false,
+  rocApiUrl: 'http://localhost:3000/dev',
+  clientId: 'temp',
+  calendarId: "temp",
+  adminCalendarId: "temp",
+  apiKey: "temp",
+  autoLogin: false,
+  loginUrl: 'http://localhost:4200/login',
+  userPoolId: 'us-east-1_temp',
+  userPoolClientId: 'temp',
+  identityPoolId: 'us-east-1:temp',
+  domain: 'dev',
+}

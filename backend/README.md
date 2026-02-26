@@ -33,6 +33,27 @@ Deploy the serverless application to AWS. This will set up the necessary AWS Lam
 
 After deployment, note the API endpoints provided by the Serverless Framework.
 
+## Local API (No serverless-offline)
+
+Use this when serverless-offline cannot run locally. It serves `/users` and
+`/projects` from DynamoDB so the Admin page can load seeded data.
+
+### Start the local API
+
+- Command: `npm install`
+- Command: `npm run local-api`
+
+The API listens on `http://localhost:3000/dev` by default. If you need a
+different port or base path:
+
+- `PORT=4000` (default is 3000)
+- `LOCAL_API_BASE_PATH=/dev` (default is /dev)
+
+### Required AWS access
+
+This server uses the AWS SDK to query DynamoDB. Ensure your AWS credentials are
+configured locally (for example via `aws configure`) and that the tables exist.
+
 ### Step 6: Set Up Login Functionality
 
 Follow these steps to configure the login functionality:

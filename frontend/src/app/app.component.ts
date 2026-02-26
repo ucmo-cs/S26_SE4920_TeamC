@@ -1,20 +1,12 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import { MatMenuModule } from '@angular/material/menu';
-
-
+import { CommonModule } from '@angular/common';
+import { RolesListComponent } from '../roles/roles-list/roles-list.component';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  selector: 'app-admin-dashboard',
+  standalone: true,
+  imports: [CommonModule, RolesListComponent],
+  templateUrl: './admin-dashboard.component.html',
+  styleUrls: ['./admin-dashboard.component.css']
 })
-export class AppComponent {
-  title = 'frontend';
-
-  constructor(
-    public router: Router,
-  ) {}
-}
+export class AdminDashboardComponent {}
