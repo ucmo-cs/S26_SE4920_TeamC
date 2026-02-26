@@ -38,7 +38,6 @@ resources:
         TableName: users
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-
     ProjectsTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -48,7 +47,6 @@ resources:
         TableName: projects
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-
     DailyStatusTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -63,11 +61,7 @@ resources:
           [
             {
               'IndexName': 'userDateIndex',
-              'KeySchema':
-                [
-                  { 'AttributeName': 'userId', 'KeyType': 'HASH' },
-                  { 'AttributeName': 'date', 'KeyType': 'RANGE' }
-                ],
+              'KeySchema': [{ 'AttributeName': 'userId', 'KeyType': 'HASH' }, { 'AttributeName': 'date', 'KeyType': 'RANGE' }],
               'Projection': { 'ProjectionType': 'ALL' },
             },
             {
@@ -81,50 +75,6 @@ resources:
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
 
-    CertificationsTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        AttributeDefinitions:
-          [
-            { 'AttributeName': 'uuid', 'AttributeType': 'S' },
-            { 'AttributeName': 'userId', 'AttributeType': 'S' }
-          ]
-        KeySchema: [{ 'AttributeName': 'uuid', 'KeyType': 'HASH' }]
-        GlobalSecondaryIndexes:
-          [
-            {
-              'IndexName': 'userIdIndex',
-              'KeySchema': [{ 'AttributeName': 'userId', 'KeyType': 'HASH' }],
-              'Projection': { 'ProjectionType': 'ALL' },
-            }
-          ]
-        BillingMode: PAY_PER_REQUEST
-        TableName: certifications
-        StreamSpecification:
-          StreamViewType: NEW_AND_OLD_IMAGES
-
-    TrainingsTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        AttributeDefinitions:
-          [
-            { 'AttributeName': 'uuid', 'AttributeType': 'S' },
-            { 'AttributeName': 'userId', 'AttributeType': 'S' }
-          ]
-        KeySchema: [{ 'AttributeName': 'uuid', 'KeyType': 'HASH' }]
-        GlobalSecondaryIndexes:
-          [
-            {
-              'IndexName': 'userIdIndex',
-              'KeySchema': [{ 'AttributeName': 'userId', 'KeyType': 'HASH' }],
-              'Projection': { 'ProjectionType': 'ALL' },
-            }
-          ]
-        BillingMode: PAY_PER_REQUEST
-        TableName: trainings
-        StreamSpecification:
-          StreamViewType: NEW_AND_OLD_IMAGES
-
 functions:
   login:
     handler: src/handlers/login.handler
@@ -132,6 +82,46 @@ functions:
       - http:
           path: login
           method: post
+          cors: true
+
+  users:
+    handler: src/handlers/users.handler
+    environment:
+      USERS_TABLE: users
+    events:
+      - http:
+          path: users
+          method: get
+          cors: true
+
+  userById:
+    handler: src/handlers/user.handler
+    environment:
+      USERS_TABLE: users
+    events:
+      - http:
+          path: users/{uuid}
+          method: get
+          cors: true
+
+  updateUserRoles:
+    handler: src/handlers/update-user-roles.handler
+    environment:
+      USERS_TABLE: users
+    events:
+      - http:
+          path: users/{uuid}/roles
+          method: put
+          cors: true
+
+  projects:
+    handler: src/handlers/projects.handler
+    environment:
+      PROJECTS_TABLE: projects
+    events:
+      - http:
+          path: projects
+          method: get
           cors: true
 
   importData:
@@ -146,88 +136,5 @@ functions:
           method: post
           cors: true
 
-  # -------------------------
-  # CERTIFICATIONS CRUD
-  # -------------------------
-  listCertifications:
-    handler: src/handlers/certifications.list
-    environment:
-      CERTIFICATIONS_TABLE: certifications
-    events:
-      - http:
-          path: certifications
-          method: get
-          cors: true
+  
 
-  createCertification:
-    handler: src/handlers/certifications.create
-    environment:
-      CERTIFICATIONS_TABLE: certifications
-    events:
-      - http:
-          path: certifications
-          method: post
-          cors: true
-
-  updateCertification:
-    handler: src/handlers/certifications.update
-    environment:
-      CERTIFICATIONS_TABLE: certifications
-    events:
-      - http:
-          path: certifications/{uuid}
-          method: put
-          cors: true
-
-  deleteCertification:
-    handler: src/handlers/certifications.remove
-    environment:
-      CERTIFICATIONS_TABLE: certifications
-    events:
-      - http:
-          path: certifications/{uuid}
-          method: delete
-          cors: true
-
-  # -------------------------
-  # TRAININGS CRUD
-  # -------------------------
-  listTrainings:
-    handler: src/handlers/trainings.list
-    environment:
-      TRAININGS_TABLE: trainings
-    events:
-      - http:
-          path: trainings
-          method: get
-          cors: true
-
-  createTraining:
-    handler: src/handlers/trainings.create
-    environment:
-      TRAININGS_TABLE: trainings
-    events:
-      - http:
-          path: trainings
-          method: post
-          cors: true
-
-  updateTraining:
-    handler: src/handlers/trainings.update
-    environment:
-      TRAININGS_TABLE: trainings
-    events:
-      - http:
-          path: trainings/{uuid}
-          method: put
-          cors: true
-
-  deleteTraining:
-    handler: src/handlers/trainings.remove
-    environment:
-      TRAININGS_TABLE: trainings
-    events:
-      - http:
-          path: trainings/{uuid}
-          method: delete
-          cors: true
