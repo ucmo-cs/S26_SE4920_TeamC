@@ -21563,6 +21563,9 @@ has-background-danger.is-hoverable:active {
 :root .mat-mdc-form-field .mat-mdc-input-element {
   color: var(--primary-color) !important;
 }
+:root .mat-mdc-input-element::placeholder {
+  color: var(--muted) !important;
+}
 :root .mdc-floating-label {
   color: var(--muted) !important;
 }

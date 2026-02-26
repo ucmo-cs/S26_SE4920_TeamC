@@ -5,10 +5,13 @@
   .mat-mdc-form-field .mat-mdc-input-element {
     color: var(--primary-color) !important;
   }
+  .mat-mdc-input-element::placeholder {
+    color: var(--muted) !important;
+  }
   .mdc-floating-label { 
     color: var(--muted) !important;
   }
-  
+  // .mat-stoke-button
   @include mat.form-field-overrides((
     disabled-input-text-placeholder-color: var(--muted),
     outline-color: var(--border-color),

@@ -3,30 +3,35 @@
     <div class="admin-header">
       <h2>{{ id ? "Edit Role" : "Create Role" }}</h2>
     </div>
-    <mat-card class="admin-card">
+    <mat-card class="admin-card admin-theme-card">
       <mat-card-content>
         <mat-form-field appearance="outline" class="theme-field">
           <mat-label>Role Name</mat-label>
-          <input type="text" [formControl]="form.controls.name" />
-
-          <mat-label>Description</mat-label>
-          <input type="text" [formControl]="form.controls.description" />
-
-          <h3>Permissions</h3>
-          <div *ngFor="let p of permissions">
-            <mat-label>
-              <input
-                type="checkbox"
-                [checked]="(form.value.permissionCodes || []).includes(p.code)"
-                (change)="onPermissionChange(p.code, $event)"
-              />
-              {{ p.label || p.code }}
-            </mat-label>
-          </div>
-
-          <button type="submit" [disabled]="form.invalid">Save</button>
-          <a routerLink="/admin/roles">Cancel</a>
+          <input matInput type="text" [formControl]="form.controls.name" />
         </mat-form-field>
+        <mat-form-field appearance="outline" class="theme-field">
+          <mat-label>Description</mat-label>
+          <input matInput type="text" [formControl]="form.controls.description"
+        /></mat-form-field>
+
+        <h3>Permissions</h3>
+        <div *ngFor="let p of permissions">
+          <mat-form-field appearance="outline" class="theme-field">
+            <mat-label>Check</mat-label>
+            <input
+              matInput
+              type="checkbox"
+              [checked]="(form.value.permissionCodes || []).includes(p.code)"
+              (change)="onPermissionChange(p.code, $event)"
+            />
+            {{ p.label || p.code }}
+          </mat-form-field>
+        </div>
+
+        <button mat-stroked-button type="submit" [disabled]="form.invalid">
+          Save
+        </button>
+        <button mat-stroked-button routerLink="/admin/roles">Cancel</button>
       </mat-card-content>
     </mat-card>
   </div>
