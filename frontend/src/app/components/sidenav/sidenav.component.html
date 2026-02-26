@@ -24,11 +24,13 @@
     </span>
   </mat-list-item>
   <div [hidden]="!toggle[2]">
-    <!-- Admin -->
     <mat-nav-list class="subList">
       <mat-list-item [routerLink]="'/admin'">Admin Tools</mat-list-item>
       <mat-list-item [routerLink]="'/admin/projects'">Projects</mat-list-item>
       <mat-list-item [routerLink]="'/admin/teams'">Teams</mat-list-item>
+      <mat-list-item [routerLink]="'/admin/manage-roles'"
+        >Manage Roles</mat-list-item
+      >
     </mat-nav-list>
   </div>
 </mat-nav-list>
