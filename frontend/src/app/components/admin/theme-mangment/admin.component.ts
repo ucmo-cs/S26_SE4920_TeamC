@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserApiService } from '../../services/user.service';
-import { ROLE } from '../../shared/constants/enum';
+import { UserApiService } from '../../../services/user.service';
+import { ROLE } from '../../../shared/constants/enum';
 
 interface AdminUser {
   uuid: string;

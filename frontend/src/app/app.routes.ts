@@ -3,13 +3,13 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
 import { DailyStatusComponent } from './components/daily-status/daily-status.component';
-import { AdminComponent } from './components/admin/admin.component';
+import { AdminComponent } from './components/admin/theme-mangment/admin.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { ProjectsOverviewComponent } from './components/projects-overview/projects-overview.component';
 import { TeamSummaryComponent } from './components/team-summary/team-summary.component';
 import { TeamAdminComponent } from './components/team-admin/team-admin.component';
-import { RolesListComponent } from './admin/roles/role-list/roles-list.component';
-import { RoleFormComponent } from './admin/roles/role-form/role-form.component'
+import { RolesListComponent } from './components/admin/roles/role-list/roles-list.component';
+import { RoleFormComponent } from './components/admin/roles/role-form/role-form.component'
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },

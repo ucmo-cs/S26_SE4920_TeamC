@@ -36,6 +36,7 @@
     container-text-color: var(--primary-color),
   ));
 
+   @include apply-theme($base-theme);
 }
 
 // Base (default) theme
@@ -195,11 +196,6 @@ $theme-volcano: (
   @each $key, $value in $theme-map {
     --#{$key}: #{$value};
   }
-}
-
-// Root default theme
-:root {
-  @include apply-theme($base-theme);
 }
 
 // Theme classes
