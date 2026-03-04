@@ -5,28 +5,38 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.handler = async (event) => {
   const requestBody = JSON.parse(event.body);
+  const { userId, date, ptoRequest } = requestBody;
+
+  if (!userId || !date || ptoRequest === undefined) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: 'Missing required fields' })
+    };
+  }
 
   const params = {
-    TableName: process.env.USERS_TABLE,
-    Item: requestBody
+    TableName: process.env.USERS_TABLE || 'users',
+    Key: {
+      uuid: userId
+    },
+    UpdateExpression: 'SET #pto.#date = :val',
+    ExpressionAttributeNames: {
+      '#pto': 'requestedPTO',
+      '#date': date
+    },
+
+    ExpressionAttributeValues: {
+      ':val': ptoRequest
+    },
+    ReturnValues: 'UPDATED_NEW'
   };
 
-  const command = new UpdateCommand({
-    TableName: 'users',
-    Key: {
-      uuid: this.user.uuid
-    },
-    UpdateExpression: "ADD #attr :value",
-    ExpressionAttributeNames: {
-      "#attr": "requestedPTO"
-    },
-    ExpressionAttributeValues: {
-      ":value": new Set([this.user.requestedPTO])
-    },
-    ReturnValues: "UPDATED_NEW"
-  });
   try {
-    await docClient.send(command);
+    const result = await dynamoDb.update(params).promise();
+    return {
+      statusCode: 200,
+      body: JSON.stringify(result.Attributes)
+    };
   } catch (err) {
     console.error('Error saving to the backend.', err);
     return {

@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 interface PTORequest {
-  doa_name: string;
+  date: string;
   end: string;
   hours: number;
   included: boolean;
@@ -44,7 +44,7 @@ export class TimeOffComponent implements OnInit {
 
   ngOnInit(): void {
     const userId = 'john-doe-uuid'; // Replace with actual user ID retrieval logic
-    this.http.get<{ [date: string]: PTORequest }>(`/time-off/${userId}`).subscribe({
+    this.http.get<{ [date: string]: PTORequest }>(`http://localhost:3000/dev/time-off/${userId}`).subscribe({
       next: (data) => {
         this.user = {
           uuid: userId,
@@ -65,7 +65,7 @@ export class TimeOffComponent implements OnInit {
       const dateString = `${(dateObj.getMonth() + 1).toString().padStart(2, '0')}/${dateObj.getDate().toString().padStart(2, '0')}/${dateObj.getFullYear()}`;
 
       const newRequest: PTORequest = {
-        doa_name: '',
+        date: dateString,
         end: formValue.end,
         hours: formValue.hours,
         included: true,
@@ -79,10 +79,10 @@ export class TimeOffComponent implements OnInit {
 
       this.user.requestedPTO[dateString] = newRequest;
       
-      this.http.post('/time-off', {
+      this.http.post('http://localhost:3000/dev/time-off', {
           userId: this.user.uuid,
           date: dateString,
-          request: newRequest
+          ptoRequest: newRequest
         })
         .subscribe({
           next: () => {
