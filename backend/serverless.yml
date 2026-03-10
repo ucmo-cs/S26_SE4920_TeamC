@@ -80,14 +80,19 @@ resources:
         TableName: dailyStatus
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-      PasswordTable:
-Type: AWS::DynamoDB::Table
-Properties:
-  AttributeDefinitions:
-    [
-      { "AttributeName": "uuid", "AttributeType": "S" },
-      { "AttributeName": "password", "AttributeType": "S" },
-    ]
+    AuthTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          [
+            { "AttributeName": "uuid", "AttributeType": "S" },
+            { "AttributeName": "password", "AttributeType": "S" },
+          ]
+      KeySchema: [{ "AttributeName": "uuid", "KeyType": "HASH" }]
+      BillingMode: PAY_PER_REQUEST
+      TableName: auth
+      StreamSpecification:
+        StreamViewType: NEW_AND_OLD_IMAGES
 functions:
   login:
     handler: src/handlers/login.handler
@@ -95,6 +100,16 @@ functions:
       - http:
           path: login
           method: post
+          cors: true
+
+  auth:
+    handler: src/handlers/auth.handler
+    environment:
+      AUTH_TABLE: auth
+    events:
+      - http:
+          path: auth
+          method: get
           cors: true
 
   users:
