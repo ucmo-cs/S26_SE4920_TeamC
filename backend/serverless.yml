@@ -1,5 +1,5 @@
 service: senior-project-template
-frameworkVersion: '3'
+frameworkVersion: "3"
 
 provider:
   name: aws
@@ -16,23 +16,24 @@ resources:
       Properties:
         AttributeDefinitions:
           [
-            { 'AttributeName': 'uuid', 'AttributeType': 'S' },
-            { 'AttributeName': 'startDate', 'AttributeType': 'S' },
-            { 'AttributeName': 'teamName', 'AttributeType': 'S' },
+            { "AttributeName": "uuid", "AttributeType": "S" },
+            { "AttributeName": "startDate", "AttributeType": "S" },
+            { "AttributeName": "teamName", "AttributeType": "S" },
           ]
-        KeySchema: [{ 'AttributeName': 'uuid', 'KeyType': 'HASH' }]
+        KeySchema: [{ "AttributeName": "uuid", "KeyType": "HASH" }]
         GlobalSecondaryIndexes:
           [
             {
-              'IndexName': 'StartDateIndex',
-              'KeySchema': [{ 'AttributeName': 'startDate', 'KeyType': 'HASH' }],
-              'Projection': { 'ProjectionType': 'ALL' },
+              "IndexName": "StartDateIndex",
+              "KeySchema":
+                [{ "AttributeName": "startDate", "KeyType": "HASH" }],
+              "Projection": { "ProjectionType": "ALL" },
             },
             {
-              'IndexName': 'TeamNameIndex',
-              'KeySchema': [{ 'AttributeName': 'teamName', 'KeyType': 'HASH' }],
-              'Projection': { 'ProjectionType': 'ALL' },
-            }
+              "IndexName": "TeamNameIndex",
+              "KeySchema": [{ "AttributeName": "teamName", "KeyType": "HASH" }],
+              "Projection": { "ProjectionType": "ALL" },
+            },
           ]
         BillingMode: PAY_PER_REQUEST
         TableName: users
@@ -41,8 +42,9 @@ resources:
     ProjectsTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        AttributeDefinitions: [{ 'AttributeName': 'uuid', 'AttributeType': 'S' }]
-        KeySchema: [{ 'AttributeName': 'uuid', 'KeyType': 'HASH' }]
+        AttributeDefinitions:
+          [{ "AttributeName": "uuid", "AttributeType": "S" }]
+        KeySchema: [{ "AttributeName": "uuid", "KeyType": "HASH" }]
         BillingMode: PAY_PER_REQUEST
         TableName: projects
         StreamSpecification:
@@ -52,29 +54,40 @@ resources:
       Properties:
         AttributeDefinitions:
           [
-            { 'AttributeName': 'uuid', 'AttributeType': 'S' },
-            { 'AttributeName': 'userId', 'AttributeType': 'S' },
-            { 'AttributeName': 'date', 'AttributeType': 'S' }
+            { "AttributeName": "uuid", "AttributeType": "S" },
+            { "AttributeName": "userId", "AttributeType": "S" },
+            { "AttributeName": "date", "AttributeType": "S" },
           ]
-        KeySchema: [{ 'AttributeName': 'uuid', 'KeyType': 'HASH' }]
+        KeySchema: [{ "AttributeName": "uuid", "KeyType": "HASH" }]
         GlobalSecondaryIndexes:
           [
             {
-              'IndexName': 'userDateIndex',
-              'KeySchema': [{ 'AttributeName': 'userId', 'KeyType': 'HASH' }, { 'AttributeName': 'date', 'KeyType': 'RANGE' }],
-              'Projection': { 'ProjectionType': 'ALL' },
+              "IndexName": "userDateIndex",
+              "KeySchema":
+                [
+                  { "AttributeName": "userId", "KeyType": "HASH" },
+                  { "AttributeName": "date", "KeyType": "RANGE" },
+                ],
+              "Projection": { "ProjectionType": "ALL" },
             },
             {
-              'IndexName': 'dateIndex',
-              'KeySchema': [{ 'AttributeName': 'date', 'KeyType': 'HASH' }],
-              'Projection': { 'ProjectionType': 'ALL' },
-            }
+              "IndexName": "dateIndex",
+              "KeySchema": [{ "AttributeName": "date", "KeyType": "HASH" }],
+              "Projection": { "ProjectionType": "ALL" },
+            },
           ]
         BillingMode: PAY_PER_REQUEST
         TableName: dailyStatus
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-
+      PasswordTable:
+Type: AWS::DynamoDB::Table
+Properties:
+  AttributeDefinitions:
+    [
+      { "AttributeName": "uuid", "AttributeType": "S" },
+      { "AttributeName": "password", "AttributeType": "S" },
+    ]
 functions:
   login:
     handler: src/handlers/login.handler
@@ -114,6 +127,16 @@ functions:
           method: put
           cors: true
 
+  createUser:
+    handler: src/handlers/create-user.handler
+    environment:
+      USERS_TABLE: users
+    events:
+      - http:
+          path: user/create-user
+          method: post
+          cors: true
+
   projects:
     handler: src/handlers/projects.handler
     environment:
@@ -135,6 +158,3 @@ functions:
           path: import-data
           method: post
           cors: true
-
-  
-
