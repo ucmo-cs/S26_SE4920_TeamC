@@ -91,7 +91,7 @@ import { TimeOffComponent } from './components/time-off/time-off.component';
       TeamSummaryComponent,
       TeamAdminComponent,
       RoleFormComponent,
-      RolesListComponent
+      RolesListComponent,
       TimeOffComponent,
     ],
     exports: [],

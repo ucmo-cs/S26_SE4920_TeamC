@@ -2,6 +2,7 @@ import { Expression } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 interface PTORequest {
   date: string;
@@ -44,7 +45,7 @@ export class TimeOffComponent implements OnInit {
 
   ngOnInit(): void {
     const userId = 'john-doe-uuid'; // Replace with actual user ID retrieval logic
-    this.http.get<{ [date: string]: PTORequest }>(`http://localhost:3000/dev/time-off/${userId}`).subscribe({
+    this.http.get<{ [date: string]: PTORequest }>(`${environment.rocApiUrl}/time-off/${userId}`).subscribe({
       next: (data) => {
         this.user = {
           uuid: userId,
@@ -79,7 +80,7 @@ export class TimeOffComponent implements OnInit {
 
       this.user.requestedPTO[dateString] = newRequest;
       
-      this.http.post('http://localhost:3000/dev/time-off', {
+      this.http.post(`${environment.rocApiUrl}/time-off`, {
           userId: this.user.uuid,
           date: dateString,
           ptoRequest: newRequest
