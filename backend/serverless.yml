@@ -88,19 +88,16 @@ resources:
         TableName: dailyStatus
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-    # AuthTable:
-    #   Type: AWS::DynamoDB::Table
-    #   Properties:
-    #     AttributeDefinitions:
-    #       [
-    #         { "AttributeName": "uuid", "AttributeType": "S" },
-    #         { "AttributeName": "password", "AttributeType": "S" },
-    #       ]
-    #   KeySchema: [{ "AttributeName": "uuid", "KeyType": "HASH" }]
-    #   BillingMode: PAY_PER_REQUEST
-    #   TableName: auth
-    #   StreamSpecification:
-    #     StreamViewType: NEW_AND_OLD_IMAGES
+    AuthTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          [{ "AttributeName": "uuid", "AttributeType": "S" }]
+        KeySchema: [{ "AttributeName": "uuid", "KeyType": "HASH" }]
+        TableName: authorization
+        BillingMode: PAY_PER_REQUEST
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES
 functions:
   login:
     handler: src/handlers/login.handler
@@ -176,6 +173,7 @@ functions:
       USERS_TABLE: users
       PROJECTS_TABLE: projects
       DAILY_STATUS_TABLE: dailyStatus
+      AUTH_TABLE: authorization
     events:
       - http:
           path: import-data
