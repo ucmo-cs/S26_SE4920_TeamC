@@ -20,7 +20,9 @@ export class AuthService {
       body: JSON.stringify({ username, password })
     })
     .then(response => response.json())
-    .then(data => loginSuccess = data.auth);
+    .then(data => loginSuccess = data);
+
+    console.log(loginSuccess);
 
     return new Observable<boolean>((observer) => {
       if (loginSuccess) {

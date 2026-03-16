@@ -19,6 +19,8 @@ module.exports.handler = async (event) => {
     },
   };
 
+  
+  // have a sucure access token for auth to access database.
   try {
     const data = await dynamoDb.get(params).promise();
 
