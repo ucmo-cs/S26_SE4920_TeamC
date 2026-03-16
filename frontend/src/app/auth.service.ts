@@ -8,11 +8,10 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   constructor(private http: HttpClient,private router: Router) { }
-  login(username: string, password: string): Observable<boolean> {
+  async login(username: string, password: string): Observable<boolean> {
     // Your login logic with Lambda function
     // Simulating success for demonstration purposes
-    let loginSuccess = false;
-    fetch('http://localhost:3000/dev/login', {
+    const response = await fetch('http://localhost:3000/dev/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -20,12 +19,9 @@ export class AuthService {
       body: JSON.stringify({ username, password })
     })
     .then(response => response.json())
-    .then(data => loginSuccess = data);
-
-    console.log(loginSuccess);
-
+    
     return new Observable<boolean>((observer) => {
-      if (loginSuccess) {
+      if (response.auth) {
         observer.next(true); // Notify subscribers that login was successful
         observer.complete(); // Complete the observable
       } else {

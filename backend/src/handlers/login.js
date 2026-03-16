@@ -10,8 +10,6 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient({
 module.exports.handler = async (event) => {
   const requestBody = JSON.parse(event.body);
 
-  console.log(requestBody);
-
   const params = {
     TableName: process.env.AUTH_TABLE || "authorization",
     Key: {
@@ -21,8 +19,11 @@ module.exports.handler = async (event) => {
 
   
   // have a sucure access token for auth to access database.
+  // Need session token
   try {
     const data = await dynamoDb.get(params).promise();
+
+    console.log(data.Item);    
 
     if (!data.Item || data.Item.password !== requestBody.password) {
       return {
@@ -30,6 +31,7 @@ module.exports.handler = async (event) => {
         body: JSON.stringify({
           message: "Invalid username or password",
           auth: false,
+          sessionToken: ""
         }),
       };
     }
