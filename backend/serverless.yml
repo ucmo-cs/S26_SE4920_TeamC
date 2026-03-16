@@ -7,7 +7,15 @@ provider:
   region: us-east-1
 
 plugins:
+  - serverless-dynamodb
   - serverless-offline
+
+custom:
+  serverless-dynamodb:
+  stages: -dev
+  start:
+    port: 8000
+    docker: false
 
 resources:
   Resources:
@@ -80,19 +88,19 @@ resources:
         TableName: dailyStatus
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-    AuthTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        AttributeDefinitions:
-          [
-            { "AttributeName": "uuid", "AttributeType": "S" },
-            { "AttributeName": "password", "AttributeType": "S" },
-          ]
-      KeySchema: [{ "AttributeName": "uuid", "KeyType": "HASH" }]
-      BillingMode: PAY_PER_REQUEST
-      TableName: auth
-      StreamSpecification:
-        StreamViewType: NEW_AND_OLD_IMAGES
+    # AuthTable:
+    #   Type: AWS::DynamoDB::Table
+    #   Properties:
+    #     AttributeDefinitions:
+    #       [
+    #         { "AttributeName": "uuid", "AttributeType": "S" },
+    #         { "AttributeName": "password", "AttributeType": "S" },
+    #       ]
+    #   KeySchema: [{ "AttributeName": "uuid", "KeyType": "HASH" }]
+    #   BillingMode: PAY_PER_REQUEST
+    #   TableName: auth
+    #   StreamSpecification:
+    #     StreamViewType: NEW_AND_OLD_IMAGES
 functions:
   login:
     handler: src/handlers/login.handler
