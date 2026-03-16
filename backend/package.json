@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "local-api": "node src/local-api.js"
+    "local-api": "node src/local-api.js",
+    "local-database": "sls dynamodb start --migrate"
   },
   "dependencies": {
     "aws-sdk": "^2.1691.0",
