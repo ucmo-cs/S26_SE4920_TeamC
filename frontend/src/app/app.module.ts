@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
+import { PortalModule } from '@angular/cdk/portal';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Material Form Controls
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -90,6 +91,7 @@ import { LearningComponent } from './components/learning/learning.component';
     imports: [
         BrowserModule,
         LayoutModule,
+        PortalModule,
         FormsModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
