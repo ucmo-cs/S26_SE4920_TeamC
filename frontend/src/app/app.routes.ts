@@ -10,6 +10,7 @@ import { TeamSummaryComponent } from './components/team-summary/team-summary.com
 import { TeamAdminComponent } from './components/team-admin/team-admin.component';
 import { RolesListComponent } from './components/admin/roles/role-list/roles-list.component';
 import { RoleFormComponent } from './components/admin/roles/role-form/role-form.component'
+import { TimeOffComponent } from './components/time-off/time-off.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -32,6 +33,18 @@ export const routes: Routes = [
     component: TeamAdminComponent
   },
   {
+    path: 'admin/roles',
+    component: RolesListComponent
+  },
+  {
+    path: 'admin/roles/new',
+    component: RoleFormComponent
+  },
+  {
+    path: 'admin/roles/:id',
+    component: RoleFormComponent
+  },
+  {
     path: 'projects',
     component: ProjectsOverviewComponent
   },
@@ -39,11 +52,10 @@ export const routes: Routes = [
     path: 'team-summary',
     component: TeamSummaryComponent
   },
-  { path: '', redirectTo: 'admin/roles', pathMatch: 'full' },
-  { path: 'admin/roles', component: RolesListComponent },
-  { path: 'admin/roles/new', component: RoleFormComponent },
-  { path: 'admin/roles/:id', component: RoleFormComponent },
-  { path: '**', redirectTo: 'admin/roles' }
+  {
+    path: 'time-off',
+    component: TimeOffComponent
+  },
   ];
 
   @NgModule({
