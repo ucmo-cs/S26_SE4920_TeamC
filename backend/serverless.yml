@@ -1,5 +1,5 @@
 service: senior-project-template
-frameworkVersion: '3'
+frameworkVersion: "3"
 
 provider:
   name: aws
@@ -7,7 +7,15 @@ provider:
   region: us-east-1
 
 plugins:
+  - serverless-dynamodb
   - serverless-offline
+
+custom:
+  serverless-dynamodb:
+  stages: -dev
+  start:
+    port: 8000
+    docker: false
 
 resources:
   Resources:
@@ -16,23 +24,24 @@ resources:
       Properties:
         AttributeDefinitions:
           [
-            { 'AttributeName': 'uuid', 'AttributeType': 'S' },
-            { 'AttributeName': 'startDate', 'AttributeType': 'S' },
-            { 'AttributeName': 'teamName', 'AttributeType': 'S' },
+            { "AttributeName": "uuid", "AttributeType": "S" },
+            { "AttributeName": "startDate", "AttributeType": "S" },
+            { "AttributeName": "teamName", "AttributeType": "S" },
           ]
-        KeySchema: [{ 'AttributeName': 'uuid', 'KeyType': 'HASH' }]
+        KeySchema: [{ "AttributeName": "uuid", "KeyType": "HASH" }]
         GlobalSecondaryIndexes:
           [
             {
-              'IndexName': 'StartDateIndex',
-              'KeySchema': [{ 'AttributeName': 'startDate', 'KeyType': 'HASH' }],
-              'Projection': { 'ProjectionType': 'ALL' },
+              "IndexName": "StartDateIndex",
+              "KeySchema":
+                [{ "AttributeName": "startDate", "KeyType": "HASH" }],
+              "Projection": { "ProjectionType": "ALL" },
             },
             {
-              'IndexName': 'TeamNameIndex',
-              'KeySchema': [{ 'AttributeName': 'teamName', 'KeyType': 'HASH' }],
-              'Projection': { 'ProjectionType': 'ALL' },
-            }
+              "IndexName": "TeamNameIndex",
+              "KeySchema": [{ "AttributeName": "teamName", "KeyType": "HASH" }],
+              "Projection": { "ProjectionType": "ALL" },
+            },
           ]
         BillingMode: PAY_PER_REQUEST
         TableName: users
@@ -41,8 +50,9 @@ resources:
     ProjectsTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        AttributeDefinitions: [{ 'AttributeName': 'uuid', 'AttributeType': 'S' }]
-        KeySchema: [{ 'AttributeName': 'uuid', 'KeyType': 'HASH' }]
+        AttributeDefinitions:
+          [{ "AttributeName": "uuid", "AttributeType": "S" }]
+        KeySchema: [{ "AttributeName": "uuid", "KeyType": "HASH" }]
         BillingMode: PAY_PER_REQUEST
         TableName: projects
         StreamSpecification:
@@ -52,29 +62,42 @@ resources:
       Properties:
         AttributeDefinitions:
           [
-            { 'AttributeName': 'uuid', 'AttributeType': 'S' },
-            { 'AttributeName': 'userId', 'AttributeType': 'S' },
-            { 'AttributeName': 'date', 'AttributeType': 'S' }
+            { "AttributeName": "uuid", "AttributeType": "S" },
+            { "AttributeName": "userId", "AttributeType": "S" },
+            { "AttributeName": "date", "AttributeType": "S" },
           ]
-        KeySchema: [{ 'AttributeName': 'uuid', 'KeyType': 'HASH' }]
+        KeySchema: [{ "AttributeName": "uuid", "KeyType": "HASH" }]
         GlobalSecondaryIndexes:
           [
             {
-              'IndexName': 'userDateIndex',
-              'KeySchema': [{ 'AttributeName': 'userId', 'KeyType': 'HASH' }, { 'AttributeName': 'date', 'KeyType': 'RANGE' }],
-              'Projection': { 'ProjectionType': 'ALL' },
+              "IndexName": "userDateIndex",
+              "KeySchema":
+                [
+                  { "AttributeName": "userId", "KeyType": "HASH" },
+                  { "AttributeName": "date", "KeyType": "RANGE" },
+                ],
+              "Projection": { "ProjectionType": "ALL" },
             },
             {
-              'IndexName': 'dateIndex',
-              'KeySchema': [{ 'AttributeName': 'date', 'KeyType': 'HASH' }],
-              'Projection': { 'ProjectionType': 'ALL' },
-            }
+              "IndexName": "dateIndex",
+              "KeySchema": [{ "AttributeName": "date", "KeyType": "HASH" }],
+              "Projection": { "ProjectionType": "ALL" },
+            },
           ]
         BillingMode: PAY_PER_REQUEST
         TableName: dailyStatus
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-
+    AuthTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          [{ "AttributeName": "uuid", "AttributeType": "S" }]
+        KeySchema: [{ "AttributeName": "uuid", "KeyType": "HASH" }]
+        TableName: authorization
+        BillingMode: PAY_PER_REQUEST
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES
 functions:
   login:
     handler: src/handlers/login.handler
@@ -82,6 +105,16 @@ functions:
       - http:
           path: login
           method: post
+          cors: true
+
+  auth:
+    handler: src/handlers/auth.handler
+    environment:
+      AUTH_TABLE: auth
+    events:
+      - http:
+          path: auth
+          method: get
           cors: true
 
   users:
@@ -114,6 +147,16 @@ functions:
           method: put
           cors: true
 
+  createUser:
+    handler: src/handlers/create-user.handler
+    environment:
+      USERS_TABLE: users
+    events:
+      - http:
+          path: user/create-user
+          method: post
+          cors: true
+
   projects:
     handler: src/handlers/projects.handler
     environment:
@@ -130,11 +173,9 @@ functions:
       USERS_TABLE: users
       PROJECTS_TABLE: projects
       DAILY_STATUS_TABLE: dailyStatus
+      AUTH_TABLE: authorization
     events:
       - http:
           path: import-data
           method: post
           cors: true
-
-  
-
