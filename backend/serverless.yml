@@ -11,11 +11,12 @@ plugins:
   - serverless-offline
 
 custom:
-  serverless-dynamodb:
-  stages: -dev
-  start:
-    port: 8000
-    docker: false
+  dynamodb:
+    stages: -dev
+    start:
+      host: 127.0.0.1
+      port: 8000
+      docker: false
 
 resources:
   Resources:
@@ -92,8 +93,20 @@ resources:
       Type: AWS::DynamoDB::Table
       Properties:
         AttributeDefinitions:
-          [{ "AttributeName": "uuid", "AttributeType": "S" }]
+          [
+            { "AttributeName": "uuid", "AttributeType": "S" },
+            { "AttributeName": "password", "AttributeType": "S" },
+          ]
         KeySchema: [{ "AttributeName": "uuid", "KeyType": "HASH" }]
+        GlobalSecondaryIndexes:
+          [
+            {
+              "IndexName": "passwordIndex",
+              "KeySchema":
+                [{ "AttributeName": "password", "KeyType": "HASH" }],
+              "Projection": { "ProjectionType": "ALL" },
+            },
+          ]
         TableName: authorization
         BillingMode: PAY_PER_REQUEST
         StreamSpecification:

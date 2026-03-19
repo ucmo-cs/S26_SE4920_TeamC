@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AuthService {
   async login(username: string, password: string): Promise<Observable<boolean>> {
     // Your login logic with Lambda function
     // Simulating success for demonstration purposes
-    const response = await fetch('http://localhost:3000/dev/login', {
+    const response = await fetch(environment.rocApiUrl + '/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
