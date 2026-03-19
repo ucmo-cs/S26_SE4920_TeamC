@@ -1,7 +1,8 @@
 export const environment = {
   state: 'local',
   production: false,
-  rocApiUrl: 'http://localhost:3000/dev',
+  rocApiUrl: 'http://localhost:3001/dev',
+  apiBaseUrl: 'http://localhost:3001/dev',
   clientId: 'temp',
   calendarId: "temp",
   adminCalendarId: "temp",

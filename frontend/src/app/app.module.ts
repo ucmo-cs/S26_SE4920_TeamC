@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
+import { PortalModule } from '@angular/cdk/portal';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Material Form Controls
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -62,6 +63,9 @@ import { UpdateDateRangeComponent } from './components/daily-status/update-date-
 import { ReportReviewComponent } from './components/daily-status/report-review/report-review.component';
 import { ReportDialogComponent } from './components/daily-status/report-dialog/report-dialog.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { CertificationComponent } from './components/certification/certification.component';
+import { TrainingComponent } from './components/training/training.component';
+import { LearningComponent } from './components/learning/learning.component';
 
 @NgModule({
     declarations: [
@@ -77,13 +81,17 @@ import { AdminComponent } from './components/admin/admin.component';
       UpdateDateRangeComponent,
       ReportReviewComponent,
       ReportDialogComponent,
-      AdminComponent
+      AdminComponent,
+      CertificationComponent,
+      TrainingComponent,
+      LearningComponent
     ],
     exports: [],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
         LayoutModule,
+        PortalModule,
         FormsModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,

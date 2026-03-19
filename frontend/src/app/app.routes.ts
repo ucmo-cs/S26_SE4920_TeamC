@@ -8,6 +8,7 @@ import { DailyStatusComponent } from './components/daily-status/daily-status.com
 // NEW pages we will create below
 import { CertificationComponent } from './components/certification/certification.component';
 import { TrainingComponent } from './components/training/training.component';
+import { LearningComponent } from './components/learning/learning.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,6 +20,7 @@ export const routes: Routes = [
   // ✅ Certification & Training
   { path: 'certification', component: CertificationComponent },
   { path: 'training', component: TrainingComponent },
+  { path: 'learning', component: LearningComponent },
 
   // fallback
   { path: '**', redirectTo: '/login' },

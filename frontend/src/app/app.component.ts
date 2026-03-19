@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RolesListComponent } from '../roles/roles-list/roles-list.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-admin-dashboard',
-  standalone: true,
-  imports: [CommonModule, RolesListComponent],
-  templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.css']
+  selector: 'app-root',
+  template: `<router-outlet></router-outlet>`,
+  standalone: false,
+  styleUrls: [],
 })
-export class AdminDashboardComponent {}
+export class AppComponent {
+  title = 'S26 Senior Project';
+}
