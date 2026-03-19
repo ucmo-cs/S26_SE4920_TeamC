@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { AuthService } from "./services/auth.service"
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  constructor(private http: HttpClient,private router: Router) { }
+  constructor(private http: HttpClient,private router: Router, private authService: AuthService) { }
   async login(username: string, password: string): Promise<Observable<boolean>> {
     // Your login logic with Lambda function
     // Simulating success for demonstration purposes
@@ -19,9 +20,10 @@ export class LoginService {
       body: JSON.stringify({ username, password })
     })
     .then(response => {return response.json()});
-        
+
     return new Observable<boolean>((observer) => {
       if (response.auth) {
+        this.authService.setUser(response.uuid);
         observer.next(true); // Notify subscribers that login was successful
         observer.complete(); // Complete the observable
       } else {

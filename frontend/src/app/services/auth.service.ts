@@ -12,7 +12,7 @@ export class AuthService {
     private router: Router,
     private dialogRef: MatDialog
   ) {
-    this.user = this.setUser();
+    this.user = this.setUser("USER1");
   }
 
   signOut() {
@@ -25,17 +25,18 @@ export class AuthService {
     return this.user;
   }
 
-  async setUser() {
+  async setUser(uuid: String) {
+    console.log(uuid);
     try {
-      let user = {
-        uuid: 'XXX',
-        name: 'John Doe',
-        email: 'john.doe@example.com',
-        assignments: [
-          "468879bf-8e44-4c95-8321-edd2b8fb0108"
-        ],
-        birthday: "",
-      }
+      const user = await fetch(`http://localhost:3000/dev/user?uuid=${uuid}`, {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+
+      console.log(user);
+      
       return new Promise((resolve) => { resolve(user) })
     } catch (err) {
       console.log('not signed in: ' + err)
