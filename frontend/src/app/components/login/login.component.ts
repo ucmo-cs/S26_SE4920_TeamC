@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {provideNativeDateAdapter} from '@angular/material/core';
-import { AuthService } from '../../auth.service';
+import { LoginService } from '../../login.service';
 
 
 interface previousRequest {
@@ -26,10 +26,10 @@ export class LoginComponent {
   username: string = ''; // Initialize with an empty string
   password: string = ''; // Initialize with an empty string
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
   async login() {
-    (await this.authService.login(this.username, this.password))
+    (await this.loginService.login(this.username, this.password))
       .subscribe({
         next: (success) => {
           if (success) {

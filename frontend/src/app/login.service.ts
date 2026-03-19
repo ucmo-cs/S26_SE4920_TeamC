@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class LoginService {
   constructor(private http: HttpClient,private router: Router) { }
   async login(username: string, password: string): Promise<Observable<boolean>> {
     // Your login logic with Lambda function
