@@ -1,9 +1,24 @@
 "use strict";
 
 const AWS = require("aws-sdk");
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const dynamoDb = new AWS.DynamoDB.DocumentClient({
+  region: 'us-east-1',
+  endpoint: process.env.DYNAMODB_ENDPOINT,
+});
+const { authenticateToken } = require("../middleware/auth");
 
-module.exports.handler = async (event) => {
+const handler = async (event) => {
+  // Skip this check for now to allow database initialization. Remove in prod.
+  // Check if user has ADMIN role
+  /*
+  if (!event.user || !event.user.roles || !event.user.roles.includes('ADMIN')) {
+    return {
+      statusCode: 403,
+      body: JSON.stringify({ message: "Admin access required" }),
+    };
+  }
+  */
+
   try {
     const users = [
       {
@@ -41,6 +56,7 @@ module.exports.handler = async (event) => {
         startDate: "08/01",
         startYear: "2021",
         state: "Missouri",
+        password: "password123",
       },
       {
         uuid: "jane-smith-uuid",
@@ -60,6 +76,7 @@ module.exports.handler = async (event) => {
         startDate: "09/15",
         startYear: "2022",
         state: "Missouri",
+        password: "password456",
       },
       {
         uuid: "bob-johnson-uuid",
@@ -79,6 +96,7 @@ module.exports.handler = async (event) => {
         startDate: "03/10",
         startYear: "2023",
         state: "Missouri",
+        password: "password789",
       },
     ];
 
@@ -139,6 +157,24 @@ module.exports.handler = async (event) => {
         userId: "jane-smith-uuid",
       },
     ];
+    
+    const authorization = [
+      {
+        uuid: "john-doe-uuid",
+        password: "password123",
+        roles: ["EMPLOYEE", "ADMIN", "LEAD", "PM"],
+      },
+      {
+        uuid: "jane-smith-uuid",
+        password: "password456",
+        roles: ["EMPLOYEE", "LEAD"],
+      },
+      {
+        uuid: "bob-johnson-uuid",
+        password: "password789",
+        roles: ["EMPLOYEE"],
+      },
+    ]
 
     // Import users
     for (const user of users) {
@@ -166,6 +202,16 @@ module.exports.handler = async (event) => {
       };
       await dynamoDb.put(params).promise();
     }
+    
+    // Import authorization data
+    for (const auth of authorization) {
+      const params = {
+        TableName: process.env.AUTH_TABLE || "authorization",
+        Item: auth,
+      };
+      await dynamoDb.put(params).promise();
+    }
+
 
     return {
       statusCode: 200,
@@ -183,4 +229,14 @@ module.exports.handler = async (event) => {
       body: JSON.stringify({ message: "Failed to import data" }),
     };
   }
+};
+
+module.exports.handler = async (event) => {
+  //const authError = authenticateToken(event);
+  // To avoid being able to log in, skip authentication so that the database can be initiated. Remove this function in prod.
+  const authError = false
+  if (authError) {
+    return authError;
+  }
+  return handler(event);
 };

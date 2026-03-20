@@ -8,10 +8,17 @@ import { environment } from '../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient,private router: Router) { }
+  private token: string | null = null;
+  private user: any = null;
+
+  constructor(private http: HttpClient, private router: Router) {
+    this.token = localStorage.getItem('authToken');
+    if (this.token) {
+      this.decodeToken();
+    }
+  }
+
   async login(username: string, password: string): Promise<Observable<boolean>> {
-    // Your login logic with Lambda function
-    // Simulating success for demonstration purposes
     const response = await fetch(environment.rocApiUrl + '/login', {
       method: 'POST',
       headers: {
@@ -19,29 +26,53 @@ export class AuthService {
       },
       body: JSON.stringify({ username, password })
     })
-    .then(response => {return response.json()});
+    .then(response => response.json());
         
     return new Observable<boolean>((observer) => {
-      if (response.auth) {
-        observer.next(true); // Notify subscribers that login was successful
-        observer.complete(); // Complete the observable
+      if (response.auth && response.sessionToken) {
+        this.token = response.sessionToken;
+        localStorage.setItem('authToken', this.token!);
+        this.decodeToken();
+        observer.next(true);
+        observer.complete();
       } else {
-        observer.error('Login failed'); // Notify subscribers that login failed
+        observer.error('Login failed');
       }
     });
   }
 
   logout() {
-    // Your logout logic with Lambda function
-    // Simulating success for demonstration purposes
-    const logoutSuccess = true;
+    this.token = null;
+    this.user = null;
+    localStorage.removeItem('authToken');
+    this.router.navigate(['/login']);
+  }
 
-    if (logoutSuccess) {
-      // Redirect to login page or any other desired page
-      this.router.navigate(['/login']);
-    } else {
-      // Handle logout failure
-      console.error('Logout failed');
+  isLoggedIn(): boolean {
+    return !!this.token;
+  }
+
+  getToken(): string | null {
+    return this.token;
+  }
+
+  getUser(): any {
+    return this.user;
+  }
+
+  hasRole(role: string): boolean {
+    return this.user && this.user.roles && this.user.roles.includes(role);
+  }
+
+  private decodeToken() {
+    if (this.token) {
+      try {
+        const payload = JSON.parse(atob(this.token.split('.')[1]));
+        this.user = payload;
+      } catch (error) {
+        console.error('Error decoding token:', error);
+        this.logout();
+      }
     }
   }
 }

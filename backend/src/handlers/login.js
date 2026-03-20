@@ -1,10 +1,10 @@
 "use strict";
 
 const AWS = require("aws-sdk");
-// Change to correct endpoint for aws
+const jwt = require("jsonwebtoken");
 const dynamoDb = new AWS.DynamoDB.DocumentClient({
-  region: "us-east-1" || "localhost",
-  endpoint: process.env.DYNAMODB_ENDPOINT || "http://localhost:8000",
+  region: 'us-east-1',
+  endpoint: process.env.DYNAMODB_ENDPOINT,
 });
 
 module.exports.handler = async (event) => {
@@ -18,8 +18,10 @@ module.exports.handler = async (event) => {
   };
 
   
-  // have a sucure access token for auth to access database.
+  // have a secure access token for auth to access database.
   // Need session token
+
+  console.log("Received login request:", requestBody);
   try {
     const data = await dynamoDb.get(params).promise();
 
@@ -36,9 +38,20 @@ module.exports.handler = async (event) => {
       };
     }
 
+    // Generate JWT token
+    const token = jwt.sign(
+      { uuid: requestBody.username, roles: data.Item.roles || [] },
+      process.env.JWT_SECRET || "default-secret-key",
+      { expiresIn: "24h" }
+    );
+
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: "Login successful", auth: true }),
+      body: JSON.stringify({ 
+        message: "Login successful", 
+        auth: true,
+        sessionToken: token
+      }),
     };
   } catch (error) {
     console.error("Error:", error);
