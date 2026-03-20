@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const AWS = require('aws-sdk');
+const AWS = require("aws-sdk");
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.handler = async (event) => {
@@ -10,13 +10,13 @@ module.exports.handler = async (event) => {
     if (!uuid) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ message: 'Missing user id' })
+        body: JSON.stringify({ message: "Missing user id" }),
       };
     }
 
     const params = {
-      TableName: process.env.USERS_TABLE || 'users',
-      Key: { uuid }
+      TableName: process.env.USERS_TABLE || "users",
+      Key: { uuid },
     };
 
     const result = await dynamoDb.get(params).promise();
@@ -24,22 +24,22 @@ module.exports.handler = async (event) => {
     if (!result.Item) {
       return {
         statusCode: 404,
-        body: JSON.stringify({ message: 'User not found' })
+        body: JSON.stringify({ message: "User not found" }),
       };
     }
 
     return {
       statusCode: 200,
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(result.Item)
+      body: JSON.stringify(result.Item),
     };
   } catch (error) {
-    console.error('Error fetching user:', error);
+    console.error("Error fetching user:", error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ message: 'Failed to fetch user' })
+      body: JSON.stringify({ message: "Failed to fetch user" }),
     };
   }
 };

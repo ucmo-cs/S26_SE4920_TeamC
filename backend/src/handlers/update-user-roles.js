@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const AWS = require('aws-sdk');
+const AWS = require("aws-sdk");
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.handler = async (event) => {
@@ -10,7 +10,7 @@ module.exports.handler = async (event) => {
     if (!uuid) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ message: 'Missing user id' })
+        body: JSON.stringify({ message: "Missing user id" }),
       };
     }
 
@@ -20,18 +20,18 @@ module.exports.handler = async (event) => {
     if (!roles) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ message: 'Roles must be an array' })
+        body: JSON.stringify({ message: "Roles must be an array" }),
       };
     }
 
     const params = {
-      TableName: process.env.USERS_TABLE || 'users',
+      TableName: process.env.USERS_TABLE || "users",
       Key: { uuid },
-      UpdateExpression: 'SET roles = :roles',
+      UpdateExpression: "SET roles = :roles",
       ExpressionAttributeValues: {
-        ':roles': roles
+        ":roles": roles,
       },
-      ReturnValues: 'ALL_NEW'
+      ReturnValues: "ALL_NEW",
     };
 
     const result = await dynamoDb.update(params).promise();
@@ -39,15 +39,15 @@ module.exports.handler = async (event) => {
     return {
       statusCode: 200,
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(result.Attributes || {})
+      body: JSON.stringify(result.Attributes || {}),
     };
   } catch (error) {
-    console.error('Error updating user roles:', error);
+    console.error("Error updating user roles:", error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ message: 'Failed to update user roles' })
+      body: JSON.stringify({ message: "Failed to update user roles" }),
     };
   }
 };
