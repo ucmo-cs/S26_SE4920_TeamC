@@ -1,10 +1,11 @@
 
 export class Node {
     private data : any;
-    private next : Node;
+    private next : Node | null;
 
     constructor(data : any){
         this.data = data;
+        this.next = null;
     }
 
     getData(){
