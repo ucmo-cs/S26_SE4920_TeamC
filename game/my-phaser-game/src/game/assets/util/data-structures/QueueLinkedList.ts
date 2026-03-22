@@ -1,3 +1,4 @@
+// make any and array of three
 export class Node {
     private data : any;
     private next : Node | null;

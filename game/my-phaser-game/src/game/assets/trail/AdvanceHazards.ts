@@ -5,5 +5,4 @@ export class AdvanceHazards implements Strategy {
     doOperation(): void {
         HazardQueue.dequeue();
     }
-
 }

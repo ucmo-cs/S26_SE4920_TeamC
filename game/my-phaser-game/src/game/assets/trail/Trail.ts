@@ -13,4 +13,5 @@ export class TrailContext {
     }
 }
 
+// singleton. Can be accessed everywhere and is the same queue
 export const HazardQueue = new QueueLinkedList();
