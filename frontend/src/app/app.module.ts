@@ -8,11 +8,8 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
-<<<<<<< HEAD
 import { PortalModule } from '@angular/cdk/portal';
-=======
 import { HttpClientModule } from '@angular/common/http';
->>>>>>> origin/develop
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 // Material Form Controls
@@ -67,14 +64,10 @@ import { DailyStatusComponent } from './components/daily-status/daily-status.com
 import { UpdateDateRangeComponent } from './components/daily-status/update-date-range/update-date-range.component';
 import { ReportReviewComponent } from './components/daily-status/report-review/report-review.component';
 import { ReportDialogComponent } from './components/daily-status/report-dialog/report-dialog.component';
-<<<<<<< HEAD
-import { AdminComponent } from './components/admin/admin.component';
+import { AdminComponent } from './components/admin/theme-mangment/admin.component';
 import { CertificationComponent } from './components/certification/certification.component';
 import { TrainingComponent } from './components/training/training.component';
 import { LearningComponent } from './components/learning/learning.component';
-
-=======
-import { AdminComponent } from './components/admin/theme-mangment/admin.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { ProjectsOverviewComponent } from './components/projects-overview/projects-overview.component';
 import { TeamSummaryComponent } from './components/team-summary/team-summary.component';
@@ -82,7 +75,6 @@ import { TeamAdminComponent } from './components/team-admin/team-admin.component
 import { RoleFormComponent } from './components/admin/roles/role-form/role-form.component';
 import { RolesListComponent } from './components/admin/roles/role-list/roles-list.component';
 import { TimeOffComponent } from './components/time-off/time-off.component';
->>>>>>> origin/develop
 @NgModule({
     declarations: [
       AppHeaderComponent,
