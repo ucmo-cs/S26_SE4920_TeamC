@@ -1,5 +1,5 @@
 import { Scene } from 'phaser';
-import {TrailContext} from "../assets/Trail/TrailContext.ts"
+import {TrailContext} from "../assets/trail/Trail.ts"
 // Docs https://docs.phaser.io/api-documentation/class/scene
 export class Game extends Scene
 {
@@ -35,10 +35,10 @@ export class Game extends Scene
         });
 
         // setup trail handler
-        this.trailContext = new TrailContext();
+        // this.trailContext = new TrailContext(new Straetgy);
     }
 
     update(time: number, delta: number): void {
-        this.trailContext.
+        // this.trailContext.
     }
 }

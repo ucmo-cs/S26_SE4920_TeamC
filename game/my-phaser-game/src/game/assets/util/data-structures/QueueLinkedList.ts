@@ -1,4 +1,28 @@
-import { Node } from "./Node.ts"
+export class Node {
+    private data : any;
+    private next : Node | null;
+
+    constructor(data : any){
+        this.data = data;
+        this.next = null;
+    }
+
+    getData(){
+        return this.data;
+    }
+
+    getNext(){
+        return this.next;
+    }
+    setNext(node : Node){
+        this.next = node;
+    }
+
+    toString(): string {
+        return String(this.data);
+    }
+}
+
 export class QueueLinkedList{
     private front : any;
     private rear: any;
@@ -51,5 +75,14 @@ export class QueueLinkedList{
     // returns true if is === null
     isEmpty(){
         return this.front === null;
+    }
+
+    toString() : String {
+        let output : String = "Queue: " ;
+        while(this.rear.next !== null){
+            output += this.rear.toString();
+        }
+
+        return output;
     }
 }
