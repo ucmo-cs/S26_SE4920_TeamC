@@ -1,5 +1,6 @@
 import { Scene } from 'phaser';
 import {TrailContext} from "../assets/trail/Trail.ts"
+import {CreateHazardOnTrail, AdvanceHazards} from "../assets/trail/TrailStrategys.ts"
 // Docs https://docs.phaser.io/api-documentation/class/scene
 export class Game extends Scene
 {
@@ -34,11 +35,15 @@ export class Game extends Scene
 
         });
 
-        // setup trail handler
-        // this.trailContext = new TrailContext(new Straetgy);
+        // setup trail handler. First step is to set strategy as create hazard
+        this.trailContext = new TrailContext(new CreateHazardOnTrail);
     }
 
     update(time: number, delta: number): void {
-        // this.trailContext.
+        // creates hazard
+        this.trailContext.executeStrategy();
+        this.trailContext = new TrailContext(new AdvanceHazards);
+        this.trailContext.executeStrategy();
+        this.trailContext = new TrailContext(new CreateHazardOnTrail);
     }
 }
