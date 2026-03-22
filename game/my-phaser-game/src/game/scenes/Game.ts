@@ -1,10 +1,12 @@
 import { Scene } from 'phaser';
-
+import {TrailContext} from "../assets/Trail/TrailContext.ts"
+// Docs https://docs.phaser.io/api-documentation/class/scene
 export class Game extends Scene
 {
     camera: Phaser.Cameras.Scene2D.Camera;
     background: Phaser.GameObjects.Image;
     msg_text : Phaser.GameObjects.Text;
+    trailContext : TrailContext
 
     constructor ()
     {
@@ -31,5 +33,12 @@ export class Game extends Scene
             this.scene.start('GameOver');
 
         });
+
+        // setup trail handler
+        this.trailContext = new TrailContext();
+    }
+
+    update(time: number, delta: number): void {
+        this.trailContext.
     }
 }

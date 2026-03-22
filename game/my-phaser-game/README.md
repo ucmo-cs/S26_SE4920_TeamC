@@ -158,3 +158,7 @@ All rights reserved.
 
 Docs :
 https://docs.phaser.io/?_gl=1*18z1ev4*_ga*MjEwMTQ2OTYwOS4xNzc0MTQ4MTIz*_ga_7NC8GZ639E*czE3NzQxNDgxMjIkbzEkZzEkdDE3NzQxNDg0MjEkajIxJGwwJGg4NTUxMDUxMzc.
+
+Requirements:
+Vision:
+A forest management simulator where a ranger is walking down a trail. The trail has three lanes in parallel. The player can use the arrow keys to move side to side to avoid hitting a object on the trail and losing. The longer the game runs the more obsoletes are in the trail and the faster they come at the player.
