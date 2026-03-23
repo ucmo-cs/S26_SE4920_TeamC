@@ -37,25 +37,37 @@ export class Game extends Scene
 
         // setup trail handler. First step is to set strategy as create hazard
         this.trailContext = new TrailContext(new CreateHazardOnTrail)
-
         // starts on creates hazard. Strategy set in create()
-        while(HazardQueue.size() < 8)
-            this.trailContext.executeStrategy();
+        this.trailContext.executeStrategy();
+        this.trailContext = new TrailContext(new CreateHazardOnTrail)
+        this.trailContext.executeStrategy();
+        this.trailContext = new TrailContext(new CreateHazardOnTrail)
+        this.trailContext.executeStrategy();
+        this.trailContext = new TrailContext(new CreateHazardOnTrail)
+        this.trailContext.executeStrategy();
+        this.trailContext = new TrailContext(new CreateHazardOnTrail)
+        this.trailContext.executeStrategy();
+        this.trailContext = new TrailContext(new CreateHazardOnTrail)
+        this.trailContext.executeStrategy();
+        this.trailContext = new TrailContext(new CreateHazardOnTrail)
+        this.trailContext.executeStrategy();
 
-        for (let index = 0; index < 15; index++) {
-            console.log(HazardQueue.toString());
-            console.log(HazardQueue.size());
-            // change to strategy to AdvanceHazards
-            this.trailContext = new TrailContext(new AdvanceHazards);
-            this.trailContext.executeStrategy();
+        this.trailContext = new TrailContext(new CreateHazardOnTrail)
+        this.trailContext.executeStrategy();
+        this.trailContext = new TrailContext(new AdvanceHazards)
+        this.trailContext.executeStrategy();
 
-            // back to creating hazards
-            this.trailContext = new TrailContext(new CreateHazardOnTrail);
-            console.log(HazardQueue.toString());
-            console.log(HazardQueue.size());
+        console.log(HazardQueue.toString());
+        // for (let index = 0; index < 15; index++) {
+        //     // back to creating hazards
+        //     this.trailContext = new TrailContext(new CreateHazardOnTrail);
+        //     this.trailContext.executeStrategy();
 
-            this.trailContext.executeStrategy();
-        }
+        //     // change to strategy to AdvanceHazards
+        //     this.trailContext = new TrailContext(new AdvanceHazards);
+        //     this.trailContext.executeStrategy();
+        //     console.log(HazardQueue.toString());
+        // }
     }
 
     // make it so each of these do not run every second.
