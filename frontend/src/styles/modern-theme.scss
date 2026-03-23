@@ -1,0 +1,712 @@
+// ============================================================================
+// MODERN PORTAL UI DESIGN SYSTEM
+// Professional, Clean, and Fast
+// ============================================================================
+
+// ============================================================================
+// 1. COLOR PALETTE
+// ============================================================================
+
+// Primary Colors
+$primary-color: #1f2937;        // Deep gray-blue
+$primary-light: #374151;        // Light gray-blue
+$primary-dark: #111827;         // Very dark
+
+$secondary-color: #3b82f6;      // Vibrant blue
+$secondary-light: #60a5fa;      // Light blue
+$secondary-dark: #1e40af;       // Dark blue
+
+$accent-color: #10b981;         // Fresh green
+$accent-light: #6ee7b7;         // Light green
+$accent-dark: #059669;          // Dark green
+
+// Neutral Colors
+$white: #ffffff;
+$off-white: #f9fafb;
+$light-gray: #f3f4f6;
+$medium-gray: #e5e7eb;
+$dark-gray: #d1d5db;
+$text-color: #1f2937;
+$text-light: #6b7280;
+$text-lighter: #9ca3af;
+
+// Status Colors
+$success-color: #10b981;
+$warning-color: #f59e0b;
+$danger-color: #ef4444;
+$info-color: #3b82f6;
+
+// ============================================================================
+// 2. TYPOGRAPHY
+// ============================================================================
+
+$font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+
+$font-size-xs: 12px;
+$font-size-sm: 14px;
+$font-size-base: 16px;
+$font-size-lg: 18px;
+$font-size-xl: 20px;
+$font-size-2xl: 24px;
+$font-size-3xl: 32px;
+
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// ============================================================================
+// 3. SPACING
+// ============================================================================
+
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 12px;
+$spacing-lg: 16px;
+$spacing-xl: 24px;
+$spacing-2xl: 32px;
+$spacing-3xl: 48px;
+
+// ============================================================================
+// 4. BORDER RADIUS
+// ============================================================================
+
+$radius-sm: 4px;
+$radius-md: 6px;
+$radius-lg: 8px;
+$radius-xl: 12px;
+$radius-full: 9999px;
+
+// ============================================================================
+// 5. SHADOWS
+// ============================================================================
+
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+// ============================================================================
+// 6. TRANSITIONS
+// ============================================================================
+
+$transition-fast: 150ms ease-in-out;
+$transition-normal: 250ms ease-in-out;
+$transition-slow: 350ms ease-in-out;
+
+// ============================================================================
+// 7. GLOBAL STYLES
+// ============================================================================
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: $font-family;
+  font-size: $font-size-base;
+  line-height: 1.6;
+  color: $text-color;
+  background-color: $off-white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// ============================================================================
+// 8. UTILITY CLASSES
+// ============================================================================
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.grid-cols-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-lg;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid-cols-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-lg;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid-cols-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-lg;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ============================================================================
+// 9. CARD COMPONENT
+// ============================================================================
+
+.card {
+  background-color: $white;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  box-shadow: $shadow-md;
+  transition: all $transition-normal;
+  border: 1px solid $medium-gray;
+
+  &:hover {
+    box-shadow: $shadow-lg;
+    transform: translateY(-2px);
+  }
+
+  &.elevated {
+    box-shadow: $shadow-lg;
+  }
+
+  &.flat {
+    box-shadow: none;
+    border: 1px solid $medium-gray;
+  }
+}
+
+// ============================================================================
+// 10. BUTTON STYLES
+// ============================================================================
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-md $spacing-lg;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  border: none;
+  border-radius: $radius-lg;
+  cursor: pointer;
+  transition: all $transition-fast;
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // Primary Button
+  &.btn-primary {
+    background-color: $secondary-color;
+    color: $white;
+
+    &:hover:not(:disabled) {
+      background-color: $secondary-dark;
+      box-shadow: $shadow-md;
+    }
+
+    &:active:not(:disabled) {
+      background-color: $secondary-dark;
+    }
+  }
+
+  // Secondary Button
+  &.btn-secondary {
+    background-color: $light-gray;
+    color: $text-color;
+    border: 1px solid $medium-gray;
+
+    &:hover:not(:disabled) {
+      background-color: $medium-gray;
+      border-color: $dark-gray;
+    }
+  }
+
+  // Success Button
+  &.btn-success {
+    background-color: $accent-color;
+    color: $white;
+
+    &:hover:not(:disabled) {
+      background-color: $accent-dark;
+    }
+  }
+
+  // Danger Button
+  &.btn-danger {
+    background-color: $danger-color;
+    color: $white;
+
+    &:hover:not(:disabled) {
+      background-color: darken($danger-color, 10%);
+    }
+  }
+
+  // Small Button
+  &.btn-sm {
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-xs;
+  }
+
+  // Large Button
+  &.btn-lg {
+    padding: $spacing-lg $spacing-xl;
+    font-size: $font-size-base;
+  }
+
+  // Full Width Button
+  &.btn-block {
+    width: 100%;
+  }
+}
+
+// ============================================================================
+// 11. FORM ELEMENTS
+// ============================================================================
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: $spacing-md $spacing-lg;
+  font-size: $font-size-sm;
+  font-family: $font-family;
+  border: 1px solid $medium-gray;
+  border-radius: $radius-lg;
+  transition: all $transition-fast;
+  background-color: $white;
+  color: $text-color;
+
+  &:focus {
+    outline: none;
+    border-color: $secondary-color;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+
+  &:disabled {
+    background-color: $light-gray;
+    cursor: not-allowed;
+  }
+
+  &::placeholder {
+    color: $text-lighter;
+  }
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+label {
+  display: block;
+  margin-bottom: $spacing-sm;
+  font-weight: $font-weight-medium;
+  color: $text-color;
+  font-size: $font-size-sm;
+}
+
+.form-group {
+  margin-bottom: $spacing-lg;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// ============================================================================
+// 12. TABLE STYLES
+// ============================================================================
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: $white;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  box-shadow: $shadow-md;
+
+  thead {
+    background-color: $light-gray;
+    border-bottom: 2px solid $medium-gray;
+
+    th {
+      padding: $spacing-lg;
+      text-align: left;
+      font-weight: $font-weight-semibold;
+      color: $text-color;
+      font-size: $font-size-sm;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid $medium-gray;
+      transition: background-color $transition-fast;
+
+      &:hover {
+        background-color: $light-gray;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      td {
+        padding: $spacing-lg;
+        font-size: $font-size-sm;
+        color: $text-color;
+      }
+    }
+  }
+}
+
+// ============================================================================
+// 13. BADGE STYLES
+// ============================================================================
+
+.badge {
+  display: inline-block;
+  padding: $spacing-sm $spacing-md;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  border-radius: $radius-full;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  &.badge-primary {
+    background-color: rgba($secondary-color, 0.1);
+    color: $secondary-dark;
+  }
+
+  &.badge-success {
+    background-color: rgba($accent-color, 0.1);
+    color: $accent-dark;
+  }
+
+  &.badge-warning {
+    background-color: rgba($warning-color, 0.1);
+    color: darken($warning-color, 20%);
+  }
+
+  &.badge-danger {
+    background-color: rgba($danger-color, 0.1);
+    color: darken($danger-color, 20%);
+  }
+}
+
+// ============================================================================
+// 14. ALERT STYLES
+// ============================================================================
+
+.alert {
+  padding: $spacing-lg;
+  border-radius: $radius-lg;
+  margin-bottom: $spacing-lg;
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-md;
+
+  &.alert-info {
+    background-color: rgba($info-color, 0.1);
+    border-left: 4px solid $info-color;
+    color: darken($info-color, 30%);
+  }
+
+  &.alert-success {
+    background-color: rgba($accent-color, 0.1);
+    border-left: 4px solid $accent-color;
+    color: darken($accent-color, 30%);
+  }
+
+  &.alert-warning {
+    background-color: rgba($warning-color, 0.1);
+    border-left: 4px solid $warning-color;
+    color: darken($warning-color, 30%);
+  }
+
+  &.alert-danger {
+    background-color: rgba($danger-color, 0.1);
+    border-left: 4px solid $danger-color;
+    color: darken($danger-color, 30%);
+  }
+}
+
+// ============================================================================
+// 15. NAVBAR STYLES
+// ============================================================================
+
+.navbar {
+  background-color: $white;
+  border-bottom: 1px solid $medium-gray;
+  box-shadow: $shadow-md;
+  padding: $spacing-lg $spacing-xl;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .navbar-brand {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $secondary-color;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+  }
+
+  .navbar-menu {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xl;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+
+    a {
+      color: $text-color;
+      text-decoration: none;
+      font-weight: $font-weight-medium;
+      transition: color $transition-fast;
+
+      &:hover {
+        color: $secondary-color;
+      }
+
+      &.active {
+        color: $secondary-color;
+        border-bottom: 2px solid $secondary-color;
+        padding-bottom: $spacing-sm;
+      }
+    }
+  }
+
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+  }
+}
+
+// ============================================================================
+// 16. SIDEBAR STYLES
+// ============================================================================
+
+.sidebar {
+  width: 260px;
+  background-color: $white;
+  border-right: 1px solid $medium-gray;
+  padding: $spacing-xl 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 50;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    transform: translateX(-100%);
+    transition: transform $transition-normal;
+
+    &.active {
+      transform: translateX(0);
+    }
+  }
+
+  .sidebar-nav {
+    list-style: none;
+
+    li {
+      a {
+        display: block;
+        padding: $spacing-md $spacing-xl;
+        color: $text-color;
+        text-decoration: none;
+        transition: all $transition-fast;
+        border-left: 3px solid transparent;
+
+        &:hover {
+          background-color: $light-gray;
+          color: $secondary-color;
+        }
+
+        &.active {
+          background-color: rgba($secondary-color, 0.1);
+          border-left-color: $secondary-color;
+          color: $secondary-color;
+          font-weight: $font-weight-semibold;
+        }
+      }
+    }
+  }
+}
+
+// ============================================================================
+// 17. CONTENT LAYOUT
+// ============================================================================
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+
+  .layout-main {
+    flex: 1;
+    margin-left: 260px;
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: 768px) {
+      margin-left: 0;
+    }
+  }
+
+  .layout-content {
+    flex: 1;
+    padding: $spacing-xl;
+    background-color: $off-white;
+  }
+}
+
+// ============================================================================
+// 18. PAGE HEADER
+// ============================================================================
+
+.page-header {
+  margin-bottom: $spacing-2xl;
+
+  h1 {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    color: $text-color;
+    margin-bottom: $spacing-md;
+  }
+
+  p {
+    font-size: $font-size-sm;
+    color: $text-light;
+  }
+}
+
+// ============================================================================
+// 19. SECTION STYLES
+// ============================================================================
+
+.section {
+  margin-bottom: $spacing-2xl;
+
+  h2 {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $text-color;
+    margin-bottom: $spacing-lg;
+    padding-bottom: $spacing-lg;
+    border-bottom: 2px solid $medium-gray;
+  }
+
+  h3 {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $text-color;
+    margin-bottom: $spacing-md;
+  }
+}
+
+// ============================================================================
+// 20. LOADING SPINNER
+// ============================================================================
+
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba($secondary-color, 0.3);
+  border-radius: $radius-full;
+  border-top-color: $secondary-color;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ============================================================================
+// 21. RESPONSIVE UTILITIES
+// ============================================================================
+
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .show-mobile {
+    display: none !important;
+  }
+}
+
+// ============================================================================
+// 22. ACCESSIBILITY
+// ============================================================================
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// Focus visible for keyboard navigation
+:focus-visible {
+  outline: 2px solid $secondary-color;
+  outline-offset: 2px;
+}

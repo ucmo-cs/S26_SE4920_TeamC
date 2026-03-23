@@ -90,8 +90,6 @@ import { TimeOffComponent } from './components/time-off/time-off.component';
       ReportReviewComponent,
       ReportDialogComponent,
       AdminComponent,
-      CertificationComponent,
-      TrainingComponent,
       ProjectsComponent,
       ProjectsOverviewComponent,
       TeamSummaryComponent,
@@ -103,6 +101,8 @@ import { TimeOffComponent } from './components/time-off/time-off.component';
     exports: [],
     bootstrap: [AppComponent],
     imports: [
+      CertificationComponent,
+      TrainingComponent,
         BrowserModule,
         LayoutModule,
         PortalModule,

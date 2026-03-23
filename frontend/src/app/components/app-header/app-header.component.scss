@@ -1,0 +1,214 @@
+// ============================================================================
+// MODERN NAVBAR/HEADER COMPONENT STYLES
+// ============================================================================
+
+@import '../../styles/theme.scss';
+
+.header-container {
+  display: flex;
+  align-items: center;
+  gap: $space-lg;
+  padding: $space-md $space-xl;
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  border-bottom: $border-width-thin solid $gray-200;
+  box-shadow: $shadow-base;
+  position: sticky;
+  top: 0;
+  z-index: $z-sticky;
+  transition: all $transition-base;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $space-md;
+    gap: $space-md;
+  }
+}
+
+#roc-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-base;
+  object-fit: contain;
+  padding: $space-xs;
+  background: $primary-50;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: $shadow-md;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  @media (max-width: $breakpoint-md) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.header-text {
+  flex: 1;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $gray-900;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (max-width: $breakpoint-md) {
+    display: none;
+  }
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: $space-lg;
+  margin-left: auto;
+
+  @media (max-width: $breakpoint-md) {
+    gap: $space-md;
+  }
+}
+
+.verticle-alignment-helper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    color: $primary-600;
+    transition: all $transition-base;
+    cursor: pointer;
+
+    &:hover {
+      color: $primary-700;
+      transform: scale(1.1);
+    }
+
+    @media (max-width: $breakpoint-md) {
+      font-size: 28px;
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
+
+.hamburger-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  color: $primary-600 !important;
+  cursor: pointer;
+  transition: all $transition-base;
+
+  &:hover {
+    color: $primary-700 !important;
+    transform: scale(1.15);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+// ============================================================================
+// MATERIAL MENU OVERRIDES
+// ============================================================================
+
+::ng-deep .mat-mdc-menu-content {
+  padding: $space-sm 0 !important;
+  border-radius: $radius-lg !important;
+  background: white !important;
+  box-shadow: $shadow-lg !important;
+  border: $border-width-thin solid $gray-200 !important;
+}
+
+::ng-deep .mat-mdc-menu-item {
+  font-size: $font-size-sm !important;
+  font-weight: $font-weight-normal !important;
+  height: auto !important;
+  padding: $space-sm $space-lg !important;
+  color: $gray-700 !important;
+  border-bottom: $border-width-thin solid transparent !important;
+  transition: all $transition-base !important;
+
+  &:hover {
+    background-color: $gray-100 !important;
+    color: $primary-600 !important;
+  }
+
+  &:active {
+    background-color: $gray-200 !important;
+    color: $primary-700 !important;
+  }
+
+  mat-icon {
+    margin-right: $space-md !important;
+    color: $primary-600 !important;
+  }
+}
+
+::ng-deep .mat-mdc-menu-item[disabled] {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
+// ============================================================================
+// RESPONSIVE STYLES
+// ============================================================================
+
+@media (max-width: $breakpoint-md) {
+  .header-container {
+    padding: $space-md;
+  }
+
+  #roc-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .header-text {
+    display: none;
+  }
+
+  .header-right {
+    gap: $space-md;
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .header-container {
+    padding: $space-sm;
+    gap: $space-sm;
+  }
+
+  #roc-logo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .verticle-alignment-helper mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .hamburger-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+}
