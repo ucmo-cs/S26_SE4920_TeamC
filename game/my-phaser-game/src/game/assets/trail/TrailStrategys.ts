@@ -30,6 +30,12 @@ export class CreateHazardOnTrail implements Strategy {
         newHazard = [Math.random() < 0.5 ? " D " : " S ", Math.random() < 0.5 ? " D " : " S ", Math.random() < 0.5 ? " D " : " S ",];
         let index = 0;
 
+        // fix this logic to have a safe random path
+        // think need to use some kind of graphing algorithm to traverse Query and make sure path safe.
+        // can not just check previous statement
+        // use depth first search for at least one
+        /// use breadth first search for each option first
+        // need some kind of path finding algorithm.
         while(currentRear[index] !== " S " || newHazard[index] !== " S "){
             //console.log("currentRear " + currentRear);
 
