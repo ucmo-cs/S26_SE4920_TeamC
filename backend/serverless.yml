@@ -11,6 +11,7 @@ provider:
     PROJECTS_TABLE: projects
     DAILY_STATUS_TABLE: dailyStatus
     AUTH_TABLE: authorization
+    JWT_SECRET: ${env:JWT_SECRET, 'dev-secret-key-change-in-production'}
 
 
 plugins:

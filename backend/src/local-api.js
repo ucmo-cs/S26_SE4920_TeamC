@@ -4,6 +4,8 @@ const express = require("express");
 const cors = require("cors");
 const AWS = require("aws-sdk");
 const jwt = require("jsonwebtoken");
+const fs = require("fs");
+const path = require("path");
 
 const app = express();
 app.use(cors());
@@ -17,10 +19,79 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 const USERS_TABLE = process.env.USERS_TABLE || "users";
 const PROJECTS_TABLE = process.env.PROJECTS_TABLE || "projects";
 const AUTH_TABLE = process.env.AUTH_TABLE || "authorization";
+const DAILY_STATUS_TABLE = process.env.DAILY_STATUS_TABLE || "dailyStatus";
 const basePath = process.env.LOCAL_API_BASE_PATH || "/dev";
 
 function buildPath(path) {
   return `${basePath}${path}`;
+}
+
+// Import data from JSON file on startup
+async function initializeData() {
+  try {
+    const dataPath = path.join(__dirname, '../import-data.json');
+    if (!fs.existsSync(dataPath)) {
+      console.log("import-data.json not found, skipping data initialization");
+      return;
+    }
+
+    const rawData = fs.readFileSync(dataPath, 'utf8');
+    const { users, projects, dailyReports, authorization } = JSON.parse(rawData);
+
+    console.log("Initializing database with import data...");
+
+    // Import users
+    if (users && Array.isArray(users)) {
+      for (const user of users) {
+        const params = {
+          TableName: USERS_TABLE,
+          Item: user,
+        };
+        await dynamoDb.put(params).promise();
+      }
+      console.log(`Imported ${users.length} users`);
+    }
+
+    // Import projects
+    if (projects && Array.isArray(projects)) {
+      for (const project of projects) {
+        const params = {
+          TableName: PROJECTS_TABLE,
+          Item: project,
+        };
+        await dynamoDb.put(params).promise();
+      }
+      console.log(`Imported ${projects.length} projects`);
+    }
+
+    // Import daily reports
+    if (dailyReports && Array.isArray(dailyReports)) {
+      for (const report of dailyReports) {
+        const params = {
+          TableName: DAILY_STATUS_TABLE,
+          Item: report,
+        };
+        await dynamoDb.put(params).promise();
+      }
+      console.log(`Imported ${dailyReports.length} daily reports`);
+    }
+
+    // Import authorization data
+    if (authorization && Array.isArray(authorization)) {
+      for (const auth of authorization) {
+        const params = {
+          TableName: AUTH_TABLE,
+          Item: auth,
+        };
+        await dynamoDb.put(params).promise();
+      }
+      console.log(`Imported ${authorization.length} authorization records`);
+    }
+
+    console.log("Database initialization complete!");
+  } catch (error) {
+    console.error("Error initializing database:", error);
+  }
 }
 
 // Middleware to verify JWT
@@ -193,7 +264,74 @@ app.get(buildPath("/projects"), verifyToken, async (req, res) => {
   }
 });
 
+// Manual import endpoint for reimporting data
+app.post(buildPath("/import-data"), async (req, res) => {
+  try {
+    const dataPath = path.join(__dirname, '../import-data.json');
+    if (!fs.existsSync(dataPath)) {
+      return res.status(404).json({ message: "import-data.json not found" });
+    }
+
+    const rawData = fs.readFileSync(dataPath, 'utf8');
+    const { users, projects, dailyReports, authorization } = JSON.parse(rawData);
+
+    let counts = { users: 0, projects: 0, dailyReports: 0, authorization: 0 };
+
+    if (users && Array.isArray(users)) {
+      for (const user of users) {
+        await dynamoDb.put({
+          TableName: USERS_TABLE,
+          Item: user,
+        }).promise();
+        counts.users++;
+      }
+    }
+
+    if (projects && Array.isArray(projects)) {
+      for (const project of projects) {
+        await dynamoDb.put({
+          TableName: PROJECTS_TABLE,
+          Item: project,
+        }).promise();
+        counts.projects++;
+      }
+    }
+
+    if (dailyReports && Array.isArray(dailyReports)) {
+      for (const report of dailyReports) {
+        await dynamoDb.put({
+          TableName: DAILY_STATUS_TABLE,
+          Item: report,
+        }).promise();
+        counts.dailyReports++;
+      }
+    }
+
+    if (authorization && Array.isArray(authorization)) {
+      for (const auth of authorization) {
+        await dynamoDb.put({
+          TableName: AUTH_TABLE,
+          Item: auth,
+        }).promise();
+        counts.authorization++;
+      }
+    }
+
+    res.json({
+      message: "Data imported successfully",
+      ...counts,
+    });
+  } catch (error) {
+    console.error("Error importing data:", error);
+    res.status(500).json({ message: "Failed to import data", error: error.message });
+  }
+});
+
 const port = Number(process.env.PORT) || 3000;
-app.listen(port, () => {
-  console.log(`Local API listening on http://localhost:${port}${basePath}`);
+
+// Initialize data and start server
+initializeData().then(() => {
+  app.listen(port, () => {
+    console.log(`Local API listening on http://localhost:${port}${basePath}`);
+  });
 });
