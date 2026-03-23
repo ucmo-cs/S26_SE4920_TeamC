@@ -37,41 +37,38 @@ export class Game extends Scene
 
         // setup trail handler. First step is to set strategy as create hazard
         this.trailContext = new TrailContext(new CreateHazardOnTrail)
-        // starts on creates hazard. Strategy set in create()
-        this.trailContext.executeStrategy();
-        this.trailContext = new TrailContext(new CreateHazardOnTrail)
-        this.trailContext.executeStrategy();
-        this.trailContext = new TrailContext(new CreateHazardOnTrail)
-        this.trailContext.executeStrategy();
-        this.trailContext = new TrailContext(new CreateHazardOnTrail)
-        this.trailContext.executeStrategy();
-        this.trailContext = new TrailContext(new CreateHazardOnTrail)
-        this.trailContext.executeStrategy();
-        this.trailContext = new TrailContext(new CreateHazardOnTrail)
-        this.trailContext.executeStrategy();
-        this.trailContext = new TrailContext(new CreateHazardOnTrail)
-        this.trailContext.executeStrategy();
+        // get it to run in order. Race condition
+        // Promise.resolve()
+        // .then(() => setTimeout(() => {this.trailContext.executeStrategy(); console.log("ran");}, 2000))
+        // .then(() => setTimeout(() => {this.trailContext.executeStrategy(); console.log("ran2");}, 4000))
+        // .then(() => setTimeout(() => {this.trailContext.executeStrategy(); console.log("ran3");}, 6000))
+        // .then(() => setTimeout(() => {this.trailContext.executeStrategy(); console.log("ran4");}, 8000))
+        // .then(() => setTimeout(() => {this.trailContext.executeStrategy(); console.log("ran5");}, 10000))
+        // .then(() => setTimeout(() => {this.trailContext.executeStrategy(); console.log("ran6");}, 12000))
+        // .then(() => setTimeout(() => {this.trailContext.executeStrategy(); console.log("ran7");}, 14000))
+        // .then(() => setTimeout(() => {this.trailContext.executeStrategy(); console.log("ran8");}, 16000))
+        // .then(() => setTimeout(() => {console.log(HazardQueue.toString()); console.log("ran9");}, 18000)) // final call
+        // .catch(err => console.error("Error executing strategies:", err));
 
-        this.trailContext = new TrailContext(new CreateHazardOnTrail)
         this.trailContext.executeStrategy();
-        this.trailContext = new TrailContext(new AdvanceHazards)
+        this.trailContext.executeStrategy();
+        this.trailContext.executeStrategy();
+        this.trailContext.executeStrategy();
+        this.trailContext.executeStrategy();
+        this.trailContext.executeStrategy();
         this.trailContext.executeStrategy();
 
         console.log(HazardQueue.toString());
-        // for (let index = 0; index < 15; index++) {
-        //     // back to creating hazards
-        //     this.trailContext = new TrailContext(new CreateHazardOnTrail);
-        //     this.trailContext.executeStrategy();
-
-        //     // change to strategy to AdvanceHazards
-        //     this.trailContext = new TrailContext(new AdvanceHazards);
-        //     this.trailContext.executeStrategy();
-        //     console.log(HazardQueue.toString());
-        // }
     }
 
     // make it so each of these do not run every second.
     // use the time and delta values for effective performance.
     update(time: number, delta: number): void {
+        this.trailContext = new TrailContext(new CreateHazardOnTrail)
+        this.trailContext.executeStrategy();
+        this.trailContext = new TrailContext(new AdvanceHazards)
+        this.trailContext.executeStrategy()
+
+        console.log(HazardQueue.toString());
     }
 }

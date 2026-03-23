@@ -25,6 +25,8 @@ export class Node {
     }
 }
 
+
+// TO DO Make async queue to wait for next item
 export class QueueLinkedList{
     private front : any;
     private rear: any;
