@@ -1,13 +1,14 @@
 import { Strategy } from "./Strategy";
 import {HazardQueue} from "./Trail";
-import { Node } from "../util/data-structures/QueueLinkedList";
 
 // concrete trail strategy
 export class CreateHazardOnTrail implements Strategy {
     doOperation(): void {
-    // add an array for each "hazard"
-    // check previous array in list to make sure it is not impossible for player to traverse
-     HazardQueue.enqueue(new Node("hazard"));
+        // remove. Just for testing
+        const hazardStatus = Math.random() < 0.5 ? "hazard" : "no hazard";
+        // add an array for each "hazard"
+        // check previous array in list to make sure it is not impossible for player to traverse
+        HazardQueue.enqueue(hazardStatus);
     }
 }
 

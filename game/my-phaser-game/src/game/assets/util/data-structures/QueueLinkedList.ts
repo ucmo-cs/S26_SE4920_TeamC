@@ -2,6 +2,7 @@
 export class Node {
     private data : any;
     private next : Node | null;
+    // set max length
 
     constructor(data : any){
         this.data = data;
@@ -27,11 +28,9 @@ export class Node {
 export class QueueLinkedList{
     private front : any;
     private rear: any;
-    private currentSize : integer;
 
     constructor(){
         this.front = this.rear = null;
-        this.currentSize = 0;
     }
 
     getFront(){
@@ -49,8 +48,8 @@ export class QueueLinkedList{
         } else {
             this.rear.next = new_node;
             this.rear = new_node;
+            this.rear.next = null;
         }
-        this.currentSize++;
     }
 
     // remove element from front
@@ -62,15 +61,26 @@ export class QueueLinkedList{
 
         const removedData = this.front.data;
         this.front = this.front.next;
+
         if(this.front === null)
             this.rear = null;
 
-        this.currentSize--;
         return removedData;
     }
 
-    size(){
-        return this.currentSize;
+    size() : number {
+        let currentSize : integer = 1;
+        if(this.front === null){
+            return 0;
+        }
+
+        let currentNode = this.front.next;
+        while(currentNode !== null){
+            currentNode = currentNode.next;
+            currentSize++;
+        }
+
+        return currentSize;
     }
 
     // returns true if is === null
@@ -80,8 +90,14 @@ export class QueueLinkedList{
 
     toString() : String {
         let output : String = "Queue: " ;
-        while(this.rear.next !== null){
-            output += this.rear.toString();
+
+        if(this.front === null)
+            return output;
+
+        let currentNode = this.front;
+        while(currentNode !== null){
+            output += "\n" + currentNode.toString();
+            currentNode = currentNode.next;
         }
 
         return output;

@@ -1,5 +1,5 @@
 import { Scene } from 'phaser';
-import {TrailContext} from "../assets/trail/Trail.ts"
+import {TrailContext, HazardQueue} from "../assets/trail/Trail.ts"
 import {CreateHazardOnTrail, AdvanceHazards} from "../assets/trail/TrailStrategys.ts"
 // Docs https://docs.phaser.io/api-documentation/class/scene
 export class Game extends Scene
@@ -7,7 +7,7 @@ export class Game extends Scene
     camera: Phaser.Cameras.Scene2D.Camera;
     background: Phaser.GameObjects.Image;
     msg_text : Phaser.GameObjects.Text;
-    trailContext : TrailContext
+    trailContext : TrailContext;
 
     constructor ()
     {
@@ -37,13 +37,51 @@ export class Game extends Scene
 
         // setup trail handler. First step is to set strategy as create hazard
         this.trailContext = new TrailContext(new CreateHazardOnTrail);
+        // starts on creates hazard. Strategy set in create()
+        // while(HazardQueue.size() < 8)
+            this.trailContext.executeStrategy();
+                    this.trailContext.executeStrategy();
+                                this.trailContext.executeStrategy();
+
+                                        this.trailContext.executeStrategy();
+             this.trailContext.executeStrategy();
+        // // change to strategy to AdvanceHazards
+        // this.trailContext = new TrailContext(new AdvanceHazards);
+        // this.trailContext.executeStrategy();
+
+        // // back to creating hazards
+        // this.trailContext = new TrailContext(new CreateHazardOnTrail);
+        console.log(HazardQueue.toString());
+        console.log(HazardQueue.size());
+
+        this.trailContext.executeStrategy();
     }
 
     update(time: number, delta: number): void {
-        // creates hazard
-        this.trailContext.executeStrategy();
-        this.trailContext = new TrailContext(new AdvanceHazards);
-        this.trailContext.executeStrategy();
-        this.trailContext = new TrailContext(new CreateHazardOnTrail);
+        // starts on creates hazard. Strategy set in create()
+        // while(HazardQueue.size() < 8)
+        //     this.trailContext.executeStrategy();
+
+        // // change to strategy to AdvanceHazards
+        // this.trailContext = new TrailContext(new AdvanceHazards);
+        // this.trailContext.executeStrategy();
+
+        // // back to creating hazards
+        // this.trailContext = new TrailContext(new CreateHazardOnTrail);
+        // console.log(HazardQueue.toString());
+        // console.log(HazardQueue.size());
+
+        // this.trailContext.executeStrategy();
+
+        // if(HazardQueue.size() < 8 && this.spawnTimer <= 0){
+        //     this.spawnTimer -= delta;
+        // } else {
+        //     this.spawnTimer -= delta;
+        // }
+
+        // if(time % 1000 < delta){
+        //     console.log();
+
+        // }
     }
 }
