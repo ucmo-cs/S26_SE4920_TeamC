@@ -38,9 +38,19 @@ module.exports.handler = async (event) => {
       };
     }
 
+    // Get user roles from users table
+    const userParams = {
+      TableName: process.env.USERS_TABLE || "users",
+      Key: {
+        uuid: requestBody.username,
+      },
+    };
+    const userData = await dynamoDb.get(userParams).promise();
+    const roles = userData.Item ? userData.Item.roles || [] : [];
+
     // Generate JWT token
     const token = jwt.sign(
-      { uuid: requestBody.username, roles: data.Item.roles || [] },
+      { uuid: requestBody.username, roles: roles },
       process.env.JWT_SECRET || "default-secret-key",
       { expiresIn: "24h" }
     );
