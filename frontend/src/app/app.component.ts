@@ -1,31 +1,17 @@
-<<<<<<< HEAD
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  template: `<router-outlet></router-outlet>`,
-  standalone: false,
-  styleUrls: [],
-})
-export class AppComponent {
-  title = 'S26 Senior Project';
-}
-=======
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
-@Component({
-  selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  standalone: false
 })
 export class AppComponent implements OnInit {
-  title = 'frontend';
+  title = 'S26 Senior Project';
 
-  constructor(
-    public router: Router,
-  ) {}
+  constructor(public router: Router) {}
 
   ngOnInit(): void {
     this.applyStoredTheme();
@@ -38,4 +24,3 @@ export class AppComponent implements OnInit {
     root.classList.add(`theme-${theme}`);
   }
 }
->>>>>>> origin/develop

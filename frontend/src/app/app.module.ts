@@ -90,11 +90,8 @@ import { TimeOffComponent } from './components/time-off/time-off.component';
       ReportReviewComponent,
       ReportDialogComponent,
       AdminComponent,
-<<<<<<< HEAD
       CertificationComponent,
       TrainingComponent,
-      LearningComponent
-=======
       ProjectsComponent,
       ProjectsOverviewComponent,
       TeamSummaryComponent,
@@ -102,7 +99,6 @@ import { TimeOffComponent } from './components/time-off/time-off.component';
       RoleFormComponent,
       RolesListComponent,
       TimeOffComponent,
->>>>>>> origin/develop
     ],
     exports: [],
     bootstrap: [AppComponent],
@@ -153,7 +149,8 @@ import { TimeOffComponent } from './components/time-off/time-off.component';
         ReactiveFormsModule,
         AppRoutingModule,
         RouterModule,
-        HttpClientModule
+        HttpClientModule,
+        LearningComponent
     ],
     providers: [
         MatSnackBar,

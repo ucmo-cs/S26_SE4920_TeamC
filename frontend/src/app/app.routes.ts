@@ -3,13 +3,9 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
 import { DailyStatusComponent } from './components/daily-status/daily-status.component';
-<<<<<<< HEAD
-
-// NEW pages we will create below
 import { CertificationComponent } from './components/certification/certification.component';
 import { TrainingComponent } from './components/training/training.component';
 import { LearningComponent } from './components/learning/learning.component';
-=======
 import { AdminComponent } from './components/admin/theme-mangment/admin.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { ProjectsOverviewComponent } from './components/projects-overview/projects-overview.component';
@@ -18,7 +14,6 @@ import { TeamAdminComponent } from './components/team-admin/team-admin.component
 import { RolesListComponent } from './components/admin/roles/role-list/roles-list.component';
 import { RoleFormComponent } from './components/admin/roles/role-form/role-form.component'
 import { TimeOffComponent } from './components/time-off/time-off.component';
->>>>>>> origin/develop
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -64,20 +59,10 @@ export const routes: Routes = [
     path: 'time-off',
     component: TimeOffComponent
   },
-  ];
-
-  @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule],
-    providers: []
-  })
-
-<<<<<<< HEAD
   // ✅ Certification & Training
   { path: 'certification', component: CertificationComponent },
   { path: 'training', component: TrainingComponent },
   { path: 'learning', component: LearningComponent },
-
   // fallback
   { path: '**', redirectTo: '/login' },
 ];
@@ -87,7 +72,3 @@ export const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
-=======
-  export class AppRoutingModule{
-  }
->>>>>>> origin/develop
