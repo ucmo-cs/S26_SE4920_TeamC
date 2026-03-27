@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { CertificationApiService } from '../../services/certification-api.service';
 import { TrainingApiService } from '../../services/training-api.service';
 
@@ -6,6 +8,8 @@ import { TrainingApiService } from '../../services/training-api.service';
   selector: 'app-learning',
   templateUrl: './learning.component.html',
   styleUrls: ['./learning.component.scss'],
+  standalone: true,
+  imports: [CommonModule, FormsModule]
 })
 export class LearningComponent implements OnInit {
   userId = 'test-user-1';
@@ -28,19 +32,19 @@ export class LearningComponent implements OnInit {
 
   loadCerts() {
     this.certApi.listByUser(this.userId).subscribe(
-      (res) => {
+      (res: any) => {
         this.certifications = res.items || [];
       },
-      (err) => console.error('Error loading certifications', err)
+      (err: any) => console.error('Error loading certifications', err)
     );
   }
 
   loadTrainings() {
     this.trainingApi.listByUser(this.userId).subscribe(
-      (res) => {
+      (res: any) => {
         this.trainings = res.items || [];
       },
-      (err) => console.error('Error loading trainings', err)
+      (err: any) => console.error('Error loading trainings', err)
     );
   }
 
@@ -59,14 +63,14 @@ export class LearningComponent implements OnInit {
           this.certForm = { name: '', issuer: '', status: 'ACTIVE' };
           this.loadCerts();
         },
-        (err) => console.error('Error adding certification', err)
+        (err: any) => console.error('Error adding certification', err)
       );
   }
 
   deleteCert(uuid: string) {
     this.certApi.delete(uuid).subscribe(
       () => this.loadCerts(),
-      (err) => console.error('Error deleting certification', err)
+      (err: any) => console.error('Error deleting certification', err)
     );
   }
 
@@ -85,14 +89,14 @@ export class LearningComponent implements OnInit {
           this.trainingForm = { title: '', provider: '', status: 'IN_PROGRESS' };
           this.loadTrainings();
         },
-        (err) => console.error('Error adding training', err)
+        (err: any) => console.error('Error adding training', err)
       );
   }
 
   deleteTraining(uuid: string) {
     this.trainingApi.delete(uuid).subscribe(
       () => this.loadTrainings(),
-      (err) => console.error('Error deleting training', err)
+      (err: any) => console.error('Error deleting training', err)
     );
   }
 }

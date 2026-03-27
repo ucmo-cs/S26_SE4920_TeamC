@@ -21560,9 +21560,20 @@ has-background-danger.is-hoverable:active {
   pointer-events: all !important;
 }
 
+:root .mat-mdc-form-field .mat-mdc-input-element {
+  color: var(--primary-color) !important;
+}
+:root .mat-mdc-input-element::placeholder {
+  color: var(--muted) !important;
+}
+:root .mdc-floating-label {
+  color: var(--muted) !important;
+}
 :root {
+  --mdc-filled-text-field-focus-label-text-color: var(--accent);
   --mdc-outlined-text-field-outline-width: 1px;
   --mdc-outlined-text-field-focus-outline-color: var(--accent);
+  --mdc-outlined-text-field-focus-label-text-color: var(--accent);
   --mdc-outlined-text-field-outline-color: var(--border-color);
   --mdc-outlined-text-field-hover-outline-color: var(--primary-color);
   --mat-form-field-disabled-input-text-placeholder-color: var(--muted);
