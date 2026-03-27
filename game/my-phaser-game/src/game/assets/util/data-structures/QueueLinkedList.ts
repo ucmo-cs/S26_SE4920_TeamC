@@ -25,7 +25,7 @@ export class Node {
     }
 }
 
-
+// maybe make each index in the array of the node point to the next one in the data structure 
 // TO DO Make async queue to wait for next item
 export class QueueLinkedList{
     private front : any;

@@ -30,6 +30,12 @@ export class CreateHazardOnTrail implements Strategy {
         newHazard = [Math.random() < 0.5 ? " D " : " S ", Math.random() < 0.5 ? " D " : " S ", Math.random() < 0.5 ? " D " : " S ",];
         let index = 0;
 
+        // make it so that you don`t create newHazards randomly and instead just check avaiable paths with path finding algorithm and just make one of the paths safe but have which ever one that is safe be random or if there is only one safe path just do that.
+
+        // path find up until this point so n-1 of the queue
+        // then each run check the next item in the queue to be added until it is safe.
+        // add multiple randomly but always keep at least one on path.
+
         // fix this logic to have a safe random path
         // think need to use some kind of graphing algorithm to traverse Query and make sure path safe.
         // can not just check previous statement
