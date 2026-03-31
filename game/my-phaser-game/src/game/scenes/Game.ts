@@ -56,7 +56,6 @@ export class Game extends Scene
         this.trailContext.executeStrategy();
         this.trailContext.executeStrategy();
         this.trailContext.executeStrategy();
-        this.trailContext.executeStrategy();
 
         console.log(HazardQueue.toString());
     }
