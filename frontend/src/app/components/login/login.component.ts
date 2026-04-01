@@ -28,8 +28,8 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  async login() {
-    (await this.authService.login(this.username, this.password))
+  login() {
+    this.authService.login(this.username, this.password)
       .subscribe({
         next: (success) => {
           if (success) {

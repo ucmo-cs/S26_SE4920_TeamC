@@ -2,27 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   constructor(private http: HttpClient,private router: Router) { }
-  async login(username: string, password: string): Promise<Observable<boolean>> {
+
+  login(username: string, password: string): Observable<boolean> {
     // Your login logic with Lambda function
     // Simulating success for demonstration purposes
-    const response = await fetch(environment.rocApiUrl + '/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ username, password })
-    })
-    .then(response => {return response.json()});
-        
+    const loginSuccess = true;
+    
     return new Observable<boolean>((observer) => {
-      if (response.auth) {
+      if (loginSuccess) {
         observer.next(true); // Notify subscribers that login was successful
         observer.complete(); // Complete the observable
       } else {
