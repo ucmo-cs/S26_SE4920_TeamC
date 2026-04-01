@@ -42,7 +42,7 @@ export class QueueLinkedList {
         return this.rear;
     }
 
-    // add element to queue
+    // add element to queue rear
     enqueue(data : any){
         const new_node = new Node(data);
         if(this.isEmpty()){
@@ -99,6 +99,21 @@ export class QueueLinkedList {
         let currentNode = this.front;
         while(currentNode !== null){
             output += "\n" + currentNode.toString();
+            currentNode = currentNode.next;
+        }
+
+        return output;
+    }
+
+    toArray() : any[] {
+        let output : any[] = [];
+
+        if(this.front === null)
+            return output;
+
+        let currentNode = this.front;
+        while(currentNode !== null){
+            output.push(currentNode.getData());
             currentNode = currentNode.next;
         }
 

@@ -1,73 +1,99 @@
-import { Scene } from 'phaser';
+import { Scene, GameObjects } from 'phaser';
 import {TrailContext, HazardQueue} from "../assets/trail/Trail.ts"
 import {CreateHazardOnTrail, AdvanceHazards} from "../assets/trail/TrailStrategys.ts"
 // Docs https://docs.phaser.io/api-documentation/class/scene
+
 export class Game extends Scene
 {
     camera: Phaser.Cameras.Scene2D.Camera;
-    background: Phaser.GameObjects.Image;
-    msg_text : Phaser.GameObjects.Text;
+    background: GameObjects.Image;
+    logo: GameObjects.Image;
+    hazard: GameObjects.Image;
     trailContext : TrailContext;
+    group: GameObjects.Group;
+
 
     constructor ()
     {
         super('Game');
     }
 
+    // refactor for performance
+    renderTrail() : void{
+        this.group.clear(true, true);
+        let currentNode = HazardQueue.getFront();
+        let yPos = 280;
+
+        while(currentNode !== null){
+            const txt = this.add.text(400, yPos, currentNode.data.toString(), {
+                    fontSize: '32px',
+                    fontFamily: 'Arial',
+                    color: '#ffffff',
+                    padding: { x: 10, y: 5 },
+            })
+
+            this.group.add(txt);
+            currentNode = currentNode.next;
+            yPos -= 30;
+        }
+    }
+
     create ()
     {
         this.camera = this.cameras.main;
-        this.camera.setBackgroundColor(0x00ff00);
+        this.camera.setBackgroundColor(0x1b1b1b);
 
-        this.background = this.add.image(512, 384, 'background');
+        this.background = this.add.image(512, 384, 'bg');
+        // this.hazard = this.add.image(512, 300, 'hazard');
+        // this.logo = this.add.image(512, 300, 'logo');
+        // this.hazard.setScale(0.5);
+        // this.logo.setScale(0.5);
+
+        this.background.setScale(0.7);
         this.background.setAlpha(0.5);
 
-        this.msg_text = this.add.text(512, 384, 'Make something fun!\nand share it with us:\nsupport@phaser.io', {
-            fontFamily: 'Arial Black', fontSize: 38, color: '#ffffff',
-            stroke: '#000000', strokeThickness: 8,
-            align: 'center'
-        });
-        this.msg_text.setOrigin(0.5);
+        const config = {
+            classType: Phaser.GameObjects.Text,
+        }
+        this.group = this.add.group(config);
+
+        // setup trail handler. First step is to set strategy as create hazard
+        this.trailContext = new TrailContext(new CreateHazardOnTrail);
+
+        this.trailContext.executeStrategy();
+        this.trailContext.executeStrategy();
+        this.trailContext.executeStrategy();
+        this.trailContext.executeStrategy();
+        this.trailContext.executeStrategy();
+        this.trailContext.executeStrategy();
+
+        //const hazardArray = HazardQueue.toArray() as GameObjects.Sprite[];
+        console.log(HazardQueue.toString());
+
+        this.renderTrail();
 
         this.input.once('pointerdown', () => {
 
             this.scene.start('GameOver');
 
         });
-
-        // setup trail handler. First step is to set strategy as create hazard
-        this.trailContext = new TrailContext(new CreateHazardOnTrail)
-        // get it to run in order. Race condition
-        // Promise.resolve()
-        // .then(() => setTimeout(() => {this.trailContext.executeStrategy(); console.log("ran");}, 2000))
-        // .then(() => setTimeout(() => {this.trailContext.executeStrategy(); console.log("ran2");}, 4000))
-        // .then(() => setTimeout(() => {this.trailContext.executeStrategy(); console.log("ran3");}, 6000))
-        // .then(() => setTimeout(() => {this.trailContext.executeStrategy(); console.log("ran4");}, 8000))
-        // .then(() => setTimeout(() => {this.trailContext.executeStrategy(); console.log("ran5");}, 10000))
-        // .then(() => setTimeout(() => {this.trailContext.executeStrategy(); console.log("ran6");}, 12000))
-        // .then(() => setTimeout(() => {this.trailContext.executeStrategy(); console.log("ran7");}, 14000))
-        // .then(() => setTimeout(() => {this.trailContext.executeStrategy(); console.log("ran8");}, 16000))
-        // .then(() => setTimeout(() => {console.log(HazardQueue.toString()); console.log("ran9");}, 18000)) // final call
-        // .catch(err => console.error("Error executing strategies:", err));
-
-        this.trailContext.executeStrategy();
-        this.trailContext.executeStrategy();
-        this.trailContext.executeStrategy();
-        this.trailContext.executeStrategy();
-        this.trailContext.executeStrategy();
-        this.trailContext.executeStrategy();
-
-        console.log(HazardQueue.toString());
     }
 
+    hazardTimer = 0;
     // make it so each of these do not run every second.
     // use the time and delta values for effective performance.
     update(time: number, delta: number): void {
-        this.trailContext = new TrailContext(new CreateHazardOnTrail)
-        this.trailContext.executeStrategy();
-        this.trailContext = new TrailContext(new AdvanceHazards)
-        this.trailContext.executeStrategy()
+        this.hazardTimer += delta;
 
-        console.log(HazardQueue.toString());
+        if(this.hazardTimer >= 1500) {
+            this.trailContext = new TrailContext(new CreateHazardOnTrail)
+            this.trailContext.executeStrategy();
+            this.trailContext = new TrailContext(new AdvanceHazards)
+            this.trailContext.executeStrategy();
+            this.renderTrail();
+
+            console.log(HazardQueue.toString());
+            this.hazardTimer = 0;
+        }
     }
 }
