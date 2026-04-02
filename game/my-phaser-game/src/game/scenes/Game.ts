@@ -85,7 +85,7 @@ export class Game extends Scene
     update(time: number, delta: number): void {
         this.hazardTimer += delta;
 
-        if(this.hazardTimer >= 1500) {
+        if(this.hazardTimer >= 1000) {
             this.trailContext = new TrailContext(new CreateHazardOnTrail)
             this.trailContext.executeStrategy();
             this.trailContext = new TrailContext(new AdvanceHazards)

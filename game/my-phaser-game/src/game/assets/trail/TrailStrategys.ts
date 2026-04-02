@@ -16,33 +16,24 @@ export class CreateHazardOnTrail implements Strategy {
         }
 
         let currentRear = HazardQueue.getRear().data;
-        // // hazard all danger up till this point
-        // // safe starting point
-        // let safeIndex = Math.floor(Math.random() * 3);
-        // // console.log("currentRear before safe index change");
-        // // console.log(currentRear);
 
         // cant make a random safe index. Just find a safe one
         const safeIndexArray : number[] = [];
         for(let i = 0; i < currentRear.length - 1; i++){
             if(currentRear[i] === " S "){
                 safeIndexArray.push(i);
-                break;
             }
         }
 
+        // might be the issue
         let randomSafeIndex = Math.floor(Math.random() * safeIndexArray.length);
         let safeIndex = safeIndexArray[randomSafeIndex];
 
-        // let safeIndex = 2;
-        // currentRear[safeIndex] = " S ";
-
-
-        // change path to allow safe path on current and new hazard
-        // always goes down one
         const randomPercentage = Math.random();
 
-        // probably the order these go in that is causing an issue.
+        // adjust values and clear up logic
+        // when only value is the one index it always dose that one
+        // going just down is causing issues
         switch(safeIndex){
             case 0: // previous looks like this [ " S ", " D ", " D "]
                 // console.log(safeIndex);
