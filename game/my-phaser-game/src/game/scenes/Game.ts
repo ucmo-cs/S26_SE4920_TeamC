@@ -3,6 +3,8 @@ import {TrailContext, HazardQueue} from "../assets/trail/Trail.ts"
 import {CreateHazardOnTrail, AdvanceHazards} from "../assets/trail/TrailStrategys.ts"
 // Docs https://docs.phaser.io/api-documentation/class/scene
 
+
+// needs refactoring and optimization
 export class Game extends Scene
 {
     camera: Phaser.Cameras.Scene2D.Camera;
@@ -11,11 +13,18 @@ export class Game extends Scene
     hazard: GameObjects.Image;
     trailContext : TrailContext;
     group: GameObjects.Group;
+    // how fast the game moves
+    clicks: integer = 800;
 
 
     constructor ()
     {
         super('Game');
+    }
+
+    init (data: { difficulty: integer })
+    {
+        this.clicks = data.difficulty;
     }
 
     // refactor for performance
@@ -44,10 +53,6 @@ export class Game extends Scene
         this.camera.setBackgroundColor(0x1b1b1b);
 
         this.background = this.add.image(512, 384, 'bg');
-        // this.hazard = this.add.image(512, 300, 'hazard');
-        // this.logo = this.add.image(512, 300, 'logo');
-        // this.hazard.setScale(0.5);
-        // this.logo.setScale(0.5);
 
         this.background.setScale(0.7);
         this.background.setAlpha(0.5);
@@ -55,6 +60,7 @@ export class Game extends Scene
         const config = {
             classType: Phaser.GameObjects.Text,
         }
+
         this.group = this.add.group(config);
 
         // setup trail handler. First step is to set strategy as create hazard
@@ -84,7 +90,8 @@ export class Game extends Scene
     update(time: number, delta: number): void {
         this.hazardTimer += delta;
 
-        if(this.hazardTimer >= 400) {
+        // add difficulty here
+        if(this.hazardTimer >= this.clicks) {
             this.trailContext = new TrailContext(new CreateHazardOnTrail)
             this.trailContext.executeStrategy();
             this.trailContext = new TrailContext(new AdvanceHazards)

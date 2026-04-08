@@ -5,6 +5,10 @@ export class MainMenu extends Scene
     background: GameObjects.Image;
     logo: GameObjects.Image;
     title: GameObjects.Text;
+    hard: GameObjects.Text;
+    medium: GameObjects.Text;
+    easy: GameObjects.Text;
+
 
     constructor ()
     {
@@ -23,9 +27,12 @@ export class MainMenu extends Scene
             align: 'center'
         }).setOrigin(0.5);
 
+        let clicks = 800;
+        // add difficulty options
+
         this.input.once('pointerdown', () => {
 
-            this.scene.start('Game');
+            this.scene.start('Game', { difficulty: clicks });
 
         });
     }
