@@ -16,6 +16,11 @@ export class Game extends Scene
     // how fast the game moves
     clicks: integer = 800;
 
+    hudBackground: Phaser.GameObjects.Rectangle;
+    timerText: Phaser.GameObjects.Text;
+    scoreText: Phaser.GameObjects.Text;
+    elapsedSeconds = 0;
+    score = 0;
 
     constructor ()
     {
@@ -63,6 +68,19 @@ export class Game extends Scene
 
         this.group = this.add.group(config);
 
+        this.hudBackground = this.add.rectangle(512, 34, 1024, 68, 0x0047ab).setOrigin(0.5, 0.5).setDepth(10);
+
+        const hudStyle = {
+            fontSize: '22px',
+            fontFamily: '"Press Start 2P", monospace',
+            color: '#ffffff',
+            lineSpacing: 6,
+            shadow: { offsetX: 1, offsetY: 1, color: '#000000', blur: 0, stroke: true, fill: true }
+        };
+
+        this.timerText = this.add.text(32, 14, 'TIME 0:00', hudStyle).setDepth(11);
+        this.scoreText = this.add.text(640, 14, 'SCORE 0000', hudStyle).setDepth(11);
+
         // setup trail handler. First step is to set strategy as create hazard
         this.trailContext = new TrailContext(new CreateHazardOnTrail);
 
@@ -91,7 +109,12 @@ export class Game extends Scene
         this.hazardTimer += delta;
 
         // add difficulty here
-        if(this.hazardTimer >= this.clicks) {
+        if (this.hazardTimer >= this.clicks) {
+            this.elapsedSeconds += 1;
+            this.score += 10;
+            this.timerText.setText(`TIME ${Math.floor(this.elapsedSeconds / 60)}:${(this.elapsedSeconds % 60).toString().padStart(2, '0')}`);
+            this.scoreText.setText(`SCORE ${this.score.toString().padStart(4, '0')}`);
+
             this.trailContext = new TrailContext(new CreateHazardOnTrail)
             this.trailContext.executeStrategy();
             this.trailContext = new TrailContext(new AdvanceHazards)
