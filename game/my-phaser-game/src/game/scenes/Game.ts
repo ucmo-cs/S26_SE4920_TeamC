@@ -68,7 +68,6 @@ export class Game extends Scene
         this.trailContext.executeStrategy();
 
         //const hazardArray = HazardQueue.toArray() as GameObjects.Sprite[];
-        console.log(HazardQueue.toString());
 
         this.renderTrail();
 
@@ -85,14 +84,13 @@ export class Game extends Scene
     update(time: number, delta: number): void {
         this.hazardTimer += delta;
 
-        if(this.hazardTimer >= 1000) {
+        if(this.hazardTimer >= 400) {
             this.trailContext = new TrailContext(new CreateHazardOnTrail)
             this.trailContext.executeStrategy();
             this.trailContext = new TrailContext(new AdvanceHazards)
             this.trailContext.executeStrategy();
             this.renderTrail();
 
-            console.log(HazardQueue.toString());
             this.hazardTimer = 0;
         }
     }
