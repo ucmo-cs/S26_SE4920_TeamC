@@ -78,7 +78,7 @@ export class Game extends Scene
             shadow: { offsetX: 1, offsetY: 1, color: '#000000', blur: 0, stroke: true, fill: true }
         };
 
-        this.timerText = this.add.text(32, 14, 'TIME 0s', hudStyle).setDepth(11);
+        this.timerText = this.add.text(32, 14, 'TIME 0:00', hudStyle).setDepth(11);
         this.scoreText = this.add.text(640, 14, 'SCORE 0000', hudStyle).setDepth(11);
 
         // setup trail handler. First step is to set strategy as create hazard
@@ -112,7 +112,7 @@ export class Game extends Scene
         if (this.hazardTimer >= this.clicks) {
             this.elapsedSeconds += 1;
             this.score += 10;
-            this.timerText.setText(`TIME ${this.elapsedSeconds}s`);
+            this.timerText.setText(`TIME ${Math.floor(this.elapsedSeconds / 60)}:${(this.elapsedSeconds % 60).toString().padStart(2, '0')}`);
             this.scoreText.setText(`SCORE ${this.score.toString().padStart(4, '0')}`);
 
             this.trailContext = new TrailContext(new CreateHazardOnTrail)
