@@ -28,16 +28,9 @@ export class CreateHazardOnTrail implements Strategy {
 
         // choices random path
         const options : string[] = ["LEFT", "RIGHT", "NONE"];
-        console.log(moves.previousMove);
 
         // have left right be sl
         let choice =  options[Math.floor(Math.random() * options.length)];
-
-        while(choice === moves.previousMove){
-            choice =  options[Math.floor(Math.random() * options.length)];
-        }
-
-        moves.previousMove = choice;
 
         // make it so  it dose not choice same option twice in a row
 

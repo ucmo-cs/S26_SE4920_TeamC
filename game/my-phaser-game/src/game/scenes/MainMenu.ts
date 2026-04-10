@@ -28,7 +28,8 @@ export class MainMenu extends Scene
         }).setOrigin(0.5);
 
         let clicks = 800;
-        // add difficulty options
+        // add difficulty options here
+        // update clicks based on difficulty chosen
 
         this.input.once('pointerdown', () => {
 
