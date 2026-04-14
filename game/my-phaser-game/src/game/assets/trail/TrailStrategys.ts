@@ -1,60 +1,61 @@
+import { LEFT, RIGHT } from "phaser";
 import { Strategy } from "./Strategy";
-import {HazardQueue} from "./Trail";
+import {HazardQueue, moves} from "./Trail";
 
 // concrete trail strategy
 export class CreateHazardOnTrail implements Strategy {
     doOperation(): void {
-        let newHazard: string[] = [" S ", " S ", " S "];
+        // always danger till overwrites one of the indexes based on previous safe index of rear
+        let newHazard: string[] = [" D ", " D ", " D "];
 
         // for first hazard
         if(HazardQueue.isEmpty()){
             // same start each time
-            newHazard = [" S ", " S ", " S "];
+            newHazard = [" D ", " S ", " D "];
+            // start of the safe path. Creates more safe traversal for next enqueue further down the code.
+            moves.pathHead = 1;
             HazardQueue.enqueue(newHazard);
-            //console.log("ran isEmpty");
             return;
         }
 
-        // this is the problem
-        const currentRear = HazardQueue.getRear().data;
-        const safeIndexInRear : any[] = [];
+        const rearData : string[] = HazardQueue.getRear().data;
+        // get rear
+        // chose to go left or right or none when at index 1
+        // based on that go down on current index position
 
-        // check safe indexes at rear
-        for (let index = 0; index < currentRear.length; index++) {
-            if(currentRear[index] === " S ")
-                safeIndexInRear.push(index);
+        // randomly choose to go left, right, or stay the same
+        // check if safe else do other random choice until safe
+
+        // choices random path
+        const options : string[] = ["LEFT", "RIGHT", "NONE"];
+
+        // have left right be sl
+        let choice =  options[Math.floor(Math.random() * options.length)];
+
+        // make it so  it dose not choice same option twice in a row
+
+        // falls through if choice is invalid.
+        switch(choice){
+            case "LEFT":
+                if(moves.pathHead - 1 >= 0){
+                    moves.pathHead = moves.pathHead - 1;
+                    rearData[moves.pathHead] = " S ";
+                    break;
+                }
+
+            case "RIGHT":
+                if(moves.pathHead + 1 < rearData.length){
+                    moves.pathHead = moves.pathHead + 1;
+                    rearData[moves.pathHead] = " S ";
+                    break;
+                }
+
+            // also NONE option.
+            default:
+                break;
         }
 
-        // TODO change from letters to Hazard class type.
-        // Implement hazard logic and use factory creation design pattern to spawn them here.
-        newHazard = [Math.random() < 0.5 ? " D " : " S ", Math.random() < 0.5 ? " D " : " S ", Math.random() < 0.5 ? " D " : " S ",];
-        let index = 0;
-
-        // make it so that you don`t create newHazards randomly and instead just check avaiable paths with path finding algorithm and just make one of the paths safe but have which ever one that is safe be random or if there is only one safe path just do that.
-
-        // path find up until this point so n-1 of the queue
-        // then each run check the next item in the queue to be added until it is safe.
-        // add multiple randomly but always keep at least one on path.
-
-        // fix this logic to have a safe random path
-        // think need to use some kind of graphing algorithm to traverse Query and make sure path safe.
-        // can not just check previous statement
-        // use depth first search for at least one
-        /// use breadth first search for each option first
-        // need some kind of path finding algorithm.
-        while(currentRear[index] !== " S " || newHazard[index] !== " S "){
-            //console.log("currentRear " + currentRear);
-
-            newHazard = [Math.random() < 0.5 ? " D " : " S ", Math.random() < 0.5 ? " D " : " S ", Math.random() < 0.5 ? " D " : " S ",];
-            //console.log("newHazard " + newHazard);
-            index++;
-
-            if(index > 2){
-                index = 0;
-            }
-        }
-        //console.log("newHazardEND " + newHazard);
-
+        newHazard[moves.pathHead] = " S ";
         HazardQueue.enqueue(newHazard);
     }
 }
