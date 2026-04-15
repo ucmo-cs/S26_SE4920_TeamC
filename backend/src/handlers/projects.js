@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
-const AWS = require("aws-sdk");
+const AWS = require('aws-sdk');
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.handler = async () => {
   try {
     const params = {
-      TableName: process.env.PROJECTS_TABLE || "projects",
+      TableName: process.env.PROJECTS_TABLE || 'projects'
     };
 
     const result = await dynamoDb.scan(params).promise();
@@ -14,15 +14,15 @@ module.exports.handler = async () => {
     return {
       statusCode: 200,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(result.Items || []),
+      body: JSON.stringify(result.Items || [])
     };
   } catch (error) {
-    console.error("Error fetching projects:", error);
+    console.error('Error fetching projects:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ message: "Failed to fetch projects" }),
+      body: JSON.stringify({ message: 'Failed to fetch projects' })
     };
   }
 };

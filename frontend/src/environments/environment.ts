@@ -6,7 +6,6 @@
 export const environment = {
   state: 'local',
   production: false,
-  apiBaseUrl: 'http://localhost:3001/dev',
   rocApiUrl: 'https://temp.execute-api.us-east-1.amazonaws.com',
   clientId: 'temp',
   calendarId: "temp",

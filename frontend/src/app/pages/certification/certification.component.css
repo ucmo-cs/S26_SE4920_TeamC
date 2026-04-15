@@ -1,0 +1,10 @@
+.page-container {
+    padding: 24px;
+  }
+  
+  .card {
+    margin-top: 16px;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }

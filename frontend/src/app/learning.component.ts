@@ -27,21 +27,15 @@ export class LearningComponent implements OnInit {
   }
 
   loadCerts() {
-    this.certApi.listByUser(this.userId).subscribe(
-      (res) => {
-        this.certifications = res.items || [];
-      },
-      (err) => console.error('Error loading certifications', err)
-    );
+    this.certApi.listByUser(this.userId).subscribe((res) => {
+      this.certifications = res.items || [];
+    });
   }
 
   loadTrainings() {
-    this.trainingApi.listByUser(this.userId).subscribe(
-      (res) => {
-        this.trainings = res.items || [];
-      },
-      (err) => console.error('Error loading trainings', err)
-    );
+    this.trainingApi.listByUser(this.userId).subscribe((res) => {
+      this.trainings = res.items || [];
+    });
   }
 
   addCert() {
@@ -54,20 +48,14 @@ export class LearningComponent implements OnInit {
         issuer: this.certForm.issuer.trim(),
         status: this.certForm.status,
       })
-      .subscribe(
-        () => {
-          this.certForm = { name: '', issuer: '', status: 'ACTIVE' };
-          this.loadCerts();
-        },
-        (err) => console.error('Error adding certification', err)
-      );
+      .subscribe(() => {
+        this.certForm = { name: '', issuer: '', status: 'ACTIVE' };
+        this.loadCerts();
+      });
   }
 
   deleteCert(uuid: string) {
-    this.certApi.delete(uuid).subscribe(
-      () => this.loadCerts(),
-      (err) => console.error('Error deleting certification', err)
-    );
+    this.certApi.delete(uuid).subscribe(() => this.loadCerts());
   }
 
   addTraining() {
@@ -80,19 +68,14 @@ export class LearningComponent implements OnInit {
         provider: this.trainingForm.provider.trim(),
         status: this.trainingForm.status,
       })
-      .subscribe(
-        () => {
-          this.trainingForm = { title: '', provider: '', status: 'IN_PROGRESS' };
-          this.loadTrainings();
-        },
-        (err) => console.error('Error adding training', err)
-      );
+      .subscribe(() => {
+        this.trainingForm = { title: '', provider: '', status: 'IN_PROGRESS' };
+        this.loadTrainings();
+      });
   }
 
   deleteTraining(uuid: string) {
-    this.trainingApi.delete(uuid).subscribe(
-      () => this.loadTrainings(),
-      (err) => console.error('Error deleting training', err)
-    );
+    this.trainingApi.delete(uuid).subscribe(() => this.loadTrainings());
   }
 }
+
