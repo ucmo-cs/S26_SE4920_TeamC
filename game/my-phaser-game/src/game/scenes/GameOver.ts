@@ -5,13 +5,14 @@ export class GameOver extends Scene
     camera: Phaser.Cameras.Scene2D.Camera;
     background: Phaser.GameObjects.Image;
     gameover_text : Phaser.GameObjects.Text;
+    summaryText: Phaser.GameObjects.Text;
 
     constructor ()
     {
         super('GameOver');
     }
 
-    create ()
+    create (data: { score?: number; elapsedSeconds?: number })
     {
         this.camera = this.cameras.main
         this.camera.setBackgroundColor(0xff0000);
@@ -25,6 +26,17 @@ export class GameOver extends Scene
             align: 'center'
         });
         this.gameover_text.setOrigin(0.5);
+
+        const score = data?.score ?? 0;
+        const elapsed = data?.elapsedSeconds ?? 0;
+        this.summaryText = this.add.text(512, 462, `Score ${score}  |  Time ${elapsed}s\nClick to return to menu`, {
+            fontFamily: 'Arial',
+            fontSize: 28,
+            color: '#ffffff',
+            stroke: '#000000',
+            strokeThickness: 4,
+            align: 'center'
+        }).setOrigin(0.5);
 
         this.input.once('pointerdown', () => {
 

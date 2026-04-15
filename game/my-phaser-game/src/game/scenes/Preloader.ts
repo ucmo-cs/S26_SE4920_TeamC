@@ -35,6 +35,7 @@ export class Preloader extends Scene
         this.load.image('logo', 'logo.png');
         this.load.image('bg', 'background.jpg');
         this.load.image('hazard', 'hazard.webp');
+        this.load.spritesheet('cat', 'cat_sheet.png', { frameWidth: 128, frameHeight: 128 });
     }
 
     create ()
