@@ -1,0 +1,128 @@
+<div class="learning-container">
+  <div class="learning-content">
+    <!-- Header -->
+    <div class="header">
+      <h1>Learning & Certifications</h1>
+      <p class="subtitle">User ID: {{ userId }}</p>
+    </div>
+
+    <!-- Two Column Layout -->
+    <div class="two-column">
+      <!-- Certifications Section -->
+      <section class="section certifications-section">
+        <h2>📜 Certifications</h2>
+        
+        <!-- Add Certification Form -->
+        <div class="form-card">
+          <h3>Add Certification</h3>
+          <div class="form-group">
+            <label>Certification Name</label>
+            <input 
+              type="text" 
+              [(ngModel)]="certForm.name"
+              placeholder="e.g., AWS Solutions Architect"
+              class="form-input"
+            />
+          </div>
+          <div class="form-group">
+            <label>Issuer</label>
+            <input 
+              type="text" 
+              [(ngModel)]="certForm.issuer"
+              placeholder="e.g., Amazon Web Services"
+              class="form-input"
+            />
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select [(ngModel)]="certForm.status" class="form-input">
+              <option value="ACTIVE">Active</option>
+              <option value="EXPIRED">Expired</option>
+              <option value="PENDING">Pending</option>
+            </select>
+          </div>
+          <button (click)="addCert()" class="btn btn-primary">Add Certification</button>
+        </div>
+
+        <!-- Certifications List -->
+        <div class="items-list">
+          <h3 *ngIf="certifications.length === 0" class="empty-state">No certifications yet</h3>
+          <div *ngFor="let cert of certifications" class="item-card">
+            <div class="item-header">
+              <h4>{{ cert.name }}</h4>
+              <span class="status-badge" [ngClass]="'status-' + cert.status?.toLowerCase()">
+                {{ cert.status }}
+              </span>
+            </div>
+            <p class="item-meta">Issuer: <strong>{{ cert.issuer }}</strong></p>
+            <p class="item-meta" *ngIf="cert.dateObtained">Date: {{ cert.dateObtained | date }}</p>
+            <button 
+              (click)="deleteCert(cert.uuid)" 
+              class="btn btn-danger btn-small"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trainings Section -->
+      <section class="section trainings-section">
+        <h2>🎓 Trainings</h2>
+        
+        <!-- Add Training Form -->
+        <div class="form-card">
+          <h3>Add Training</h3>
+          <div class="form-group">
+            <label>Training Title</label>
+            <input 
+              type="text" 
+              [(ngModel)]="trainingForm.title"
+              placeholder="e.g., Angular Advanced Concepts"
+              class="form-input"
+            />
+          </div>
+          <div class="form-group">
+            <label>Provider</label>
+            <input 
+              type="text" 
+              [(ngModel)]="trainingForm.provider"
+              placeholder="e.g., Udemy"
+              class="form-input"
+            />
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select [(ngModel)]="trainingForm.status" class="form-input">
+              <option value="IN_PROGRESS">In Progress</option>
+              <option value="COMPLETED">Completed</option>
+              <option value="NOT_STARTED">Not Started</option>
+            </select>
+          </div>
+          <button (click)="addTraining()" class="btn btn-primary">Add Training</button>
+        </div>
+
+        <!-- Trainings List -->
+        <div class="items-list">
+          <h3 *ngIf="trainings.length === 0" class="empty-state">No trainings yet</h3>
+          <div *ngFor="let training of trainings" class="item-card">
+            <div class="item-header">
+              <h4>{{ training.title }}</h4>
+              <span class="status-badge" [ngClass]="'status-' + training.status?.toLowerCase()">
+                {{ training.status }}
+              </span>
+            </div>
+            <p class="item-meta">Provider: <strong>{{ training.provider }}</strong></p>
+            <p class="item-meta" *ngIf="training.completionDate">Completed: {{ training.completionDate | date }}</p>
+            <button 
+              (click)="deleteTraining(training.uuid)" 
+              class="btn btn-danger btn-small"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

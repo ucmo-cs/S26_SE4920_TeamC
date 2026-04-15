@@ -1,9 +1,23 @@
+/* Modern Admin Dashboard Header Styling */
+:host {
+  --header-bg: #ffffff;
+  --header-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --primary-color: #3498db;
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --accent-bg: #f5f7fa;
+}
+
 .header-container {
-  height: 100px;
+  height: 70px;
   display: flex;
   align-items: center;
-  color: var(--nav-text);
-  background-color: var(--nav-bg);
+  color: var(--text-primary);
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  box-shadow: var(--header-shadow);
+  border-bottom: 1px solid #ecf0f1;
+  padding: 0 24px;
+  gap: 20px;
 }
 
 .verticle-alignment-helper {
@@ -15,28 +29,44 @@
 .profile-picture {
   width: 40px;
   height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary-color);
+  transition: transform 0.2s ease;
+}
+
+.profile-picture:hover {
+  transform: scale(1.1);
 }
 
 #roc-logo {
-  margin-right: auto;
-  overflow: hidden;
-  width: 150px;
-  height: 150px;
   cursor: pointer;
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  margin-right: 12px;
+}
+
+#roc-logo:hover {
+  transform: scale(1.05);
 }
 
 h3 {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.hamburger-icon {
-  cursor: pointer;
-  margin-left: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  flex: 1;
 }
 
 .head-bg {
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .header-right {
@@ -44,27 +74,114 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 20px;
+  gap: 16px;
 }
 
 .hamburger-container {
   height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.hamburger-icon {
+  cursor: pointer;
+  margin-left: 8px;
+  color: var(--text-primary);
+  transition: color 0.2s ease;
+}
+
+.hamburger-icon:hover {
+  color: var(--primary-color);
+}
+
+/* Material Menu Styling */
+::ng-deep .header-menu-trigger {
+  color: var(--text-primary) !important;
+  font-weight: 500;
+}
+
+::ng-deep .header-menu-trigger:hover {
+  background-color: var(--accent-bg) !important;
+  color: var(--primary-color) !important;
+}
+
+::ng-deep .mat-mdc-menu-content {
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+::ng-deep button.mat-mdc-menu-item {
+  height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  padding: 0 16px !important;
+  transition: background-color 0.2s ease !important;
+}
+
+::ng-deep button.mat-mdc-menu-item:hover {
+  background-color: var(--accent-bg) !important;
+  color: var(--primary-color) !important;
+}
+
+::ng-deep button.mat-mdc-menu-item::before {
+  content: '';
+}
+
+::ng-deep .mat-mdc-menu-item-submenu-trigger::after {
+  color: var(--primary-color) !important;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .header-container {
+    padding: 0 16px;
+    gap: 12px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  #roc-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .header-right {
+    gap: 12px;
+  }
 }
 
 @media screen and (max-width: 575px) {
+  .header-container {
+    height: 60px;
+    padding: 0 12px;
+    gap: 8px;
+  }
+
   .header-container .header-text {
     display: none;
   }
 
-  #roc-logo {
-    margin-right: auto;
-    height: 70px;
-    width: 70px;
+  h3 {
+    display: none;
   }
-}
 
-button.mat-mdc-menu-item {
-  height: 35px !important;
-  display: flex;
-  align-items: center;
+  #roc-logo {
+    width: 35px;
+    height: 35px;
+    margin-right: auto;
+  }
+
+  .profile-picture {
+    width: 35px;
+    height: 35px;
+  }
+
+  .header-right {
+    gap: 8px;
+    margin-right: 0;
+  }
 }

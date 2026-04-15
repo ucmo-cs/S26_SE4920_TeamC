@@ -1,0 +1,74 @@
+<div class="time-off-container">
+  <div class="card-container">
+    <h2>Request Time Off</h2>
+    <form [formGroup]="ptoForm" (ngSubmit)="submitRequest()" class="pto-form">
+      <mat-form-field appearance="fill">
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Start Time</mat-label>
+          <input matInput type="time" formControlName="start">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>End Time</mat-label>
+          <input matInput type="time" formControlName="end">
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Hours</mat-label>
+          <input matInput type="number" formControlName="hours">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Type</mat-label>
+          <mat-select formControlName="ptoType">
+            <mat-option value="pto">PTO</mat-option>
+            <mat-option value="sick">Sick</mat-option>
+            <mat-option value="unpaid">Unpaid</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="!ptoForm.valid">Submit Request</button>
+    </form>
+  </div>
+
+  <div class="card-container" *ngIf="user">
+    <h2>My Requests</h2>
+    <table class="requests-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Hours</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let date of objectKeys(user.requestedPTO)">
+          <td>{{ date }}</td>
+          <td>{{ user.requestedPTO[date].start }}</td>
+          <td>{{ user.requestedPTO[date].end }}</td>
+          <td>{{ user.requestedPTO[date].hours }}</td>
+          <td>
+            <span *ngIf="user.requestedPTO[date].types.pto > 0">PTO</span>
+            <span *ngIf="user.requestedPTO[date].types.sick > 0">Sick</span>
+            <span *ngIf="user.requestedPTO[date].types.unpaid > 0">Unpaid</span>
+          </td>
+        </tr>
+        <tr *ngIf="objectKeys(user.requestedPTO).length === 0">
+          <td colspan="5">No requests found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
