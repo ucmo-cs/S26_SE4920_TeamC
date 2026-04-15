@@ -2,22 +2,12 @@
 @use "bulma/sass";
 
 :root {
-  .mat-mdc-form-field .mat-mdc-input-element {
-    color: var(--primary-color) !important;
-  }
-  .mat-mdc-input-element::placeholder {
-    color: var(--muted) !important;
-  }
-  .mdc-floating-label { 
-    color: var(--muted) !important;
-  }
   @include mat.form-field-overrides((
     disabled-input-text-placeholder-color: var(--muted),
     outline-color: var(--border-color),
     focus-outline-color: var(--accent),
     hover-outline-color: var(--primary-color),
     outline-width: 1px,
-    focus-label-text-color: var(--accent),
   ));
 
   @include mat.select-overrides((
@@ -35,8 +25,6 @@
     enabled-icon-color: var(--primary-color),
     container-text-color: var(--primary-color),
   ));
-
-   @include apply-theme($base-theme);
 }
 
 // Base (default) theme
@@ -196,6 +184,11 @@ $theme-volcano: (
   @each $key, $value in $theme-map {
     --#{$key}: #{$value};
   }
+}
+
+// Root default theme
+:root {
+  @include apply-theme($base-theme);
 }
 
 // Theme classes
