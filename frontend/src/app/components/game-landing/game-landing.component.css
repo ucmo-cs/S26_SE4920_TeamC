@@ -12,7 +12,58 @@
 }
 
 .game-header {
-  margin-bottom: 8px;
+  margin-bottom: 24px;
+}
+
+.game-wrapper {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr 300px;
+  margin-top: 16px;
+}
+
+.phaser-game-wrapper {
+  width: 100%;
+  background: #028af8;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 4 / 3;
+}
+
+.phaser-game-wrapper canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.leaderboard-card {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.leaderboard-card mat-card-content {
+  padding: 16px;
+}
+
+.auto-save-message {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  border: 1px solid #c3e6cb;
+  border-radius: 4px;
+  color: #155724;
+  font-size: 0.875rem;
+  margin-top: 12px;
+  padding: 8px 12px;
+  text-align: center;
+}
+
+.empty-state {
+  color: var(--muted);
+  padding: 24px 0;
+  text-align: center;
 }
 
 .game-launch-wrap {

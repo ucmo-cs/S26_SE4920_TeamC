@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { GameService } from '../../services/game.service';
 import { environment } from '../../../environments/environment';
 
 interface LeaderboardEntry {
@@ -13,37 +14,44 @@ interface LeaderboardEntry {
   templateUrl: './game-landing.component.html',
   styleUrls: ['./game-landing.component.css']
 })
-export class GameLandingComponent implements OnInit, OnDestroy {
-  private readonly gameOrigin = 'http://localhost:8080';
-  private readonly gameScoreEventType = 'ROC_GAME_SCORE';
-  private readonly leaderboardApiUrl = `${environment.apiBaseUrl}/leaderboard`;
+export class GameLandingComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('gameContainer') gameContainer!: ElementRef<HTMLDivElement>;
 
-  private messageListener: (event: MessageEvent) => void;
+  private readonly leaderboardApiUrl = `${environment.apiBaseUrl}/leaderboard`;
 
   employeeName = '';
   employeeIdentity = '';
   entries: LeaderboardEntry[] = [];
   autoSavedMessage = '';
 
-  constructor(private authService: AuthService) {
-    this.messageListener = (event: MessageEvent) => {
-      void this.handleGameMessage(event);
-    };
-  }
+  constructor(
+    private authService: AuthService,
+    private gameService: GameService
+  ) {}
+
 
   ngOnInit(): void {
     void this.loadEntries();
     void this.loadLoggedInEmployee();
-    window.addEventListener('message', this.messageListener);
+  }
+
+  ngAfterViewInit(): void {
+    const containerId = 'phaser-game-container';
+    this.gameContainer.nativeElement.id = containerId;
+    this.gameService.initializeGame(containerId, (score: number) => this.handleGameScore(score));
   }
 
   ngOnDestroy(): void {
-    window.removeEventListener('message', this.messageListener);
+    this.gameService.destroyGame();
   }
 
-  openGame(): void {
-    const parentOrigin = encodeURIComponent(window.location.origin);
-    window.open(`${this.gameOrigin}/?parentOrigin=${parentOrigin}`, '_blank');
+  private handleGameScore(score: number): void {
+    const name = this.employeeIdentity || this.employeeName || 'Unknown Employee';
+    if (!name || !Number.isFinite(score) || score < 0) {
+      return;
+    }
+
+    void this.upsertEmployeeHighScore(name, Math.floor(score));
   }
 
   formatUpdatedAt(iso: string): string {
@@ -93,31 +101,6 @@ export class GameLandingComponent implements OnInit, OnDestroy {
     }
   }
 
-  private async handleGameMessage(event: MessageEvent): Promise<void> {
-    if (event.origin !== this.gameOrigin) {
-      return;
-    }
-
-    const payload = event.data as { type?: string; score?: number };
-    if (payload?.type !== this.gameScoreEventType) {
-      return;
-    }
-
-    const incomingScore = Number(payload.score);
-    const name = await this.resolveEmployeeIdentity();
-    if (!name || !Number.isFinite(incomingScore) || incomingScore < 0) {
-      return;
-    }
-
-    const saved = await this.upsertEmployeeHighScore(name, Math.floor(incomingScore));
-    if (saved) {
-      this.autoSavedMessage = `Auto-saved score ${Math.floor(incomingScore)} for ${name}.`;
-      return;
-    }
-
-    this.autoSavedMessage = 'Score captured, but leaderboard sync failed. Check backend API.';
-  }
-
   private async upsertEmployeeHighScore(employeeName: string, submittedScore: number): Promise<boolean> {
     try {
       const response = await fetch(this.leaderboardApiUrl, {
@@ -132,6 +115,7 @@ export class GameLandingComponent implements OnInit, OnDestroy {
       });
 
       if (!response.ok) {
+        this.autoSavedMessage = 'Score captured, but leaderboard sync failed. Check backend API.';
         return false;
       }
 
@@ -145,21 +129,11 @@ export class GameLandingComponent implements OnInit, OnDestroy {
         .sort((a, b) => b.score - a.score)
         .slice(0, 25);
 
+      this.autoSavedMessage = `Auto-saved score ${Math.floor(submittedScore)} for ${employeeName}.`;
       return true;
     } catch {
-      // Keep current entries if save fails.
+      this.autoSavedMessage = 'Score captured, but leaderboard sync failed. Check backend API.';
       return false;
     }
   }
-
-  private async resolveEmployeeIdentity(): Promise<string> {
-    const existing = (this.employeeIdentity || this.employeeName || '').trim();
-    if (existing) {
-      return existing;
-    }
-
-    await this.loadLoggedInEmployee();
-    const resolved = (this.employeeIdentity || this.employeeName || '').trim();
-    return resolved || 'Unknown Employee';
-    }
 }
