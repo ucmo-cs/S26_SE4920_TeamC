@@ -33,4 +33,10 @@ export class UserApiService {
       this.http.put(`${this.apiBase}/users/${uuid}/roles`, { roles })
     );
   }
+
+  public clearLeaderboard() {
+    return firstValueFrom(
+      this.http.delete(`${this.apiBase}/leaderboard`)
+    );
+  }
 }

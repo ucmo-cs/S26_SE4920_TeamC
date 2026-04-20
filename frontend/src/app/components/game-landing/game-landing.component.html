@@ -1,0 +1,40 @@
+<div class="admin-page game-landing-page">
+  <div class="admin-content game-landing-content">
+    <div class="admin-header game-header">
+      <div>
+        <h2>Game Hub</h2>
+        <p class="game-welcome">Welcome, {{ employeeIdentity || employeeName || 'Player' }} let's play</p>
+      </div>
+    </div>
+
+    <div class="game-launch-wrap">
+      <button mat-raised-button class="launch-game-btn" (click)="openGame()">Launch Game</button>
+    </div>
+
+    <mat-card class="admin-card">
+      <mat-card-content>
+        <div class="panel-head">
+          <h3>Leaderboard</h3>
+          <span>{{ entries.length }} entries</span>
+        </div>
+
+        <div *ngIf="entries.length; else empty" class="leaderboard-list">
+          <div class="leaderboard-row" *ngFor="let entry of entries; let i = index">
+            <div class="rank">#{{ i + 1 }}</div>
+            <div class="meta">
+              <strong>{{ entry.employeeName }}</strong>
+              <small>{{ formatUpdatedAt(entry.updatedAt) }}</small>
+            </div>
+            <div class="score">{{ entry.score }}</div>
+          </div>
+        </div>
+
+        <ng-template #empty>
+          <div class="empty-state">
+            <p>No scores yet. Launch the game and add one.</p>
+          </div>
+        </ng-template>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

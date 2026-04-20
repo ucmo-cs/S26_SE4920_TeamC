@@ -37,6 +37,28 @@
       </mat-card-content>
     </mat-card>
 
+    <mat-card class="admin-card admin-theme-card">
+      <mat-card-content>
+        <div class="theme-grid">
+          <div>
+            <h3>Leaderboard</h3>
+            <p class="muted">Clear all game leaderboard scores.</p>
+            <p class="muted leaderboard-action-message" *ngIf="leaderboardActionMessage">{{ leaderboardActionMessage }}</p>
+          </div>
+          <div class="theme-controls">
+            <button
+              mat-stroked-button
+              color="warn"
+              (click)="clearLeaderboard()"
+              [disabled]="clearingLeaderboard"
+            >
+              {{ clearingLeaderboard ? 'Clearing...' : 'Clear Leaderboard' }}
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
     <mat-card class="admin-card">
       <mat-card-content>
         <ng-container *ngIf="users.length; else emptyState">

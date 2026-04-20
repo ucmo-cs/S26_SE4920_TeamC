@@ -75,6 +75,7 @@ import { TeamAdminComponent } from './components/team-admin/team-admin.component
 import { RoleFormComponent } from './components/admin/roles/role-form/role-form.component';
 import { RolesListComponent } from './components/admin/roles/role-list/roles-list.component';
 import { TimeOffComponent } from './components/time-off/time-off.component';
+import { GameLandingComponent } from './components/game-landing/game-landing.component';
 @NgModule({
     declarations: [
       AppHeaderComponent,
@@ -97,6 +98,7 @@ import { TimeOffComponent } from './components/time-off/time-off.component';
       RoleFormComponent,
       RolesListComponent,
       TimeOffComponent,
+      GameLandingComponent,
     ],
     exports: [],
     bootstrap: [AppComponent],

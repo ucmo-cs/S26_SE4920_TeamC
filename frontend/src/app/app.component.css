@@ -1,72 +1,26 @@
-/* Modern Admin Dashboard Layout */
-
-:host {
-  --header-height: 70px;
-  --sidebar-width: 240px;
-  --footer-height: auto;
-  --primary-bg: #f5f7fa;
-  --border-color: #e0e6ed;
-}
-
 .content-div {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: var(--primary-bg);
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    min-width: 0;
 }
 
 .content {
-  box-sizing: border-box;
-  flex: 1 1 auto;
-  min-height: calc(100vh - var(--header-height));
-  min-width: 0;
-  display: flex;
-  background-color: var(--primary-bg);
-}
-
-app-header {
-  flex: 0 0 auto;
-  z-index: 100;
+    box-sizing: border-box;
+    flex: 1 1 auto;
+    min-height: 80vh;
+    min-width: 0;
+    overflow-x: auto;
 }
 
 app-sidenav {
-  flex: 0 0 auto;
-  width: var(--sidebar-width);
-  min-width: 200px;
-  max-width: 280px;
-  z-index: 50;
-  border-right: 1px solid var(--border-color);
-}
-
-router-outlet {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-app-footer {
-  flex: 0 0 auto;
-  z-index: 10;
-  border-top: 1px solid var(--border-color);
-}
-
-/* Responsive Design */
-@media screen and (max-width: 1024px) {
-  app-sidenav {
-    width: 200px;
+    flex: 0 0 220px;
+    width: 220px;
     min-width: 180px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  app-sidenav {
-    width: 180px;
-    min-width: 160px;
-  }
-
-  .content {
-    min-height: calc(100vh - 60px);
-  }
+    max-width: 260px;
+    background-color: var(--nav-bg);
+    position: relative;
+    z-index: 2;
 }
 
 @media screen and (max-width: 575px) {
@@ -76,14 +30,9 @@ app-footer {
 
   .content {
     width: 100%;
-    min-height: calc(100vh - 60px);
-  }
-
-  :host {
-    --header-height: 60px;
   }
 }
 
 .mat-mdc-tooltip.tooltip {
-  color: red !important;
+    color:red !important;
 }

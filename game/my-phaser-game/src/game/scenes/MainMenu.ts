@@ -1,4 +1,6 @@
 import { Scene, GameObjects } from 'phaser';
+import { getMusicLabel, setMusicMuted, isMusicMuted } from '../audio/music';
+import { returnToWork } from '../utils/portal-navigation';
 
 export class MainMenu extends Scene
 {
@@ -9,6 +11,9 @@ export class MainMenu extends Scene
     hard: GameObjects.Text;
     medium: GameObjects.Text;
     easy: GameObjects.Text;
+    muteText: GameObjects.Text;
+    musicText: GameObjects.Text;
+    backToWorkText: GameObjects.Text;
     selectedDifficulty = 780;
 
 
@@ -59,6 +64,35 @@ export class MainMenu extends Scene
             strokeThickness: 6
         }).setOrigin(0.5).setInteractive({ useHandCursor: true });
 
+        this.muteText = this.add.text(512, 650, this.getMuteLabel(), {
+            fontFamily: 'Arial',
+            fontSize: 18,
+            color: '#ffffff',
+            stroke: '#000000',
+            strokeThickness: 4,
+            align: 'center'
+        }).setOrigin(0.5).setInteractive({ useHandCursor: true });
+
+        this.musicText = this.add.text(512, 686, getMusicLabel('Music'), {
+            fontFamily: 'Arial',
+            fontSize: 18,
+            color: '#ffffff',
+            stroke: '#000000',
+            strokeThickness: 4,
+            align: 'center'
+        }).setOrigin(0.5).setInteractive({ useHandCursor: true });
+
+        this.backToWorkText = this.add.text(512, 96, 'Back to Work', {
+            fontFamily: 'Arial Black',
+            fontSize: 22,
+            color: '#ffffff',
+            backgroundColor: '#d62828',
+            stroke: '#7f1d1d',
+            strokeThickness: 2,
+            align: 'center',
+            padding: { x: 16, y: 8 }
+        }).setOrigin(0.5).setInteractive({ useHandCursor: true });
+
         const startGame = (difficulty: number) => {
             this.selectedDifficulty = difficulty;
             this.scene.start('Game', { difficulty: this.selectedDifficulty });
@@ -67,6 +101,9 @@ export class MainMenu extends Scene
         this.easy.on('pointerdown', () => startGame(920));
         this.medium.on('pointerdown', () => startGame(780));
         this.hard.on('pointerdown', () => startGame(640));
+        this.muteText.on('pointerdown', () => this.toggleMute());
+        this.musicText.on('pointerdown', () => this.toggleMusic());
+        this.backToWorkText.on('pointerdown', () => returnToWork());
 
         this.input.keyboard?.on('keydown-ONE', () => startGame(920));
         this.input.keyboard?.on('keydown-TWO', () => startGame(780));
@@ -76,5 +113,27 @@ export class MainMenu extends Scene
         this.input.keyboard?.on('keydown-NUMPAD_THREE', () => startGame(640));
 
         this.input.keyboard?.on('keydown-SPACE', () => startGame(780));
+        this.input.keyboard?.on('keydown-M', () => this.toggleMute());
+        this.input.keyboard?.on('keydown-B', () => returnToWork());
+        this.input.keyboard?.on('keydown-ESC', () => returnToWork());
+    }
+
+    private async toggleMute(): Promise<void> {
+        const nextMuted = !this.isMuted();
+        await setMusicMuted(nextMuted);
+        this.muteText.setText(this.getMuteLabel());
+    }
+
+    private isMuted(): boolean {
+        return isMusicMuted();
+    }
+
+    private getMuteLabel(): string {
+        return this.isMuted() ? 'Press M: SFX Muted' : 'Press M: SFX On';
+    }
+
+    private async toggleMusic(): Promise<void> {
+        await toggleMusic();
+        this.musicText.setText(getMusicLabel('Music'));
     }
 }
