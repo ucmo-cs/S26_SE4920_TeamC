@@ -2,8 +2,9 @@
 
 const AWS = require('aws-sdk');
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const { authenticateToken } = require("../middleware/auth");
 
-module.exports.handler = async (event) => {
+const handler = async (event) => {
   const requestBody = JSON.parse(event.body);
   const { userId, date, ptoRequest } = requestBody;
 
@@ -44,4 +45,12 @@ module.exports.handler = async (event) => {
       body: JSON.stringify({ message: 'Internal server error' })
     };
   }
-}
+};
+
+module.exports.handler = async (event) => {
+  const authError = authenticateToken(event);
+  if (authError) {
+    return authError;
+  }
+  return handler(event);
+};

@@ -9,7 +9,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { PortalModule } from '@angular/cdk/portal';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 // Material Form Controls
@@ -76,6 +76,7 @@ import { RoleFormComponent } from './components/admin/roles/role-form/role-form.
 import { RolesListComponent } from './components/admin/roles/role-list/roles-list.component';
 import { TimeOffComponent } from './components/time-off/time-off.component';
 import { GameLandingComponent } from './components/game-landing/game-landing.component';
+import { AuthInterceptor } from './auth.interceptor';
 @NgModule({
     declarations: [
       AppHeaderComponent,
@@ -158,6 +159,7 @@ import { GameLandingComponent } from './components/game-landing/game-landing.com
         MatSnackBar,
         provideHttpClient(withInterceptorsFromDi()),
         provideNativeDateAdapter(),
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
     ]
   })
   export class AppModule {}

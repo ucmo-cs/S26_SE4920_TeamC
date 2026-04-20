@@ -2,8 +2,17 @@
 
 const AWS = require("aws-sdk");
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const { authenticateToken } = require("../middleware/auth");
 
-module.exports.handler = async (event) => {
+const handler = async (event) => {
+  // Check if user has ADMIN role
+  if (!event.user || !event.user.roles || !event.user.roles.includes('ADMIN')) {
+    return {
+      statusCode: 403,
+      body: JSON.stringify({ message: "Admin access required" }),
+    };
+  }
+
   try {
     const uuid = event?.pathParameters?.uuid;
 
@@ -50,4 +59,12 @@ module.exports.handler = async (event) => {
       body: JSON.stringify({ message: "Failed to update user roles" }),
     };
   }
+};
+
+module.exports.handler = async (event) => {
+  const authError = authenticateToken(event);
+  if (authError) {
+    return authError;
+  }
+  return handler(event);
 };

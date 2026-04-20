@@ -2,8 +2,9 @@
 
 const AWS = require("aws-sdk");
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const { authenticateToken } = require("../middleware/auth");
 
-module.exports.handler = async () => {
+const handler = async (event) => {
   try {
     const params = {
       TableName: process.env.USERS_TABLE || "users",
@@ -25,4 +26,12 @@ module.exports.handler = async () => {
       body: JSON.stringify({ message: "Failed to fetch users" }),
     };
   }
+};
+
+module.exports.handler = async (event) => {
+  const authError = authenticateToken(event);
+  if (authError) {
+    return authError;
+  }
+  return handler(event);
 };

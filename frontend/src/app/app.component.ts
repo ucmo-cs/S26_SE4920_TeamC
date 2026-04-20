@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -11,10 +12,20 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'S26 Senior Project';
 
-  constructor(public router: Router) {}
+  constructor(
+    public router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.applyStoredTheme();
+    this.checkAuthAndRedirect();
+  }
+
+  private checkAuthAndRedirect(): void {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/home']);
+    }
   }
 
   private applyStoredTheme(): void {

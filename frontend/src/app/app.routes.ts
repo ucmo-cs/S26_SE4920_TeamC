@@ -14,51 +14,68 @@ import { TeamAdminComponent } from './components/team-admin/team-admin.component
 import { RolesListComponent } from './components/admin/roles/role-list/roles-list.component';
 import { RoleFormComponent } from './components/admin/roles/role-form/role-form.component'
 import { TimeOffComponent } from './components/time-off/time-off.component';
+import { AuthGuard } from './auth.guard';
 import { GameLandingComponent } from './components/game-landing/game-landing.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent }, 
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }, 
   {
     path: 'daily-status',
-    component: DailyStatusComponent
+    component: DailyStatusComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'admin',
-    component: AdminComponent
+    component: AdminComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ADMIN'] }
   },
   {
     path: 'admin/projects',
-    component: ProjectsComponent
+    component: ProjectsComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ADMIN'] }
   },
   {
     path: 'admin/teams',
-    component: TeamAdminComponent
+    component: TeamAdminComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ADMIN'] }
   },
   {
     path: 'admin/roles',
-    component: RolesListComponent
+    component: RolesListComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ADMIN'] }
   },
   {
     path: 'admin/roles/new',
-    component: RoleFormComponent
+    component: RoleFormComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ADMIN'] }
   },
   {
     path: 'admin/roles/:id',
-    component: RoleFormComponent
+    component: RoleFormComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ADMIN'] }
   },
   {
     path: 'projects',
-    component: ProjectsOverviewComponent
+    component: ProjectsOverviewComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'team-summary',
-    component: TeamSummaryComponent
+    component: TeamSummaryComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'time-off',
-    component: TimeOffComponent
+    component: TimeOffComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'game',
