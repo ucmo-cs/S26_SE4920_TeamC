@@ -1,0 +1,47 @@
+<div class="admin-page game-landing-page">
+  <div class="admin-content game-landing-content">
+    <div class="admin-header game-header">
+      <div>
+        <h2>Game Hub</h2>
+        <p class="game-welcome">Welcome, {{ employeeIdentity || employeeName || 'Player' }} let's play</p>
+      </div>
+    </div>
+
+    <div class="game-wrapper">
+      <!-- Embedded Phaser Game -->
+      <div #gameContainer class="phaser-game-wrapper"></div>
+
+      <!-- Leaderboard Sidebar -->
+      <mat-card class="leaderboard-card">
+        <mat-card-content>
+          <div class="panel-head">
+            <h3>Leaderboard</h3>
+            <span>{{ entries.length }} entries</span>
+          </div>
+
+          <div *ngIf="entries.length; else empty" class="leaderboard-list">
+            <div class="leaderboard-row" *ngFor="let entry of entries; let i = index">
+              <div class="rank">#{{ i + 1 }}</div>
+              <div class="meta">
+                <strong>{{ entry.employeeName }}</strong>
+                <small>{{ formatUpdatedAt(entry.updatedAt) }}</small>
+              </div>
+              <div class="score">{{ entry.score }}</div>
+            </div>
+          </div>
+
+          <ng-template #empty>
+            <div class="empty-state">
+              <p>No scores yet. Launch the game and add one.</p>
+            </div>
+          </ng-template>
+
+          <div *ngIf="autoSavedMessage" class="auto-save-message">
+            {{ autoSavedMessage }}
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+

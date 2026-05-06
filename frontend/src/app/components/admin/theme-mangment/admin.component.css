@@ -66,6 +66,10 @@ h3 {
   width: 100%;
 }
 
+.leaderboard-action-message {
+  margin-top: 10px;
+}
+
 .admin-card .mat-mdc-select-trigger {
   color: var(--body-text) !important;
 }

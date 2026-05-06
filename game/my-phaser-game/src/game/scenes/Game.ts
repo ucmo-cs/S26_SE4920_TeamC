@@ -1,6 +1,7 @@
 import { Scene, GameObjects } from 'phaser';
 import {TrailContext, HazardQueue} from "../assets/trail/Trail.ts"
 import {CreateHazardOnTrail} from "../assets/trail/TrailStrategys.ts"
+import { getMusicLabel, toggleMusic, ensureTempleMusicStarted, setMusicMuted } from '../audio/music';
 // Docs https://docs.phaser.io/api-documentation/class/scene
 
 
@@ -22,9 +23,11 @@ export class Game extends Scene
     timerText: Phaser.GameObjects.Text;
     scoreText: Phaser.GameObjects.Text;
     statusText: Phaser.GameObjects.Text;
+    musicText: Phaser.GameObjects.Text;
     elapsedMs = 0;
     score = 0;
     ticks = 0;
+    private readonly muteStorageKey = 'roc-game-muted';
 
     laneXs = [320, 512, 704];
     playerLane = 1;
@@ -119,6 +122,14 @@ export class Game extends Scene
             fontFamily: 'Arial',
             color: '#ffffff'
         }).setDepth(11);
+        this.statusText.setText(this.getMuteStatusLabel());
+
+        this.musicText = this.add.text(760, 10, getMusicLabel('MUSIC'), {
+            fontSize: '18px',
+            fontFamily: 'Arial',
+            color: '#ffffff'
+        }).setDepth(11).setInteractive({ useHandCursor: true });
+        this.musicText.on('pointerdown', () => this.toggleMusic());
 
         // Create cat animations
         this.anims.create({
@@ -157,6 +168,13 @@ export class Game extends Scene
         this.playerMarker.play('rear_run');
 
         this.cursors = this.input.keyboard!.createCursorKeys();
+        this.input.keyboard?.on('keydown-M', () => {
+            this.toggleMute();
+            this.statusText.setText(this.getMuteStatusLabel());
+        });
+        this.input.keyboard?.on('keydown-N', () => this.toggleMusic());
+
+        void ensureTempleMusicStarted();
 
         while (!HazardQueue.isEmpty()) {
             HazardQueue.dequeue();
@@ -233,5 +251,28 @@ export class Game extends Scene
 
             this.hazardTimer = 0;
         }
+    }
+
+    private toggleMute(): void {
+        const nextMuted = !this.isMuted();
+        localStorage.setItem(this.muteStorageKey, nextMuted ? 'true' : 'false');
+    }
+
+    private isMuted(): boolean {
+        return localStorage.getItem(this.muteStorageKey) === 'true';
+    }
+
+    private getMuteStatusLabel(): string {
+        return this.isMuted() ? 'SFX OFF (M)' : 'SFX ON (M)';
+    }
+
+    private async toggleMusic(): Promise<void> {
+        const nextMuted = await toggleMusic();
+        if (!nextMuted) {
+            await ensureTempleMusicStarted();
+        } else {
+            await setMusicMuted(true);
+        }
+        this.musicText.setText(getMusicLabel('MUSIC'));
     }
 }

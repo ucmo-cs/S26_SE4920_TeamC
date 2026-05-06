@@ -44,8 +44,10 @@ export class AuthService {
     }
   }
 
-  checkLoggedIn() {
-    return this.user;
+  getToken(): string | null {
+    // TODO: Implement proper token storage and retrieval
+    // For now, return null as authentication is not fully implemented
+    return null;
   }
 
   async adminCheck() {

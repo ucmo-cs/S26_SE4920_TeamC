@@ -5,14 +5,42 @@ provider:
   name: aws
   runtime: nodejs20.x
   region: us-east-1
+  
+plugins:
+  - serverless-dynamodb
+  - serverless-offline
+  
+custom:
+  dynamodb:
+    stages: -dev
+    start:
+      host: 127.0.0.1
+      port: 8000
+      docker: false
+      migrate: true
 
 functions:
+  login:
+    handler: src/handlers/login.handler
+    environment:
+      USERS_TABLE: users
+      AUTH_TABLE: authorization
+      DYNAMODB_ENDPOINT: http://localhost:8000
+
+  auth:
+    handler: src/handlers/auth.handler
+    environment:
+      AUTH_TABLE: authorization
+      DYNAMODB_ENDPOINT: http://localhost:8000
+
   importData:
     handler: src/handlers/import-data.handler
     environment:
       USERS_TABLE: users
       PROJECTS_TABLE: projects
       DAILY_STATUS_TABLE: dailyStatus
+      AUTH_TABLE: authorization
+      DYNAMODB_ENDPOINT: http://localhost:8000
 
   users:
     handler: src/handlers/users.handler
@@ -28,3 +56,12 @@ functions:
     handler: src/handlers/projects.handler
     environment:
       PROJECTS_TABLE: projects
+      
+  postTimeOff:
+    handler: src/handlers/post-time-off.handler
+    environment:
+      USERS_TABLE: users
+  getTimeOff:
+    handler: src/handlers/get-time-off.handler
+    environment:
+      USERS_TABLE: users

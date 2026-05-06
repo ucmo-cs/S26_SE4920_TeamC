@@ -18,6 +18,8 @@ export class AdminComponent implements OnInit {
   users: AdminUser[] = [];
   displayedColumns: string[] = ['name', 'email', 'roles', 'actions'];
   availableRoles = Object.values(ROLE);
+  leaderboardActionMessage = '';
+  clearingLeaderboard = false;
   themeOptions = [
     { value: 'default', label: 'Default' },
     { value: 'forest', label: 'Forest Service' },
@@ -75,5 +77,28 @@ export class AdminComponent implements OnInit {
 
   trackByUuid(index: number, user: AdminUser): string {
     return user.uuid;
+  }
+
+  async clearLeaderboard(): Promise<void> {
+    const confirmed = window.confirm(
+      'Clear all leaderboard scores? This cannot be undone.'
+    );
+
+    if (!confirmed || this.clearingLeaderboard) {
+      return;
+    }
+
+    this.clearingLeaderboard = true;
+    this.leaderboardActionMessage = '';
+
+    try {
+      await this.userApi.clearLeaderboard();
+      this.leaderboardActionMessage = 'Leaderboard cleared successfully.';
+    } catch (error) {
+      console.error('Failed to clear leaderboard:', error);
+      this.leaderboardActionMessage = 'Failed to clear leaderboard. Please try again.';
+    } finally {
+      this.clearingLeaderboard = false;
+    }
   }
 }

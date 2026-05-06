@@ -4,12 +4,13 @@
 
 const AWS = require("aws-sdk");
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const { authenticateToken } = require("../middleware/auth");
 
-module.exports.handler = async () => {
+const handler = async () => {
   // add admin access only
   try {
     const params = {
-      TableName: process.env.AUTH_TABLE || "auth",
+      TableName: process.env.AUTH_TABLE || "authorization",
     };
 
     const result = await dynamoDb.get(params).promise();
@@ -28,4 +29,12 @@ module.exports.handler = async () => {
       body: JSON.stringify({ message: "Failed to get passwords" }),
     };
   }
+};
+
+module.exports.handler = async (event) => {
+  const authError = authenticateToken(event);
+  if (authError) {
+    return authError;
+  }
+  return handler(event);
 };
